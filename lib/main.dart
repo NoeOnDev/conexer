@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/register_screen.dart';
 import 'screens/complete_registration_screen.dart';
+import 'screens/verify_code_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,12 +22,14 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => const RegisterScreen(),
+        '/': (context) => const VerifyCodeScreen(),
+        '/register': (context) => const RegisterScreen(),
         '/complete-registration': (context) {
           final args =
               ModalRoute.of(context)!.settings.arguments as Map<String, String>;
           return CompleteRegistrationScreen(contactId: args['contactId']!);
         },
+        
       },
     );
   }
