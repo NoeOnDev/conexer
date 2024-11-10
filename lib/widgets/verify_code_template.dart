@@ -1,23 +1,46 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_button.dart';
 
-class VerifyCodeScreen extends StatefulWidget {
-  const VerifyCodeScreen({super.key});
+class VerifyCodeTemplate extends StatefulWidget {
+  final String title;
+  final String message;
+
+  const VerifyCodeTemplate({
+    super.key,
+    required this.title,
+    required this.message,
+  });
 
   @override
-  VerifyCodeScreenState createState() => VerifyCodeScreenState();
+  VerifyCodeTemplateState createState() => VerifyCodeTemplateState();
 }
 
-class VerifyCodeScreenState extends State<VerifyCodeScreen> {
+class VerifyCodeTemplateState extends State<VerifyCodeTemplate> {
   final formKey = GlobalKey<FormState>();
   final codeControllers = List.generate(5, (_) => TextEditingController());
+  final focusNodes = List.generate(5, (_) => FocusNode());
 
   @override
   void dispose() {
     for (var controller in codeControllers) {
       controller.dispose();
     }
+    for (var node in focusNodes) {
+      node.dispose();
+    }
     super.dispose();
+  }
+
+  void _onChanged(String value, int index) {
+    if (value.isNotEmpty) {
+      if (index < 4) {
+        FocusScope.of(context).requestFocus(focusNodes[index + 1]);
+      }
+    } else {
+      if (index > 0) {
+        FocusScope.of(context).requestFocus(focusNodes[index - 1]);
+      }
+    }
   }
 
   @override
@@ -37,15 +60,14 @@ class VerifyCodeScreenState extends State<VerifyCodeScreen> {
                 key: formKey,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Center(
-                      child: Text(
-                        'Verify Your Account',
-                        style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Text(
+                      widget.title,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -57,8 +79,15 @@ class VerifyCodeScreenState extends State<VerifyCodeScreen> {
                       ),
                     ),
                     const SizedBox(height: 16),
+                    Text(
+                      widget.message,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 16),
                     const Text(
-                      'Enter the 5-digit code sent to your phone',
+                      'Enter the 5-digit code',
+                      textAlign: TextAlign.center,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
@@ -70,9 +99,11 @@ class VerifyCodeScreenState extends State<VerifyCodeScreen> {
                           width: 50,
                           child: TextFormField(
                             controller: codeControllers[index],
+                            focusNode: focusNodes[index],
                             keyboardType: TextInputType.number,
                             textAlign: TextAlign.center,
                             maxLength: 1,
+                            onChanged: (value) => _onChanged(value, index),
                             decoration: InputDecoration(
                               counterText: '',
                               filled: true,
@@ -97,6 +128,14 @@ class VerifyCodeScreenState extends State<VerifyCodeScreen> {
                       backgroundColor: const Color(0xFF324A5F),
                       onPressed: () {
                         // Handle confirm code logic here
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    CustomButton(
+                      text: 'Resend Code',
+                      backgroundColor: const Color(0xFF324A5F),
+                      onPressed: () {
+                        // Handle resend code logic here
                       },
                     ),
                   ],
