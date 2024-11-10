@@ -1,12 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import '../widgets/labeled_text_field.dart';
+import '../widgets/custom_button.dart';
+import '../models/user.dart';
+import '../services/api_service.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
+  RegisterScreenState createState() => RegisterScreenState();
+}
 
+class RegisterScreenState extends State<RegisterScreen> {
+  final formKey = GlobalKey<FormState>();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final apiService = ApiService(
+      baseUrl:
+          'https://ec7c-187-244-112-126.ngrok-free.app/api/v1/users/contacts');
+  final logger = Logger();
+
+  @override
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    super.dispose();
+  }
+
+  void _register() async {
+    if (formKey.currentState!.validate()) {
+      final user = User(
+        firstName: firstNameController.text,
+        lastName: lastNameController.text,
+        email: emailController.text,
+        phone: phoneController.text,
+      );
+
+      try {
+        await apiService.registerUser(user);
+        // Handle successful registration
+      } catch (e) {
+        // Handle registration error
+        logger.e('Failed to register user', error: e);
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -40,93 +86,40 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    'First Name',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.deepPurple),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
+                  LabeledTextField(
+                    label: 'First Name',
+                    controller: firstNameController,
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    'Last Name',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.deepPurple),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
+                  LabeledTextField(
+                    label: 'Last Name',
+                    controller: lastNameController,
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    'Email',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextFormField(
+                  LabeledTextField(
+                    label: 'Email',
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.deepPurple),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
+                    controller: emailController,
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    'Phone',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextFormField(
+                  LabeledTextField(
+                    label: 'Phone',
                     keyboardType: TextInputType.phone,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.deepPurple),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
+                    controller: phoneController,
                   ),
                   const SizedBox(height: 20),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          // Handle registration logic here
-                        }
-                      },
-                      child: const Text('Register'),
-                    ),
+                  CustomButton(
+                    text: 'Register',
+                    backgroundColor: const Color(0xFF324A5F),
+                    onPressed: _register,
+                  ),
+                  const SizedBox(height: 10),
+                  CustomButton(
+                    text: 'Cancel',
+                    backgroundColor: const Color(0xFFC1121F),
+                    onPressed: () {
+                      // Handle cancel logic here
+                    },
                   ),
                 ],
               ),
