@@ -41,10 +41,14 @@ class RegisterScreenState extends State<RegisterScreen> {
       );
 
       try {
-        await contactService.registerContact(contact);
-        // Handle successful registration
+        final contactId = await contactService.registerContact(contact);
+        if (!mounted) return;
+        Navigator.pushNamed(
+          context,
+          '/complete-registration',
+          arguments: {'contactId': contactId},
+        );
       } catch (e) {
-        // Handle registration error
         logger.e('Failed to register contact', error: e);
       }
     }

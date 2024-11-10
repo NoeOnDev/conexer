@@ -7,7 +7,7 @@ class ContactService {
 
   ContactService({required this.baseUrl});
 
-  Future<void> registerContact(Contact contact) async {
+  Future<String> registerContact(Contact contact) async {
     final url = Uri.parse('$baseUrl/api/v1/contacts');
     final response = await http.post(
       url,
@@ -16,9 +16,9 @@ class ContactService {
     );
 
     if (response.statusCode == 201) {
-      // Handle successful response
+      final responseData = jsonDecode(response.body);
+      return responseData['id'];
     } else {
-      // Handle error response
       throw Exception('Failed to register contact');
     }
   }
