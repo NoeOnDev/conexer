@@ -20,7 +20,7 @@ class RegisterScreenState extends State<RegisterScreen> {
   final phoneController = TextEditingController();
   final apiService = ApiService(
       baseUrl:
-          'https://ec7c-187-244-112-126.ngrok-free.app/api/v1/users/contacts');
+          'https://ec7c-187-244-112-126.ngrok-free.app');
   final logger = Logger();
 
   @override
@@ -64,64 +64,67 @@ class RegisterScreenState extends State<RegisterScreen> {
                 color: const Color(0x8077A1DD),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Center(
-                    child: Text(
-                      'Register',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Center(
+                      child: Text(
+                        'Register',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  Center(
-                    child: Image.asset(
-                      'assets/register_user.png',
-                      width: 250,
-                      height: 200,
+                    const SizedBox(height: 16),
+                    Center(
+                      child: Image.asset(
+                        'assets/register_user.png',
+                        width: 250,
+                        height: 200,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  LabeledTextField(
-                    label: 'First Name',
-                    controller: firstNameController,
-                  ),
-                  const SizedBox(height: 16),
-                  LabeledTextField(
-                    label: 'Last Name',
-                    controller: lastNameController,
-                  ),
-                  const SizedBox(height: 16),
-                  LabeledTextField(
-                    label: 'Email',
-                    keyboardType: TextInputType.emailAddress,
-                    controller: emailController,
-                  ),
-                  const SizedBox(height: 16),
-                  LabeledTextField(
-                    label: 'Phone',
-                    keyboardType: TextInputType.phone,
-                    controller: phoneController,
-                  ),
-                  const SizedBox(height: 20),
-                  CustomButton(
-                    text: 'Register',
-                    backgroundColor: const Color(0xFF324A5F),
-                    onPressed: _register,
-                  ),
-                  const SizedBox(height: 10),
-                  CustomButton(
-                    text: 'Cancel',
-                    backgroundColor: const Color(0xFFC1121F),
-                    onPressed: () {
-                      // Handle cancel logic here
-                    },
-                  ),
-                ],
+                    const SizedBox(height: 16),
+                    LabeledTextField(
+                      label: 'First Name',
+                      controller: firstNameController,
+                    ),
+                    const SizedBox(height: 16),
+                    LabeledTextField(
+                      label: 'Last Name',
+                      controller: lastNameController,
+                    ),
+                    const SizedBox(height: 16),
+                    LabeledTextField(
+                      label: 'Email',
+                      keyboardType: TextInputType.emailAddress,
+                      controller: emailController,
+                    ),
+                    const SizedBox(height: 16),
+                    LabeledTextField(
+                      label: 'Phone',
+                      keyboardType: TextInputType.phone,
+                      controller: phoneController,
+                    ),
+                    const SizedBox(height: 20),
+                    CustomButton(
+                      text: 'Register',
+                      backgroundColor: const Color(0xFF324A5F),
+                      onPressed: _register,
+                    ),
+                    const SizedBox(height: 10),
+                    CustomButton(
+                      text: 'Cancel',
+                      backgroundColor: const Color(0xFFC1121F),
+                      onPressed: () {
+                        // Handle cancel logic here
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
