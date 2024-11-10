@@ -85,7 +85,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 16),
                     Center(
                       child: Image.asset(
-                        'assets/register_user.png',
+                        'assets/img/register_contact.png',
                         width: 250,
                         height: 200,
                       ),

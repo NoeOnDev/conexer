@@ -78,6 +78,14 @@ class CompleteRegistrationScreenState
                       ),
                     ),
                     const SizedBox(height: 16),
+                    Center(
+                      child: Image.asset(
+                        'assets/img/register_user.png',
+                        width: 250,
+                        height: 200,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                     LabeledTextField(
                       label: 'Username',
                       controller: usernameController,

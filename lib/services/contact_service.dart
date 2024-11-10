@@ -8,7 +8,7 @@ class ContactService {
   ContactService({required this.baseUrl});
 
   Future<String> registerContact(Contact contact) async {
-    final url = Uri.parse('$baseUrl/api/v1/contacts');
+    final url = Uri.parse('$baseUrl/api/v1/users/contacts');
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
