@@ -20,8 +20,9 @@ class CompleteRegistrationScreenState
   final formKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  final userService =
-      UserService(baseUrl: 'https://ec7c-187-244-112-126.ngrok-free.app');
+  final userService = UserService(
+      baseUrl:
+          'https://0629-2806-262-3487-34f-785b-645b-2915-ae92.ngrok-free.app');
   final logger = Logger();
 
   @override
@@ -80,7 +81,7 @@ class CompleteRegistrationScreenState
                     const SizedBox(height: 16),
                     Center(
                       child: Image.asset(
-                        'assets/img/register_user.png',
+                        'assets/img/img_register_user.png',
                         width: 250,
                         height: 200,
                       ),

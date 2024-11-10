@@ -18,8 +18,9 @@ class RegisterScreenState extends State<RegisterScreen> {
   final lastNameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
-  final contactService =
-      ContactService(baseUrl: 'https://ec7c-187-244-112-126.ngrok-free.app');
+  final contactService = ContactService(
+      baseUrl:
+          'https://0629-2806-262-3487-34f-785b-645b-2915-ae92.ngrok-free.app');
   final logger = Logger();
 
   @override
@@ -85,7 +86,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 16),
                     Center(
                       child: Image.asset(
-                        'assets/img/register_contact.png',
+                        'assets/img/img_register_contact.png',
                         width: 250,
                         height: 200,
                       ),
