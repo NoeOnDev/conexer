@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import '../widgets/labeled_text_field.dart';
 import '../widgets/custom_button.dart';
-import '../models/user.dart';
-import '../services/api_service.dart';
+import '../models/contact.dart';
+import '../services/contact_service.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -18,9 +18,8 @@ class RegisterScreenState extends State<RegisterScreen> {
   final lastNameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
-  final apiService = ApiService(
-      baseUrl:
-          'https://ec7c-187-244-112-126.ngrok-free.app');
+  final contactService =
+      ContactService(baseUrl: 'https://ec7c-187-244-112-126.ngrok-free.app');
   final logger = Logger();
 
   @override
@@ -34,7 +33,7 @@ class RegisterScreenState extends State<RegisterScreen> {
 
   void _register() async {
     if (formKey.currentState!.validate()) {
-      final user = User(
+      final contact = Contact(
         firstName: firstNameController.text,
         lastName: lastNameController.text,
         email: emailController.text,
@@ -42,11 +41,11 @@ class RegisterScreenState extends State<RegisterScreen> {
       );
 
       try {
-        await apiService.registerUser(user);
+        await contactService.registerContact(contact);
         // Handle successful registration
       } catch (e) {
         // Handle registration error
-        logger.e('Failed to register user', error: e);
+        logger.e('Failed to register contact', error: e);
       }
     }
   }
@@ -74,7 +73,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                       child: Text(
                         'Register',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 26,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

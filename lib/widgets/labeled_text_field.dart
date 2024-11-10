@@ -21,7 +21,7 @@ class LabeledTextField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
         TextFormField(
           keyboardType: keyboardType,
