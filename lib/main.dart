@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+import 'screens/register_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,12 +13,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Conexer',
       theme: ThemeData(
+        fontFamily: 'Hepta Slab',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const HomeScreen(),
+        '/': (context) => const RegisterScreen(),
       },
     );
   }
