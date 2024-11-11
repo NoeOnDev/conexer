@@ -40,8 +40,14 @@ class CompleteRegistrationScreenState
       );
 
       try {
-        await widget.userService.registerUser(user);
-        // Handle successful registration
+        final response = await widget.userService.registerUser(user);
+        final userId = response['user']['id'];
+        if (!mounted) return;
+        Navigator.pushNamed(
+          context,
+          '/verify-account',
+          arguments: {'userId': userId},
+        );
       } catch (e) {
         // Handle registration error
         logger.e('Failed to complete registration', error: e);

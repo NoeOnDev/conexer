@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'screens/register_screen.dart';
 import 'screens/complete_registration_screen.dart';
 import 'screens/verify_account_screen.dart';
-import 'screens/verify_2fa_screen.dart';
-import 'screens/change_password_screen.dart';
 import 'services/contact_service.dart';
 import 'services/user_service.dart';
+import 'services/verify_service.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,15 +31,19 @@ class MyApp extends StatelessWidget {
         '/': (context) =>
             RegisterScreen(contactService: ContactService(baseUrl: baseUrl)),
         '/complete-registration': (context) {
-          final args =
-              ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+          final args = ModalRoute.of(context)!.settings.arguments
+              as Map<String, dynamic>;
           return CompleteRegistrationScreen(
               contactId: args['contactId']!,
               userService: UserService(baseUrl: baseUrl));
         },
-        '/verify-account': (context) => const VerifyAccountScreen(),
-        '/verify-2fa': (context) => const Verify2FAScreen(),
-        '/change-password': (context) => const ChangePasswordScreen(),
+        '/verify-account': (context) {
+          final args = ModalRoute.of(context)!.settings.arguments
+              as Map<String, dynamic>;
+          return VerifyAccountScreen(
+              userId: args['userId']!,
+              verifyService: VerifyService(baseUrl: baseUrl));
+        },
       },
     );
   }

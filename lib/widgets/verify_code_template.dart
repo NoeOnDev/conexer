@@ -4,11 +4,13 @@ import '../widgets/custom_button.dart';
 class VerifyCodeTemplate extends StatefulWidget {
   final String title;
   final String message;
+  final Future<void> Function(String code) onConfirmCode;
 
   const VerifyCodeTemplate({
     super.key,
     required this.title,
     required this.message,
+    required this.onConfirmCode,
   });
 
   @override
@@ -39,6 +41,18 @@ class VerifyCodeTemplateState extends State<VerifyCodeTemplate> {
     } else {
       if (index > 0) {
         FocusScope.of(context).requestFocus(focusNodes[index - 1]);
+      }
+    }
+  }
+
+  void _confirmCode() async {
+    if (formKey.currentState!.validate()) {
+      final code = codeControllers.map((controller) => controller.text).join();
+      try {
+        await widget.onConfirmCode(code);
+        // Handle successful confirmation
+      } catch (e) {
+        // Handle error
       }
     }
   }
@@ -126,9 +140,7 @@ class VerifyCodeTemplateState extends State<VerifyCodeTemplate> {
                     CustomButton(
                       text: 'Confirm Code',
                       backgroundColor: const Color(0xFF324A5F),
-                      onPressed: () {
-                        // Handle confirm code logic here
-                      },
+                      onPressed: _confirmCode,
                     ),
                     const SizedBox(height: 10),
                     CustomButton(
