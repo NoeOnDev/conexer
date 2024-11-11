@@ -7,8 +7,10 @@ import '../services/user_service.dart';
 
 class CompleteRegistrationScreen extends StatefulWidget {
   final String contactId;
+  final UserService userService;
 
-  const CompleteRegistrationScreen({super.key, required this.contactId});
+  const CompleteRegistrationScreen(
+      {super.key, required this.contactId, required this.userService});
 
   @override
   CompleteRegistrationScreenState createState() =>
@@ -20,9 +22,6 @@ class CompleteRegistrationScreenState
   final formKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  final userService = UserService(
-      baseUrl:
-          'https://0629-2806-262-3487-34f-785b-645b-2915-ae92.ngrok-free.app');
   final logger = Logger();
 
   @override
@@ -41,7 +40,7 @@ class CompleteRegistrationScreenState
       );
 
       try {
-        await userService.registerUser(user);
+        await widget.userService.registerUser(user);
         // Handle successful registration
       } catch (e) {
         // Handle registration error

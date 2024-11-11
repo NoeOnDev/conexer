@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/contact.dart';
+import 'base_service.dart';
 
-class ContactService {
-  final String baseUrl;
-
-  ContactService({required this.baseUrl});
+class ContactService extends BaseService {
+  ContactService({required super.baseUrl});
 
   Future<String> registerContact(Contact contact) async {
     final url = Uri.parse('$baseUrl/api/v1/users/contacts');

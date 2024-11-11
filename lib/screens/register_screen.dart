@@ -6,7 +6,9 @@ import '../models/contact.dart';
 import '../services/contact_service.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+  final ContactService contactService;
+
+  const RegisterScreen({super.key, required this.contactService});
 
   @override
   RegisterScreenState createState() => RegisterScreenState();
@@ -18,9 +20,6 @@ class RegisterScreenState extends State<RegisterScreen> {
   final lastNameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
-  final contactService = ContactService(
-      baseUrl:
-          'https://0629-2806-262-3487-34f-785b-645b-2915-ae92.ngrok-free.app');
   final logger = Logger();
 
   @override
@@ -42,7 +41,7 @@ class RegisterScreenState extends State<RegisterScreen> {
       );
 
       try {
-        final contactId = await contactService.registerContact(contact);
+        final contactId = await widget.contactService.registerContact(contact);
         if (!mounted) return;
         Navigator.pushNamed(
           context,
