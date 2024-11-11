@@ -138,17 +138,17 @@ class VerifyCodeTemplateState extends State<VerifyCodeTemplate> {
                     ),
                     const SizedBox(height: 20),
                     CustomButton(
-                      text: 'Confirm Code',
-                      backgroundColor: const Color(0xFF324A5F),
-                      onPressed: _confirmCode,
-                    ),
-                    const SizedBox(height: 10),
-                    CustomButton(
                       text: 'Resend Code',
-                      backgroundColor: const Color(0xFF324A5F),
+                      backgroundColor: const Color(0xFF6A6A6A),
                       onPressed: () {
                         // Handle resend code logic here
                       },
+                    ),
+                    const SizedBox(height: 10),
+                    CustomButton(
+                      text: 'Confirm Code',
+                      backgroundColor: const Color(0xFF324A5F),
+                      onPressed: _confirmCode,
                     ),
                   ],
                 ),
