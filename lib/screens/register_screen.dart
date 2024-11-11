@@ -7,8 +7,9 @@ import '../services/contact_service.dart';
 
 class RegisterScreen extends StatefulWidget {
   final ContactService contactService;
+  final String role;
 
-  const RegisterScreen({super.key, required this.contactService});
+  const RegisterScreen({super.key, required this.contactService, required this.role});
 
   @override
   RegisterScreenState createState() => RegisterScreenState();
@@ -88,6 +89,14 @@ class RegisterScreenState extends State<RegisterScreen> {
                         'assets/img/img_register_contact.png',
                         width: 250,
                         height: 200,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Role: ${widget.role}',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 16),

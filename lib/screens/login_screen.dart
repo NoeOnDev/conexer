@@ -28,7 +28,7 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void _navigateToRegister() {
-    Navigator.pushNamed(context, '/register');
+    Navigator.pushNamed(context, '/select-register');
   }
 
   @override
