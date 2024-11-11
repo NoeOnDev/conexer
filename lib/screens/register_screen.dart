@@ -92,23 +92,23 @@ class RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const SizedBox(height: 16),
                     LabeledTextField(
-                      label: 'First Name',
+                      label: 'First Name:',
                       controller: firstNameController,
                     ),
                     const SizedBox(height: 16),
                     LabeledTextField(
-                      label: 'Last Name',
+                      label: 'Last Name:',
                       controller: lastNameController,
                     ),
                     const SizedBox(height: 16),
                     LabeledTextField(
-                      label: 'Email',
+                      label: 'Email:',
                       keyboardType: TextInputType.emailAddress,
                       controller: emailController,
                     ),
                     const SizedBox(height: 16),
                     LabeledTextField(
-                      label: 'Phone',
+                      label: 'Phone:',
                       keyboardType: TextInputType.phone,
                       controller: phoneController,
                     ),

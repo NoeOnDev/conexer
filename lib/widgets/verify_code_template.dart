@@ -100,7 +100,7 @@ class VerifyCodeTemplateState extends State<VerifyCodeTemplate> {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      'Enter the 5-digit code',
+                      'Enter the 5-digit code:',
                       textAlign: TextAlign.center,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16),

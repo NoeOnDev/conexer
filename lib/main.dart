@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/register_screen.dart';
 import 'screens/complete_registration_screen.dart';
 import 'screens/verify_account_screen.dart';
+import 'screens/login_screen.dart';
 import 'services/contact_service.dart';
 import 'services/user_service.dart';
 import 'services/verify_service.dart';
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) =>
+        '/': (context) => const LoginScreen(),
+        '/register': (context) =>
             RegisterScreen(contactService: ContactService(baseUrl: baseUrl)),
         '/complete-registration': (context) {
           final args = ModalRoute.of(context)!.settings.arguments

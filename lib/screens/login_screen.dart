@@ -1,58 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import '../widgets/labeled_text_field.dart';
 import '../widgets/custom_button.dart';
-import '../models/user.dart';
-import '../services/user_service.dart';
 
-class CompleteRegistrationScreen extends StatefulWidget {
-  final String contactId;
-  final UserService userService;
-
-  const CompleteRegistrationScreen(
-      {super.key, required this.contactId, required this.userService});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  CompleteRegistrationScreenState createState() =>
-      CompleteRegistrationScreenState();
+  LoginScreenState createState() => LoginScreenState();
 }
 
-class CompleteRegistrationScreenState
-    extends State<CompleteRegistrationScreen> {
+class LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
-  final usernameController = TextEditingController();
+  final usernameOrEmailController = TextEditingController();
   final passwordController = TextEditingController();
-  final logger = Logger();
 
   @override
   void dispose() {
-    usernameController.dispose();
+    usernameOrEmailController.dispose();
     passwordController.dispose();
     super.dispose();
   }
 
-  void _completeRegistration() async {
+  void _login() async {
     if (formKey.currentState!.validate()) {
-      final user = User(
-        contactId: widget.contactId,
-        username: usernameController.text,
-        password: passwordController.text,
-      );
-
-      try {
-        final response = await widget.userService.registerUser(user);
-        final userId = response['user']['id'];
-        if (!mounted) return;
-        Navigator.pushNamed(
-          context,
-          '/verify-account',
-          arguments: {'userId': userId},
-        );
-      } catch (e) {
-        // Handle registration error
-        logger.e('Failed to complete registration', error: e);
-      }
+      // Handle login logic here
     }
+  }
+
+  void _navigateToRegister() {
+    Navigator.pushNamed(context, '/register');
   }
 
   @override
@@ -76,7 +52,7 @@ class CompleteRegistrationScreenState
                   children: [
                     const Center(
                       child: Text(
-                        'Complete Registration',
+                        'Login',
                         style: TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.bold,
@@ -86,15 +62,15 @@ class CompleteRegistrationScreenState
                     const SizedBox(height: 16),
                     Center(
                       child: Image.asset(
-                        'assets/img/img_register_user.png',
+                        'assets/img/img_login.png',
                         width: 250,
                         height: 200,
                       ),
                     ),
                     const SizedBox(height: 16),
                     LabeledTextField(
-                      label: 'Username:',
-                      controller: usernameController,
+                      label: 'Username or Email:',
+                      controller: usernameOrEmailController,
                     ),
                     const SizedBox(height: 16),
                     LabeledTextField(
@@ -104,17 +80,15 @@ class CompleteRegistrationScreenState
                     ),
                     const SizedBox(height: 20),
                     CustomButton(
-                      text: 'Complete Registration',
+                      text: 'Login',
                       backgroundColor: const Color(0xFF324A5F),
-                      onPressed: _completeRegistration,
+                      onPressed: _login,
                     ),
                     const SizedBox(height: 10),
                     CustomButton(
-                      text: 'Cancel',
-                      backgroundColor: const Color(0xFFC1121F),
-                      onPressed: () {
-                        // Handle cancel logic here
-                      },
+                      text: 'Register',
+                      backgroundColor: const Color(0xFF6A6A6A),
+                      onPressed: _navigateToRegister,
                     ),
                   ],
                 ),
