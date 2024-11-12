@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/labeled_text_field.dart';
 import '../widgets/custom_button.dart';
+import '../widgets/link_text.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -29,6 +30,10 @@ class LoginScreenState extends State<LoginScreen> {
 
   void _navigateToRegister() {
     Navigator.pushNamed(context, '/select-register');
+  }
+
+  void _navigateToForgotPassword() {
+    // Navigate to forgot password screen
   }
 
   @override
@@ -78,7 +83,12 @@ class LoginScreenState extends State<LoginScreen> {
                       keyboardType: TextInputType.visiblePassword,
                       controller: passwordController,
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 8),
+                    LinkText(
+                      text: 'Forgot your password?',
+                      onTap: _navigateToForgotPassword,
+                    ),
+                    const SizedBox(height: 28),
                     CustomButton(
                       text: 'Login',
                       backgroundColor: const Color(0xFF324A5F),

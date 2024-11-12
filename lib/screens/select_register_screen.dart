@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/link_text.dart';
 
 class SelectRegisterScreen extends StatelessWidget {
   const SelectRegisterScreen({super.key});
@@ -9,6 +10,10 @@ class SelectRegisterScreen extends StatelessWidget {
       '/register',
       arguments: {'role': role},
     );
+  }
+
+  void _navigateToLogin(BuildContext context) {
+    Navigator.pushNamed(context, '/');
   }
 
   @override
@@ -114,6 +119,11 @@ class SelectRegisterScreen extends StatelessWidget {
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 28),
+                  LinkText(
+                    text: 'Already have an account?',
+                    onTap: () => _navigateToLogin(context),
                   ),
                 ],
               ),
