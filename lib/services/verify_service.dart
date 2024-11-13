@@ -21,4 +21,20 @@ class VerifyService extends BaseService {
       throw Exception('Failed to validate token');
     }
   }
+
+  Future<void> resendNotification(ResendNotification resendNotification) async {
+    final url = Uri.parse('$baseUrl/api/v1/users/resend-notification');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(resendNotification.toJson()),
+    );
+
+    if (response.statusCode == 200) {
+      // Handle successful response
+    } else {
+      // Handle error response
+      throw Exception('Failed to resend notification');
+    }
+  }
 }

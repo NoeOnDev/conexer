@@ -33,20 +33,23 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LoginScreen(),
         '/select-register': (context) => const SelectRegisterScreen(),
         '/register': (context) {
-          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          final args = ModalRoute.of(context)!.settings.arguments
+              as Map<String, dynamic>;
           return RegisterScreen(
             contactService: ContactService(baseUrl: baseUrl),
             role: args['role'],
           );
         },
         '/complete-registration': (context) {
-          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          final args = ModalRoute.of(context)!.settings.arguments
+              as Map<String, dynamic>;
           return CompleteRegistrationScreen(
               contactId: args['contactId']!,
               userService: UserService(baseUrl: baseUrl));
         },
         '/verify-account': (context) {
-          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          final args = ModalRoute.of(context)!.settings.arguments
+              as Map<String, dynamic>;
           return VerifyAccountScreen(
               userId: args['userId']!,
               verifyService: VerifyService(baseUrl: baseUrl));

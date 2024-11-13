@@ -5,12 +5,14 @@ class VerifyCodeTemplate extends StatefulWidget {
   final String title;
   final String message;
   final Future<void> Function(String code) onConfirmCode;
+  final Future<void> Function() onResendCode;
 
   const VerifyCodeTemplate({
     super.key,
     required this.title,
     required this.message,
     required this.onConfirmCode,
+    required this.onResendCode,
   });
 
   @override
@@ -54,6 +56,15 @@ class VerifyCodeTemplateState extends State<VerifyCodeTemplate> {
       } catch (e) {
         // Handle error
       }
+    }
+  }
+
+  void _resendCode() async {
+    try {
+      await widget.onResendCode();
+      // Handle successful resend
+    } catch (e) {
+      // Handle error
     }
   }
 
@@ -140,9 +151,7 @@ class VerifyCodeTemplateState extends State<VerifyCodeTemplate> {
                     CustomButton(
                       text: 'Resend Code',
                       backgroundColor: const Color(0xFF6A6A6A),
-                      onPressed: () {
-                        // Handle resend code logic here
-                      },
+                      onPressed: _resendCode,
                     ),
                     const SizedBox(height: 10),
                     CustomButton(
