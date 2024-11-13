@@ -20,4 +20,19 @@ class UserService extends BaseService {
       throw Exception('Failed to register user');
     }
   }
+
+  Future<Map<String, dynamic>> requestPasswordChange(String email) async {
+    final url = Uri.parse('$baseUrl/api/v1/users/request-password-change');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'email': email}),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to request password change');
+    }
+  }
 }

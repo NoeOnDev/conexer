@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'screens/register_screen.dart';
 import 'screens/complete_registration_screen.dart';
 import 'screens/verify_account_screen.dart';
+import 'screens/verify_password_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/select_register_screen.dart';
+import 'screens/forgot_password_screen.dart';
 import 'services/contact_service.dart';
 import 'services/user_service.dart';
 import 'services/verify_service.dart';
@@ -51,6 +53,16 @@ class MyApp extends StatelessWidget {
           final args = ModalRoute.of(context)!.settings.arguments
               as Map<String, dynamic>;
           return VerifyAccountScreen(
+              userId: args['userId']!,
+              verifyService: VerifyService(baseUrl: baseUrl));
+        },
+        '/forgot-password': (context) => ForgotPasswordScreen(
+              userService: UserService(baseUrl: baseUrl),
+            ),
+        '/verify-password': (context) {
+          final args = ModalRoute.of(context)!.settings.arguments
+              as Map<String, dynamic>;
+          return VerifyPasswordScreen(
               userId: args['userId']!,
               verifyService: VerifyService(baseUrl: baseUrl));
         },
