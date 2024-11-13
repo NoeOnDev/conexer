@@ -6,7 +6,7 @@ import 'base_service.dart';
 class VerifyService extends BaseService {
   VerifyService({required super.baseUrl});
 
-  Future<void> validateToken(Verify verify) async {
+  Future<Map<String, dynamic>> validateToken(Verify verify) async {
     final url = Uri.parse('$baseUrl/api/v1/notifications/token/validate');
     final response = await http.post(
       url,
@@ -15,9 +15,8 @@ class VerifyService extends BaseService {
     );
 
     if (response.statusCode == 200) {
-      // Handle successful response
+      return jsonDecode(response.body);
     } else {
-      // Handle error response
       throw Exception('Failed to validate token');
     }
   }
@@ -33,7 +32,6 @@ class VerifyService extends BaseService {
     if (response.statusCode == 200) {
       // Handle successful response
     } else {
-      // Handle error response
       throw Exception('Failed to resend notification');
     }
   }

@@ -35,4 +35,20 @@ class UserService extends BaseService {
       throw Exception('Failed to request password change');
     }
   }
+
+  Future<void> updatePassword(String userId, String newPassword) async {
+    final url = Uri.parse('$baseUrl/api/v1/users/update-password');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'userId': userId, 'newPassword': newPassword}),
+    );
+
+    if (response.statusCode == 200) {
+      // Handle successful response
+    } else {
+      // Handle error response
+      throw Exception('Failed to update password');
+    }
+  }
 }

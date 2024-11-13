@@ -20,17 +20,22 @@ class VerifyPasswordScreen extends StatelessWidget {
       message: 'A 5-digit code has been sent to your email address.',
       onConfirmCode: (code) async {
         final verify = Verify(
-            userId: userId, code: code, eventType: 'user_change_password');
-        await verifyService.validateToken(verify);
+            userId: userId, code: code, eventType: 'user_password_change');
+        final response = await verifyService.validateToken(verify);
         // Handle successful verification
         if (context.mounted) {
-          Navigator.pushNamed(context, '/');
+          final newUserId = response['userId'];
+          Navigator.pushNamed(
+            context,
+            '/reset-password',
+            arguments: {'userId': newUserId},
+          );
         }
       },
       onResendCode: () async {
         final resendNotification = ResendNotification(
           userId: userId,
-          notificationType: 'user_change_password',
+          notificationType: 'user_password_change',
         );
         await verifyService.resendNotification(resendNotification);
         // Handle successful resend

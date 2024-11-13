@@ -6,6 +6,7 @@ import 'screens/verify_password_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/select_register_screen.dart';
 import 'screens/forgot_password_screen.dart';
+import 'screens/reset_password_screen.dart';
 import 'services/contact_service.dart';
 import 'services/user_service.dart';
 import 'services/verify_service.dart';
@@ -65,6 +66,13 @@ class MyApp extends StatelessWidget {
           return VerifyPasswordScreen(
               userId: args['userId']!,
               verifyService: VerifyService(baseUrl: baseUrl));
+        },
+        '/reset-password': (context) {
+          final args = ModalRoute.of(context)!.settings.arguments
+              as Map<String, dynamic>;
+          return ResetPasswordScreen(
+              userId: args['userId']!,
+              userService: UserService(baseUrl: baseUrl));
         },
       },
     );
