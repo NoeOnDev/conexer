@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import '../widgets/labeled_text_field.dart';
 import '../widgets/custom_button.dart';
 import '../models/user.dart';
@@ -22,7 +21,6 @@ class CompleteRegistrationScreenState
   final formKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  final logger = Logger();
 
   @override
   void dispose() {
@@ -50,7 +48,6 @@ class CompleteRegistrationScreenState
         );
       } catch (e) {
         // Handle registration error
-        logger.e('Failed to complete registration', error: e);
       }
     }
   }

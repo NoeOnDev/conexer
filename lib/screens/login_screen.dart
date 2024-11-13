@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import '../widgets/labeled_text_field.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/link_text.dart';
+import '../services/user_service.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  final UserService userService;
+
+  const LoginScreen({super.key, required this.userService});
 
   @override
   LoginScreenState createState() => LoginScreenState();
@@ -24,7 +27,15 @@ class LoginScreenState extends State<LoginScreen> {
 
   void _login() async {
     if (formKey.currentState!.validate()) {
-      // Handle login logic here
+      try {
+        final response = await widget.userService.login(
+          usernameOrEmailController.text,
+          passwordController.text,
+        );
+        // Handle successful login
+      } catch (e) {
+        // Handle login error
+      }
     }
   }
 

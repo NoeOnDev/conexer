@@ -20,6 +20,9 @@ class CustomButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: backgroundColor,
           padding: const EdgeInsets.symmetric(vertical: 16.0),
+          elevation: 5.0,
+          shadowColor: Colors.black.withOpacity(0.5),
+          animationDuration: const Duration(milliseconds: 200),
         ),
         onPressed: onPressed,
         child: Text(

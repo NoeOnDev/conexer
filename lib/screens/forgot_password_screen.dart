@@ -30,11 +30,6 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         final userId = response['userId'];
         // Handle successful password change request
         if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text(
-                  'Password change request has been processed successfully')),
-        );
         Navigator.pushNamed(
           context,
           '/verify-password',
@@ -42,9 +37,6 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         );
       } catch (e) {
         // Handle error
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to request password change')),
-        );
       }
     }
   }

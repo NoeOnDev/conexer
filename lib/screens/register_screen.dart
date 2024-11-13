@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import '../widgets/labeled_text_field.dart';
 import '../widgets/custom_button.dart';
 import '../models/contact.dart';
@@ -22,7 +21,6 @@ class RegisterScreenState extends State<RegisterScreen> {
   final lastNameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
-  final logger = Logger();
 
   @override
   void dispose() {
@@ -51,7 +49,7 @@ class RegisterScreenState extends State<RegisterScreen> {
           arguments: {'contactId': contactId},
         );
       } catch (e) {
-        logger.e('Failed to register contact', error: e);
+        // Handle registration error
       }
     }
   }

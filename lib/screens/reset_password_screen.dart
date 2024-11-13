@@ -32,9 +32,6 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
   void _resetPassword() async {
     if (formKey.currentState!.validate()) {
       if (newPasswordController.text != confirmPasswordController.text) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Passwords do not match')),
-        );
         return;
       }
 
@@ -45,16 +42,9 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
         );
         // Handle successful password update
         if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text('Password has been updated successfully')),
-        );
         Navigator.pushNamed(context, '/');
       } catch (e) {
         // Handle error
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to update password')),
-        );
       }
     }
   }

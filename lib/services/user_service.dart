@@ -36,6 +36,21 @@ class UserService extends BaseService {
     }
   }
 
+  Future<Map<String, dynamic>> login(String identifier, String password) async {
+    final url = Uri.parse('$baseUrl/api/v1/users/login');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'identifier': identifier, 'password': password}),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to login');
+    }
+  }
+
   Future<void> updatePassword(String userId, String newPassword) async {
     final url = Uri.parse('$baseUrl/api/v1/users/update-password');
     final response = await http.post(

@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const String baseUrl =
-        'https://105c-2806-262-3487-34f-9d57-d3fe-f4-3123.ngrok-free.app';
+        'https://bf1f-2806-262-3487-34f-5bb0-6cf7-bd03-fa6a.ngrok-free.app';
 
     return MaterialApp(
       title: 'Conexer',
@@ -33,7 +33,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => const LoginScreen(),
+        '/': (context) =>
+            LoginScreen(userService: UserService(baseUrl: baseUrl)),
         '/select-register': (context) => const SelectRegisterScreen(),
         '/register': (context) {
           final args = ModalRoute.of(context)!.settings.arguments
