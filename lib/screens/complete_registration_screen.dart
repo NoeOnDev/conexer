@@ -39,7 +39,7 @@ class CompleteRegistrationScreenState
 
       try {
         final response = await widget.userService.registerUser(user);
-        final userId = response['user']['id'];
+        final userId = response['userId'];
         if (!mounted) return;
         Navigator.pushNamed(
           context,
@@ -110,7 +110,7 @@ class CompleteRegistrationScreenState
                       text: 'Cancel',
                       backgroundColor: const Color(0xFFC1121F),
                       onPressed: () {
-                        // Handle cancel logic here
+                        Navigator.pop(context);
                       },
                     ),
                   ],

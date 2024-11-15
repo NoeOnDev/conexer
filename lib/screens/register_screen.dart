@@ -123,7 +123,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                       text: 'Cancel',
                       backgroundColor: const Color(0xFFC1121F),
                       onPressed: () {
-                        // Handle cancel logic here
+                        Navigator.pop(context);
                       },
                     ),
                   ],

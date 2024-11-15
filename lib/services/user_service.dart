@@ -15,7 +15,11 @@ class UserService extends BaseService {
     );
 
     if (response.statusCode == 201) {
-      return jsonDecode(response.body);
+      final responseData = jsonDecode(response.body);
+      return {
+        'userId': responseData['user']['id']['value'],
+        'message': responseData['message'],
+      };
     } else {
       throw Exception('Failed to register user');
     }

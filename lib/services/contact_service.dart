@@ -16,7 +16,7 @@ class ContactService extends BaseService {
 
     if (response.statusCode == 201) {
       final responseData = jsonDecode(response.body);
-      return responseData['id'];
+      return responseData['id']['value'];
     } else {
       throw Exception('Failed to register contact');
     }
