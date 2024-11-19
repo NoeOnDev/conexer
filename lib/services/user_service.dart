@@ -22,7 +22,7 @@ class UserService extends BaseService {
     }
   }
 
-  Future<Map<String, dynamic>> requestPasswordChange(String email) async {
+  Future<String> requestPasswordChange(String email) async {
     final url = Uri.parse('$baseUrl/api/v1/users/request-password-change');
     final response = await http.post(
       url,
@@ -31,7 +31,8 @@ class UserService extends BaseService {
     );
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body);
+      final responseData = jsonDecode(response.body);
+      return responseData['token'];
     } else {
       throw Exception('Failed to request password change');
     }
@@ -52,12 +53,15 @@ class UserService extends BaseService {
     }
   }
 
-  Future<void> updatePassword(String userId, String newPassword) async {
+  Future<void> updatePassword(String jwtToken, String newPassword) async {
     final url = Uri.parse('$baseUrl/api/v1/users/update-password');
     final response = await http.post(
       url,
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'userId': userId, 'newPassword': newPassword}),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $jwtToken',
+      },
+      body: jsonEncode({'newPassword': newPassword}),
     );
 
     if (response.statusCode == 200) {

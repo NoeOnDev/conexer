@@ -25,15 +25,14 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   void _requestPasswordReset() async {
     if (formKey.currentState!.validate()) {
       try {
-        final response = await widget.userService
+        final token = await widget.userService
             .requestPasswordChange(emailController.text);
-        final userId = response['userId'];
         // Handle successful password change request
         if (!mounted) return;
         Navigator.pushNamed(
           context,
           '/verify-password',
-          arguments: {'userId': userId},
+          arguments: {'token': token},
         );
       } catch (e) {
         // Handle error

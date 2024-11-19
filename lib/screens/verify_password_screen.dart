@@ -18,13 +18,14 @@ class VerifyPasswordScreen extends StatelessWidget {
       title: 'Verify Password Change',
       message: 'A 5-digit code has been sent to your email address.',
       onConfirmCode: (code) async {
-        await verifyService.validateToken(token, code);
+        final response = await verifyService.validateToken(token, code);
+        final jwtToken = response['jwtToken'];
         // Handle successful verification
         if (context.mounted) {
           Navigator.pushNamed(
             context,
             '/reset-password',
-            arguments: {'token': token},
+            arguments: {'jwtToken': jwtToken},
           );
         }
       },

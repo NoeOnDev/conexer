@@ -4,12 +4,12 @@ import '../widgets/custom_button.dart';
 import '../services/user_service.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
-  final String userId;
+  final String jwtToken;
   final UserService userService;
 
   const ResetPasswordScreen({
     super.key,
-    required this.userId,
+    required this.jwtToken,
     required this.userService,
   });
 
@@ -37,7 +37,7 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
       try {
         await widget.userService.updatePassword(
-          widget.userId,
+          widget.jwtToken,
           newPasswordController.text,
         );
         // Handle successful password update

@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
           final args = ModalRoute.of(context)!.settings.arguments
               as Map<String, dynamic>;
           return ResetPasswordScreen(
-              userId: args['userId']!,
+              jwtToken: args['jwtToken']!,
               userService: UserService(baseUrl: baseUrl));
         },
       },
