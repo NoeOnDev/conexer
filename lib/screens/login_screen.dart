@@ -28,11 +28,17 @@ class LoginScreenState extends State<LoginScreen> {
   void _login() async {
     if (formKey.currentState!.validate()) {
       try {
-        final response = await widget.userService.login(
+        final token = await widget.userService.login(
           usernameOrEmailController.text,
           passwordController.text,
         );
         // Handle successful login
+        if (!mounted) return;
+        Navigator.pushNamed(
+          context,
+          '/verify-2fa',
+          arguments: {'token': token},
+        );
       } catch (e) {
         // Handle login error
       }

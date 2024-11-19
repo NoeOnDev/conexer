@@ -3,10 +3,12 @@ import 'screens/register_screen.dart';
 import 'screens/complete_registration_screen.dart';
 import 'screens/verify_account_screen.dart';
 import 'screens/verify_password_screen.dart';
+import 'screens/verify_2fa_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/select_register_screen.dart';
 import 'screens/forgot_password_screen.dart';
 import 'screens/reset_password_screen.dart';
+import 'screens/home_screen.dart';
 import 'services/contact_service.dart';
 import 'services/user_service.dart';
 import 'services/verify_service.dart';
@@ -75,6 +77,14 @@ class MyApp extends StatelessWidget {
               jwtToken: args['jwtToken']!,
               userService: UserService(baseUrl: baseUrl));
         },
+        '/verify-2fa': (context) {
+          final args = ModalRoute.of(context)!.settings.arguments
+              as Map<String, dynamic>;
+          return Verify2FAScreen(
+              token: args['token']!,
+              verifyService: VerifyService(baseUrl: baseUrl));
+        },
+        '/home': (context) => const HomeScreen(),
       },
     );
   }

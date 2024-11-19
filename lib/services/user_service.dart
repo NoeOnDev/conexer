@@ -38,7 +38,7 @@ class UserService extends BaseService {
     }
   }
 
-  Future<Map<String, dynamic>> login(String identifier, String password) async {
+  Future<String> login(String identifier, String password) async {
     final url = Uri.parse('$baseUrl/api/v1/users/login');
     final response = await http.post(
       url,
@@ -47,7 +47,8 @@ class UserService extends BaseService {
     );
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body);
+      final responseData = jsonDecode(response.body);
+      return responseData['token'];
     } else {
       throw Exception('Failed to login');
     }
