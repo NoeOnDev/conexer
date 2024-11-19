@@ -1,17 +1,19 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../models/verify.dart';
 import 'base_service.dart';
 
 class VerifyService extends BaseService {
   VerifyService({required super.baseUrl});
 
-  Future<Map<String, dynamic>> validateToken(Verify verify) async {
+  Future<Map<String, dynamic>> validateToken(String token, String code) async {
     final url = Uri.parse('$baseUrl/api/v1/notifications/token/validate');
     final response = await http.post(
       url,
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(verify.toJson()),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode({'code': code}),
     );
 
     if (response.statusCode == 200) {
@@ -21,12 +23,14 @@ class VerifyService extends BaseService {
     }
   }
 
-  Future<void> resendNotification(ResendNotification resendNotification) async {
+  Future<void> resendNotification(String token) async {
     final url = Uri.parse('$baseUrl/api/v1/users/resend-notification');
     final response = await http.post(
       url,
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(resendNotification.toJson()),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
     );
 
     if (response.statusCode == 200) {

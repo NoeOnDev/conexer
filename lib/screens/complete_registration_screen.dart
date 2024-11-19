@@ -38,16 +38,16 @@ class CompleteRegistrationScreenState
       );
 
       try {
-        final response = await widget.userService.registerUser(user);
-        final userId = response['userId'];
+        final token = await widget.userService.registerUser(user);
         if (!mounted) return;
         Navigator.pushNamed(
           context,
           '/verify-account',
-          arguments: {'userId': userId},
+          arguments: {'token': token},
         );
       } catch (e) {
         // Handle registration error
+        print('Error: $e');
       }
     }
   }

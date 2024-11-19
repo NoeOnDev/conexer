@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const String baseUrl =
-        'https://c9e6-2806-262-3487-34f-9361-cbfc-9bff-2d5b.ngrok-free.app';
+        'https://4aa4-2806-262-3487-34f-ce2e-a1b3-877b-9ecf.ngrok-free.app';
 
     return MaterialApp(
       title: 'Conexer',
@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
           final args = ModalRoute.of(context)!.settings.arguments
               as Map<String, dynamic>;
           return VerifyAccountScreen(
-              userId: args['userId']!,
+              token: args['token']!,
               verifyService: VerifyService(baseUrl: baseUrl));
         },
         '/forgot-password': (context) => ForgotPasswordScreen(
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
           final args = ModalRoute.of(context)!.settings.arguments
               as Map<String, dynamic>;
           return VerifyPasswordScreen(
-              userId: args['userId']!,
+              token: args['token']!,
               verifyService: VerifyService(baseUrl: baseUrl));
         },
         '/reset-password': (context) {

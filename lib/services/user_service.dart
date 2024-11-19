@@ -6,7 +6,7 @@ import 'base_service.dart';
 class UserService extends BaseService {
   UserService({required super.baseUrl});
 
-  Future<Map<String, dynamic>> registerUser(User user) async {
+  Future<String> registerUser(User user) async {
     final url = Uri.parse('$baseUrl/api/v1/users/register');
     final response = await http.post(
       url,
@@ -16,10 +16,7 @@ class UserService extends BaseService {
 
     if (response.statusCode == 201) {
       final responseData = jsonDecode(response.body);
-      return {
-        'userId': responseData['user']['id']['value'],
-        'message': responseData['message'],
-      };
+      return responseData['token'];
     } else {
       throw Exception('Failed to register user');
     }
@@ -66,7 +63,6 @@ class UserService extends BaseService {
     if (response.statusCode == 200) {
       // Handle successful response
     } else {
-      // Handle error response
       throw Exception('Failed to update password');
     }
   }
