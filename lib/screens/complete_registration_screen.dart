@@ -6,10 +6,15 @@ import '../services/user_service.dart';
 
 class CompleteRegistrationScreen extends StatefulWidget {
   final String contactId;
+  final String role;
   final UserService userService;
 
-  const CompleteRegistrationScreen(
-      {super.key, required this.contactId, required this.userService});
+  const CompleteRegistrationScreen({
+    super.key,
+    required this.contactId,
+    required this.role,
+    required this.userService,
+  });
 
   @override
   CompleteRegistrationScreenState createState() =>
@@ -35,6 +40,7 @@ class CompleteRegistrationScreenState
         contactId: widget.contactId,
         username: usernameController.text,
         password: passwordController.text,
+        role: widget.role,
       );
 
       try {

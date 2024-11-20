@@ -23,7 +23,6 @@ class LabeledDropdown extends StatelessWidget {
           label,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
-        const SizedBox(height: 8),
         DropdownButtonFormField<String>(
           value: value,
           items: items.map((String item) {

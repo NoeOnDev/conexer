@@ -21,12 +21,18 @@ class Verify2FAScreen extends StatelessWidget {
       onConfirmCode: (code) async {
         final response = await verifyService.validateToken(token, code);
         final jwtToken = response['jwtToken'];
+        final role = response['role'];
         // Handle successful verification
         if (context.mounted) {
           final prefs = await SharedPreferences.getInstance();
-          await prefs.setString('jwtToken', jwtToken);
+          await prefs.setString('token_user_verification', jwtToken);
+          await prefs.setString('user_role', role);
           if (context.mounted) {
-            Navigator.pushNamed(context, '/home');
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              '/home',
+              (Route<dynamic> route) => false,
+            );
           }
         }
       },

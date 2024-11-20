@@ -49,7 +49,10 @@ class RegisterScreenState extends State<RegisterScreen> {
         Navigator.pushNamed(
           context,
           '/complete-registration',
-          arguments: {'contactId': contactId},
+          arguments: {
+            'contactId': contactId,
+            'role': widget.role,
+          },
         );
       } catch (e) {
         // Handle registration error
