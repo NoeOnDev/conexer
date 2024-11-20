@@ -52,6 +52,7 @@ class MyApp extends StatelessWidget {
           return RegisterScreen(
             contactService: ContactService(baseUrl: baseUrl),
             role: args['role'],
+            imagePath: args['imagePath'],
           );
         },
         '/complete-registration': (context) {

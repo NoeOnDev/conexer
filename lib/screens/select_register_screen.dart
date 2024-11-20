@@ -4,11 +4,12 @@ import '../widgets/link_text.dart';
 class SelectRegisterScreen extends StatelessWidget {
   const SelectRegisterScreen({super.key});
 
-  void _navigateToRegister(BuildContext context, String role) {
+  void _navigateToRegister(
+      BuildContext context, String role, String imagePath) {
     Navigator.pushNamed(
       context,
       '/register',
-      arguments: {'role': role},
+      arguments: {'role': role, 'imagePath': imagePath},
     );
   }
 
@@ -54,7 +55,8 @@ class SelectRegisterScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GestureDetector(
-                        onTap: () => _navigateToRegister(context, 'Citizen'),
+                        onTap: () => _navigateToRegister(context, 'Citizen',
+                            'assets/img/img_register_role_citizen.png'),
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width * 0.4,
                           child: Card(
@@ -86,8 +88,10 @@ class SelectRegisterScreen extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () =>
-                            _navigateToRegister(context, 'Representative'),
+                        onTap: () => _navigateToRegister(
+                            context,
+                            'Representative',
+                            'assets/img/img_register_role_representative.png'),
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width * 0.4,
                           child: Card(

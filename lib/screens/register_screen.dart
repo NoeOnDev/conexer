@@ -8,9 +8,14 @@ import '../services/contact_service.dart';
 class RegisterScreen extends StatefulWidget {
   final ContactService contactService;
   final String role;
+  final String imagePath;
 
-  const RegisterScreen(
-      {super.key, required this.contactService, required this.role});
+  const RegisterScreen({
+    super.key,
+    required this.contactService,
+    required this.role,
+    required this.imagePath,
+  });
 
   @override
   RegisterScreenState createState() => RegisterScreenState();
@@ -92,7 +97,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(height: 16),
                       Center(
                         child: Image.asset(
-                          'assets/img/img_register_contact.png',
+                          widget.imagePath,
                           width: 250,
                           height: 200,
                         ),
