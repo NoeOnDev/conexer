@@ -22,7 +22,7 @@ class RegisterScreenState extends State<RegisterScreen> {
   final lastNameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
-  String? selectedHobbit;
+  String? selectedHobby;
 
   @override
   void dispose() {
@@ -40,7 +40,7 @@ class RegisterScreenState extends State<RegisterScreen> {
         lastName: lastNameController.text,
         email: emailController.text,
         phone: phoneController.text,
-        hobbit: selectedHobbit ?? 'None',
+        hobby: selectedHobby ?? 'None',
       );
 
       try {
@@ -118,8 +118,8 @@ class RegisterScreenState extends State<RegisterScreen> {
                       ),
                       const SizedBox(height: 16),
                       LabeledDropdown(
-                        label: 'Hobbit:',
-                        value: selectedHobbit,
+                        label: 'Hobby:',
+                        value: selectedHobby,
                         items: const [
                           'Chef',
                           'Merchandise Trade',
@@ -132,7 +132,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                         ],
                         onChanged: (value) {
                           setState(() {
-                            selectedHobbit = value;
+                            selectedHobby = value;
                           });
                         },
                       ),
