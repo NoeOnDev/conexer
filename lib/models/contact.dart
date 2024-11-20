@@ -3,12 +3,14 @@ class Contact {
   final String lastName;
   final String email;
   final String phone;
+  final String hobbit;
 
   Contact({
     required this.firstName,
     required this.lastName,
     required this.email,
     required this.phone,
+    required this.hobbit,
   });
 
   Map<String, dynamic> toJson() {
@@ -17,6 +19,7 @@ class Contact {
       'lastName': lastName,
       'email': email,
       'phone': phone,
+      'hobbit': hobbit,
     };
   }
 }

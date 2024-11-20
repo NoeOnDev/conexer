@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/labeled_text_field.dart';
 import '../widgets/custom_button.dart';
+import '../widgets/labeled_dropdown.dart';
 import '../models/contact.dart';
 import '../services/contact_service.dart';
 
@@ -21,6 +22,7 @@ class RegisterScreenState extends State<RegisterScreen> {
   final lastNameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
+  String? selectedHobbit;
 
   @override
   void dispose() {
@@ -38,6 +40,7 @@ class RegisterScreenState extends State<RegisterScreen> {
         lastName: lastNameController.text,
         email: emailController.text,
         phone: phoneController.text,
+        hobbit: selectedHobbit ?? 'None',
       );
 
       try {
@@ -111,6 +114,26 @@ class RegisterScreenState extends State<RegisterScreen> {
                       label: 'Phone:',
                       keyboardType: TextInputType.phone,
                       controller: phoneController,
+                    ),
+                    const SizedBox(height: 16),
+                    LabeledDropdown(
+                      label: 'Hobbit:',
+                      value: selectedHobbit,
+                      items: const [
+                        'Chef',
+                        'Merchandise Trade',
+                        'Craftsman',
+                        'Community Volunteering',
+                        'Arts and Culture Promotion',
+                        'Community Educator',
+                        'Health and Wellness',
+                        'None',
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          selectedHobbit = value;
+                        });
+                      },
                     ),
                     const SizedBox(height: 20),
                     CustomButton(

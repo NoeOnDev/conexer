@@ -16,7 +16,7 @@ class VerifyPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return VerifyCodeTemplate(
       title: 'Verify Password Change',
-      message: 'A 5-digit code has been sent to your email address.',
+      message: 'A 5-digit code has been sent to your WhatsApp number.',
       onConfirmCode: (code) async {
         final response = await verifyService.validateToken(token, code);
         final jwtToken = response['jwtToken'];
