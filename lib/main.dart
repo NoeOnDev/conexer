@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/register_screen.dart';
 import 'screens/complete_registration_screen.dart';
 import 'screens/verify_account_screen.dart';
@@ -13,17 +14,24 @@ import 'services/contact_service.dart';
 import 'services/user_service.dart';
 import 'services/verify_service.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final prefs = await SharedPreferences.getInstance();
+  final userToken = prefs.getString('token_user_verification');
+
+  runApp(MyApp(isLoggedIn: userToken != null));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isLoggedIn;
+
+  const MyApp({super.key, required this.isLoggedIn});
 
   @override
   Widget build(BuildContext context) {
     const String baseUrl =
-        'https://8b6a-2806-262-3487-34f-ed35-164c-9e0a-6ac9.ngrok-free.app';
+        'https://fb83-2806-262-3487-34f-ed6f-f79f-9410-83c3.ngrok-free.app';
 
     return MaterialApp(
       title: 'Conexer',
@@ -32,11 +40,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/',
+      home: isLoggedIn
+          ? const HomeScreen()
+          : LoginScreen(userService: UserService(baseUrl: baseUrl)),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) =>
-            LoginScreen(userService: UserService(baseUrl: baseUrl)),
         '/select-register': (context) => const SelectRegisterScreen(),
         '/register': (context) {
           final args = ModalRoute.of(context)!.settings.arguments
