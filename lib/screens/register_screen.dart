@@ -60,96 +60,98 @@ class RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                color: const Color(0x8077A1DD),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Center(
-                      child: Text(
-                        'Register',
-                        style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: const Color(0x8077A1DD),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Center(
+                        child: Text(
+                          'Register',
+                          style: TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    Center(
-                      child: Image.asset(
-                        'assets/img/img_register_contact.png',
-                        width: 250,
-                        height: 200,
+                      const SizedBox(height: 16),
+                      Center(
+                        child: Image.asset(
+                          'assets/img/img_register_contact.png',
+                          width: 250,
+                          height: 200,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    LabeledTextField(
-                      label: 'First Name:',
-                      controller: firstNameController,
-                    ),
-                    const SizedBox(height: 16),
-                    LabeledTextField(
-                      label: 'Last Name:',
-                      controller: lastNameController,
-                    ),
-                    const SizedBox(height: 16),
-                    LabeledTextField(
-                      label: 'Email:',
-                      keyboardType: TextInputType.emailAddress,
-                      controller: emailController,
-                    ),
-                    const SizedBox(height: 16),
-                    LabeledTextField(
-                      label: 'Phone:',
-                      keyboardType: TextInputType.phone,
-                      controller: phoneController,
-                    ),
-                    const SizedBox(height: 16),
-                    LabeledDropdown(
-                      label: 'Hobbit:',
-                      value: selectedHobbit,
-                      items: const [
-                        'Chef',
-                        'Merchandise Trade',
-                        'Craftsman',
-                        'Community Volunteering',
-                        'Arts and Culture Promotion',
-                        'Community Educator',
-                        'Health and Wellness',
-                        'None',
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          selectedHobbit = value;
-                        });
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    CustomButton(
-                      text: 'Register',
-                      backgroundColor: const Color(0xFF324A5F),
-                      onPressed: _register,
-                    ),
-                    const SizedBox(height: 10),
-                    CustomButton(
-                      text: 'Cancel',
-                      backgroundColor: const Color(0xFFC1121F),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
+                      const SizedBox(height: 16),
+                      LabeledTextField(
+                        label: 'First Name:',
+                        controller: firstNameController,
+                      ),
+                      const SizedBox(height: 16),
+                      LabeledTextField(
+                        label: 'Last Name:',
+                        controller: lastNameController,
+                      ),
+                      const SizedBox(height: 16),
+                      LabeledTextField(
+                        label: 'Email:',
+                        keyboardType: TextInputType.emailAddress,
+                        controller: emailController,
+                      ),
+                      const SizedBox(height: 16),
+                      LabeledTextField(
+                        label: 'Phone:',
+                        keyboardType: TextInputType.phone,
+                        controller: phoneController,
+                      ),
+                      const SizedBox(height: 16),
+                      LabeledDropdown(
+                        label: 'Hobbit:',
+                        value: selectedHobbit,
+                        items: const [
+                          'Chef',
+                          'Merchandise Trade',
+                          'Craftsman',
+                          'Community Volunteering',
+                          'Arts and Culture Promotion',
+                          'Community Educator',
+                          'Health and Wellness',
+                          'None',
+                        ],
+                        onChanged: (value) {
+                          setState(() {
+                            selectedHobbit = value;
+                          });
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                      CustomButton(
+                        text: 'Register',
+                        backgroundColor: const Color(0xFF324A5F),
+                        onPressed: _register,
+                      ),
+                      const SizedBox(height: 10),
+                      CustomButton(
+                        text: 'Cancel',
+                        backgroundColor: const Color(0xFFC1121F),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

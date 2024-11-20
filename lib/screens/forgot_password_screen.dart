@@ -43,58 +43,60 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                color: const Color(0x8077A1DD),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Center(
-                      child: Text(
-                        'Forgot Password',
-                        style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: const Color(0x8077A1DD),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Center(
+                        child: Text(
+                          'Forgot Password',
+                          style: TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    Center(
-                      child: Image.asset(
-                        'assets/img/img_forgot_password.png',
-                        width: 250,
-                        height: 200,
+                      const SizedBox(height: 16),
+                      Center(
+                        child: Image.asset(
+                          'assets/img/img_forgot_password.png',
+                          width: 250,
+                          height: 200,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    const Text(
-                      'Please enter your email address to request a password reset.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    const SizedBox(height: 16),
-                    LabeledTextField(
-                      label: 'Email:',
-                      keyboardType: TextInputType.emailAddress,
-                      controller: emailController,
-                    ),
-                    const SizedBox(height: 20),
-                    CustomButton(
-                      text: 'Request Password Reset',
-                      backgroundColor: const Color(0xFF324A5F),
-                      onPressed: _requestPasswordReset,
-                    ),
-                  ],
+                      const SizedBox(height: 16),
+                      const Text(
+                        'Please enter your email address to request a password reset.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 16),
+                      LabeledTextField(
+                        label: 'Email:',
+                        keyboardType: TextInputType.emailAddress,
+                        controller: emailController,
+                      ),
+                      const SizedBox(height: 20),
+                      CustomButton(
+                        text: 'Request Password Reset',
+                        backgroundColor: const Color(0xFF324A5F),
+                        onPressed: _requestPasswordReset,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

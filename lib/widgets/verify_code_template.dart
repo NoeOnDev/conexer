@@ -71,95 +71,97 @@ class VerifyCodeTemplateState extends State<VerifyCodeTemplate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                color: const Color(0x8077A1DD),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      widget.title,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: const Color(0x8077A1DD),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        widget.title,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    Center(
-                      child: Image.asset(
-                        'assets/img/img_verify_code.png',
-                        width: 250,
-                        height: 200,
+                      const SizedBox(height: 16),
+                      Center(
+                        child: Image.asset(
+                          'assets/img/img_verify_code.png',
+                          width: 250,
+                          height: 200,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      widget.message,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                    const SizedBox(height: 16),
-                    const Text(
-                      'Enter the 5-digit code:',
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: List.generate(5, (index) {
-                        return SizedBox(
-                          width: 50,
-                          child: TextFormField(
-                            controller: codeControllers[index],
-                            focusNode: focusNodes[index],
-                            keyboardType: TextInputType.number,
-                            textAlign: TextAlign.center,
-                            maxLength: 1,
-                            onChanged: (value) => _onChanged(value, index),
-                            decoration: InputDecoration(
-                              counterText: '',
-                              filled: true,
-                              fillColor: Colors.white,
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.deepPurple),
-                                borderRadius: BorderRadius.circular(10),
+                      const SizedBox(height: 16),
+                      Text(
+                        widget.message,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        'Enter the 5-digit code:',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: List.generate(5, (index) {
+                          return SizedBox(
+                            width: 50,
+                            child: TextFormField(
+                              controller: codeControllers[index],
+                              focusNode: focusNodes[index],
+                              keyboardType: TextInputType.number,
+                              textAlign: TextAlign.center,
+                              maxLength: 1,
+                              onChanged: (value) => _onChanged(value, index),
+                              decoration: InputDecoration(
+                                counterText: '',
+                                filled: true,
+                                fillColor: Colors.white,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.deepPurple),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      }),
-                    ),
-                    const SizedBox(height: 20),
-                    CustomButton(
-                      text: 'Resend Code',
-                      backgroundColor: const Color(0xFF6A6A6A),
-                      onPressed: _resendCode,
-                    ),
-                    const SizedBox(height: 10),
-                    CustomButton(
-                      text: 'Confirm Code',
-                      backgroundColor: const Color(0xFF324A5F),
-                      onPressed: _confirmCode,
-                    ),
-                  ],
+                          );
+                        }),
+                      ),
+                      const SizedBox(height: 20),
+                      CustomButton(
+                        text: 'Resend Code',
+                        backgroundColor: const Color(0xFF6A6A6A),
+                        onPressed: _resendCode,
+                      ),
+                      const SizedBox(height: 10),
+                      CustomButton(
+                        text: 'Confirm Code',
+                        backgroundColor: const Color(0xFF324A5F),
+                        onPressed: _confirmCode,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
