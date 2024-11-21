@@ -101,12 +101,14 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         label: 'New Password:',
                         keyboardType: TextInputType.visiblePassword,
                         controller: newPasswordController,
+                        obscureText: true,
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
                         label: 'Confirm Password:',
                         keyboardType: TextInputType.visiblePassword,
                         controller: confirmPasswordController,
+                        obscureText: true,
                       ),
                       const SizedBox(height: 20),
                       CustomButton(

@@ -5,6 +5,8 @@ class LabeledTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final bool obscureText;
+  final String? prefixText;
 
   const LabeledTextField({
     super.key,
@@ -12,6 +14,8 @@ class LabeledTextField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.controller,
     this.validator,
+    this.obscureText = false,
+    this.prefixText,
   });
 
   @override
@@ -27,9 +31,11 @@ class LabeledTextField extends StatelessWidget {
           keyboardType: keyboardType,
           controller: controller,
           validator: validator,
+          obscureText: obscureText,
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.white,
+            prefixText: prefixText,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(10),

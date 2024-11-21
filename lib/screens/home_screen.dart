@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
-import '../services/auth_service.dart';
+import '../widgets/citizen_scaffold.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () => AuthService.logout(context),
-          ),
-        ],
-      ),
-      body: const Center(
+    return const CitizenScaffold(
+      body: Center(
         child: Text(
           'Welcome!',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),

@@ -1,0 +1,139 @@
+import 'package:flutter/material.dart';
+import '../services/auth_service.dart';
+
+class CitizenScaffold extends StatelessWidget {
+  final Widget body;
+
+  const CitizenScaffold({super.key, required this.body});
+
+  void _onMenuItemSelected(BuildContext context, String value) {
+    switch (value) {
+      case 'Home':
+        Navigator.pushNamed(context, '/home');
+        break;
+      case 'Reports and Appointments':
+        Navigator.pushNamed(context, '/reportes-citas');
+        break;
+      case 'News':
+        Navigator.pushNamed(context, '/noticias');
+        break;
+      case 'Events':
+        Navigator.pushNamed(context, '/eventos');
+        break;
+      case 'Profile':
+        Navigator.pushNamed(context, '/perfil');
+        break;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0x8077A1DD),
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                  border: Border.all(color: Colors.black, width: 2),
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.menu,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications),
+            onPressed: () {
+              Navigator.pushNamed(context, '/notifications');
+            },
+          ),
+        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color(0x8077A1DD),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundColor: Colors.white,
+                    child: CircleAvatar(
+                      radius: 45,
+                      backgroundImage:
+                          AssetImage('assets/img/img_logo_conexer.png'),
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  Text(
+                    'Conexer',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 24,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () => _onMenuItemSelected(context, 'Home'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.assignment),
+              title: const Text('Reports and Appointments'),
+              onTap: () =>
+                  _onMenuItemSelected(context, 'Reports and Appointments'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.article),
+              title: const Text('News'),
+              onTap: () => _onMenuItemSelected(context, 'News'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.event),
+              title: const Text('Events'),
+              onTap: () => _onMenuItemSelected(context, 'Events'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text('Profile'),
+              onTap: () => _onMenuItemSelected(context, 'Profile'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout, color: Colors.red),
+              title: const Text(
+                'Logout',
+                style: TextStyle(color: Colors.red),
+              ),
+              onTap: () => AuthService.logout(context),
+            ),
+          ],
+        ),
+      ),
+      body: body,
+    );
+  }
+}

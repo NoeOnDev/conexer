@@ -100,6 +100,7 @@ class LoginScreenState extends State<LoginScreen> {
                         label: 'Password:',
                         keyboardType: TextInputType.visiblePassword,
                         controller: passwordController,
+                        obscureText: true,
                       ),
                       const SizedBox(height: 8),
                       LinkText(

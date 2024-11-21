@@ -104,6 +104,7 @@ class CompleteRegistrationScreenState
                         label: 'Password:',
                         keyboardType: TextInputType.visiblePassword,
                         controller: passwordController,
+                        obscureText: true,
                       ),
                       const SizedBox(height: 20),
                       CustomButton(

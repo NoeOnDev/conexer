@@ -28,6 +28,7 @@ class RegisterScreenState extends State<RegisterScreen> {
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
   String? selectedHobby;
+  String countryCode = '+52';
 
   @override
   void dispose() {
@@ -44,7 +45,7 @@ class RegisterScreenState extends State<RegisterScreen> {
         firstName: firstNameController.text,
         lastName: lastNameController.text,
         email: emailController.text,
-        phone: phoneController.text,
+        phone: '$countryCode${phoneController.text}',
         hobby: selectedHobby ?? 'None',
       );
 
@@ -123,6 +124,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                         label: 'Phone:',
                         keyboardType: TextInputType.phone,
                         controller: phoneController,
+                        prefixText: '$countryCode ',
                       ),
                       const SizedBox(height: 16),
                       LabeledDropdown(
