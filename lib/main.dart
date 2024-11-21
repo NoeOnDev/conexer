@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/register_screen.dart';
 import 'screens/complete_registration_screen.dart';
+import 'screens/splash_screen.dart';
 import 'screens/verify_account_screen.dart';
 import 'screens/verify_password_screen.dart';
 import 'screens/verify_2fa_screen.dart';
@@ -13,6 +14,7 @@ import 'screens/home_screen.dart';
 import 'services/contact_service.dart';
 import 'services/user_service.dart';
 import 'services/verify_service.dart';
+import 'services/auth_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,9 +42,18 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: isLoggedIn
-          ? const HomeScreen()
-          : LoginScreen(userService: UserService(baseUrl: baseUrl)),
+      home: FutureBuilder<bool>(
+        future: AuthService.isTokenValid(baseUrl),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const SplashScreen();
+          } else if (snapshot.hasData && snapshot.data == true) {
+            return const HomeScreen();
+          } else {
+            return LoginScreen(userService: UserService(baseUrl: baseUrl));
+          }
+        },
+      ),
       debugShowCheckedModeBanner: false,
       routes: {
         '/select-register': (context) => const SelectRegisterScreen(),
