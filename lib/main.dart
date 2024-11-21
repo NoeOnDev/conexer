@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       title: 'Conexer',
       theme: ThemeData(
         fontFamily: 'Hepta Slab',
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0x8077A1DD)),
         useMaterial3: true,
       ),
       home: FutureBuilder<bool>(

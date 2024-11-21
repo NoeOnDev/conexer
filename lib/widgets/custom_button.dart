@@ -4,12 +4,14 @@ class CustomButton extends StatelessWidget {
   final String text;
   final Color backgroundColor;
   final VoidCallback onPressed;
+  final double textSize;
 
   const CustomButton({
     super.key,
     required this.text,
     required this.backgroundColor,
     required this.onPressed,
+    this.textSize = 16.0,
   });
 
   @override
@@ -23,14 +25,17 @@ class CustomButton extends StatelessWidget {
           elevation: 5.0,
           shadowColor: Colors.black.withOpacity(0.5),
           animationDuration: const Duration(milliseconds: 200),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
         ),
         onPressed: onPressed,
         child: Text(
           text,
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w700,
-            fontSize: 16,
+            fontSize: textSize,
           ),
         ),
       ),
