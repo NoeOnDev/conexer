@@ -12,7 +12,7 @@ class CitizenScaffold extends StatelessWidget {
         Navigator.pushNamed(context, '/home');
         break;
       case 'Reports and Appointments':
-        Navigator.pushNamed(context, '/reportes-citas');
+        Navigator.pushNamed(context, '/reports');
         break;
       case 'News':
         Navigator.pushNamed(context, '/noticias');
@@ -30,6 +30,7 @@ class CitizenScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text('Conexer', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600)),
         backgroundColor: const Color(0x8077A1DD),
         leading: Builder(
           builder: (BuildContext context) {
@@ -86,7 +87,7 @@ class CitizenScaffold extends StatelessWidget {
                   ),
                   SizedBox(width: 20),
                   Text(
-                    'Conexer',
+                    'Menu',
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w600,
