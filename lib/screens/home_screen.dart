@@ -10,8 +10,8 @@ class HomeScreen extends StatelessWidget {
     Navigator.pushNamed(context, '/create-report');
   }
 
-  void _viewEvents(BuildContext context) {
-    Navigator.pushNamed(context, '/events');
+  void _scheduleAppointment(BuildContext context) {
+    Navigator.pushNamed(context, '/schedule-appointment');
   }
 
   void _viewNews(BuildContext context) {
@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
           ),
           const SizedBox(height: 32),
           const Text(
-            'Want to see nearby events?',
+            'Would you like to schedule an appointment?',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -51,9 +51,9 @@ class HomeScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           CustomButton(
-            text: 'View Events',
+            text: 'Schedule Appointment',
             backgroundColor: const Color(0xFF324A5F),
-            onPressed: () => _viewEvents(context),
+            onPressed: () => _scheduleAppointment(context),
             textSize: 16.0,
           ),
           const SizedBox(height: 32),

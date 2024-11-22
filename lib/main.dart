@@ -12,6 +12,7 @@ import 'screens/forgot_password_screen.dart';
 import 'screens/reset_password_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/create_report_screen.dart';
+import 'screens/schedule_appointment_screen.dart';
 import 'services/contact_service.dart';
 import 'services/user_service.dart';
 import 'services/verify_service.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const String baseUrl =
-        'https://e388-2806-262-3487-34f-dcd8-2fd-6ad5-67bc.ngrok-free.app';
+        'https://241a-2806-262-3487-34f-401c-1b3f-6f4a-ad4c.ngrok-free.app';
 
     return MaterialApp(
       title: 'Conexer',
@@ -108,6 +109,7 @@ class MyApp extends StatelessWidget {
         },
         '/home': (context) => const HomeScreen(),
         '/create-report': (context) => const CreateReportScreen(),
+        '/schedule-appointment': (context) => const ScheduleAppointmentScreen(),
       },
     );
   }

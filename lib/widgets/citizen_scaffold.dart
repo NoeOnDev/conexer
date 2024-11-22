@@ -12,16 +12,16 @@ class CitizenScaffold extends StatelessWidget {
         Navigator.pushNamed(context, '/home');
         break;
       case 'Reports':
-        Navigator.pushNamed(context, '/');
+        Navigator.pushNamed(context, '/reports');
+        break;
+      case 'Appointments':
+        Navigator.pushNamed(context, '/appointments');
         break;
       case 'News':
-        Navigator.pushNamed(context, '/');
-        break;
-      case 'Events':
-        Navigator.pushNamed(context, '/');
+        Navigator.pushNamed(context, '/news');
         break;
       case 'Profile':
-        Navigator.pushNamed(context, '/');
+        Navigator.pushNamed(context, '/profile');
         break;
     }
   }
@@ -101,14 +101,14 @@ class CitizenScaffold extends StatelessWidget {
               onTap: () => _onMenuItemSelected(context, 'Reports'),
             ),
             ListTile(
+              leading: const Icon(Icons.calendar_today),
+              title: const Text('Appointments'),
+              onTap: () => _onMenuItemSelected(context, 'Appointments'),
+            ),
+            ListTile(
               leading: const Icon(Icons.article),
               title: const Text('News'),
               onTap: () => _onMenuItemSelected(context, 'News'),
-            ),
-            ListTile(
-              leading: const Icon(Icons.event),
-              title: const Text('Events'),
-              onTap: () => _onMenuItemSelected(context, 'Events'),
             ),
             ListTile(
               leading: const Icon(Icons.person),

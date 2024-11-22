@@ -58,7 +58,7 @@ class CreateReportScreenState extends State<CreateReportScreen> {
         LabeledTextField(
           label: 'Description:',
           controller: descriptionController,
-          maxLines: 5,
+          maxLines: 8,
           labelColor: Colors.white,
         ),
         const SizedBox(height: 20),
