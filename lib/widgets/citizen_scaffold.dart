@@ -11,17 +11,17 @@ class CitizenScaffold extends StatelessWidget {
       case 'Home':
         Navigator.pushNamed(context, '/home');
         break;
-      case 'Reports and Appointments':
-        Navigator.pushNamed(context, '/reports');
+      case 'Reports':
+        Navigator.pushNamed(context, '/');
         break;
       case 'News':
-        Navigator.pushNamed(context, '/noticias');
+        Navigator.pushNamed(context, '/');
         break;
       case 'Events':
-        Navigator.pushNamed(context, '/eventos');
+        Navigator.pushNamed(context, '/');
         break;
       case 'Profile':
-        Navigator.pushNamed(context, '/perfil');
+        Navigator.pushNamed(context, '/');
         break;
     }
   }
@@ -30,7 +30,8 @@ class CitizenScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Conexer', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600)),
+        title: const Text('Conexer',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600)),
         backgroundColor: const Color(0x8077A1DD),
         leading: Builder(
           builder: (BuildContext context) {
@@ -56,14 +57,6 @@ class CitizenScaffold extends StatelessWidget {
             );
           },
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {
-              Navigator.pushNamed(context, '/notifications');
-            },
-          ),
-        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -104,9 +97,8 @@ class CitizenScaffold extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.assignment),
-              title: const Text('Reports and Appointments'),
-              onTap: () =>
-                  _onMenuItemSelected(context, 'Reports and Appointments'),
+              title: const Text('Reports'),
+              onTap: () => _onMenuItemSelected(context, 'Reports'),
             ),
             ListTile(
               leading: const Icon(Icons.article),

@@ -11,8 +11,6 @@ import 'screens/select_register_screen.dart';
 import 'screens/forgot_password_screen.dart';
 import 'screens/reset_password_screen.dart';
 import 'screens/home_screen.dart';
-import 'screens/reports_screen.dart';
-import 'screens/actions_screen.dart';
 import 'screens/create_report_screen.dart';
 import 'services/contact_service.dart';
 import 'services/user_service.dart';
@@ -109,8 +107,6 @@ class MyApp extends StatelessWidget {
               verifyService: VerifyService(baseUrl: baseUrl));
         },
         '/home': (context) => const HomeScreen(),
-        '/reports': (context) => const ReportsScreen(),
-        '/actions': (context) => const ActionsScreen(),
         '/create-report': (context) => const CreateReportScreen(),
       },
     );
