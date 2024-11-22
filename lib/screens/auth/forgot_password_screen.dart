@@ -1,56 +1,43 @@
 import 'package:flutter/material.dart';
-import '../widgets/labeled_text_field.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/link_text.dart';
-import '../services/user_service.dart';
+import '../../widgets/labeled_text_field.dart';
+import '../../widgets/custom_button.dart';
+import '../../services/user_service.dart';
 
-class LoginScreen extends StatefulWidget {
+class ForgotPasswordScreen extends StatefulWidget {
   final UserService userService;
 
-  const LoginScreen({super.key, required this.userService});
+  const ForgotPasswordScreen({super.key, required this.userService});
 
   @override
-  LoginScreenState createState() => LoginScreenState();
+  ForgotPasswordScreenState createState() => ForgotPasswordScreenState();
 }
 
-class LoginScreenState extends State<LoginScreen> {
+class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final formKey = GlobalKey<FormState>();
-  final usernameOrEmailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final emailController = TextEditingController();
 
   @override
   void dispose() {
-    usernameOrEmailController.dispose();
-    passwordController.dispose();
+    emailController.dispose();
     super.dispose();
   }
 
-  void _login() async {
+  void _requestPasswordReset() async {
     if (formKey.currentState!.validate()) {
       try {
-        final token = await widget.userService.login(
-          usernameOrEmailController.text,
-          passwordController.text,
-        );
-        // Handle successful login
+        final token = await widget.userService
+            .requestPasswordChange(emailController.text);
+        // Handle successful password change request
         if (!mounted) return;
         Navigator.pushNamed(
           context,
-          '/verify-2fa',
+          '/verify-password',
           arguments: {'token': token},
         );
       } catch (e) {
-        // Handle login error
+        // Handle error
       }
     }
-  }
-
-  void _navigateToRegister() {
-    Navigator.pushNamed(context, '/select-register');
-  }
-
-  void _navigateToForgotPassword() {
-    Navigator.pushNamed(context, '/forgot-password');
   }
 
   @override
@@ -75,7 +62,7 @@ class LoginScreenState extends State<LoginScreen> {
                     children: [
                       const Center(
                         child: Text(
-                          'Login',
+                          'Forgot Password',
                           style: TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
@@ -85,39 +72,28 @@ class LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 16),
                       Center(
                         child: Image.asset(
-                          'assets/img/img_login.png',
+                          'assets/img/img_forgot_password.png',
                           width: 250,
                           height: 200,
                         ),
                       ),
                       const SizedBox(height: 16),
-                      LabeledTextField(
-                        label: 'Username or Email:',
-                        controller: usernameOrEmailController,
+                      const Text(
+                        'Please enter your email address to request a password reset.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16),
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
-                        label: 'Password:',
-                        keyboardType: TextInputType.visiblePassword,
-                        controller: passwordController,
-                        obscureText: true,
+                        label: 'Email:',
+                        keyboardType: TextInputType.emailAddress,
+                        controller: emailController,
                       ),
-                      const SizedBox(height: 8),
-                      LinkText(
-                        text: 'Forgot your password?',
-                        onTap: _navigateToForgotPassword,
-                      ),
-                      const SizedBox(height: 28),
+                      const SizedBox(height: 20),
                       CustomButton(
-                        text: 'Login',
+                        text: 'Request Password Reset',
                         backgroundColor: const Color(0xFF324A5F),
-                        onPressed: _login,
-                      ),
-                      const SizedBox(height: 10),
-                      CustomButton(
-                        text: 'Register',
-                        backgroundColor: const Color(0xFF6A6A6A),
-                        onPressed: _navigateToRegister,
+                        onPressed: _requestPasswordReset,
                       ),
                     ],
                   ),

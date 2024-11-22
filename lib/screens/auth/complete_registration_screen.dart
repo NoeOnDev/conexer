@@ -1,56 +1,60 @@
 import 'package:flutter/material.dart';
-import '../widgets/labeled_text_field.dart';
-import '../widgets/custom_button.dart';
-import '../services/user_service.dart';
+import '../../widgets/labeled_text_field.dart';
+import '../../widgets/custom_button.dart';
+import '../../models/user.dart';
+import '../../services/user_service.dart';
 
-class ResetPasswordScreen extends StatefulWidget {
-  final String jwtToken;
+class CompleteRegistrationScreen extends StatefulWidget {
+  final String contactId;
+  final String role;
   final UserService userService;
 
-  const ResetPasswordScreen({
+  const CompleteRegistrationScreen({
     super.key,
-    required this.jwtToken,
+    required this.contactId,
+    required this.role,
     required this.userService,
   });
 
   @override
-  ResetPasswordScreenState createState() => ResetPasswordScreenState();
+  CompleteRegistrationScreenState createState() =>
+      CompleteRegistrationScreenState();
 }
 
-class ResetPasswordScreenState extends State<ResetPasswordScreen> {
+class CompleteRegistrationScreenState
+    extends State<CompleteRegistrationScreen> {
   final formKey = GlobalKey<FormState>();
-  final newPasswordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   void dispose() {
-    newPasswordController.dispose();
-    confirmPasswordController.dispose();
+    usernameController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
-  void _resetPassword() async {
+  void _completeRegistration() async {
     if (formKey.currentState!.validate()) {
-      if (newPasswordController.text != confirmPasswordController.text) {
-        return;
-      }
+      final user = User(
+        contactId: widget.contactId,
+        username: usernameController.text,
+        password: passwordController.text,
+        role: widget.role,
+      );
 
       try {
-        await widget.userService.updatePassword(
-          widget.jwtToken,
-          newPasswordController.text,
-        );
-        // Handle successful password update
+        final token = await widget.userService.registerUser(user);
         if (!mounted) return;
-        Navigator.pushNamed(context, '/');
+        Navigator.pushNamed(
+          context,
+          '/verify-account',
+          arguments: {'token': token},
+        );
       } catch (e) {
-        // Handle error
+        // Handle registration error
       }
     }
-  }
-
-  void _cancelResetPassword() {
-    Navigator.pop(context);
   }
 
   @override
@@ -75,7 +79,7 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     children: [
                       const Center(
                         child: Text(
-                          'Reset Password',
+                          'Complete Registration',
                           style: TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
@@ -85,42 +89,36 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       const SizedBox(height: 16),
                       Center(
                         child: Image.asset(
-                          'assets/img/img_reset_password.png',
+                          'assets/img/img_register_user.png',
                           width: 250,
                           height: 200,
                         ),
                       ),
                       const SizedBox(height: 16),
-                      const Text(
-                        'Please enter your new password and confirm it below. Make sure your password is strong and secure.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16),
+                      LabeledTextField(
+                        label: 'Username:',
+                        controller: usernameController,
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
-                        label: 'New Password:',
+                        label: 'Password:',
                         keyboardType: TextInputType.visiblePassword,
-                        controller: newPasswordController,
-                        obscureText: true,
-                      ),
-                      const SizedBox(height: 16),
-                      LabeledTextField(
-                        label: 'Confirm Password:',
-                        keyboardType: TextInputType.visiblePassword,
-                        controller: confirmPasswordController,
+                        controller: passwordController,
                         obscureText: true,
                       ),
                       const SizedBox(height: 20),
                       CustomButton(
-                        text: 'Reset Password',
+                        text: 'Complete Registration',
                         backgroundColor: const Color(0xFF324A5F),
-                        onPressed: _resetPassword,
+                        onPressed: _completeRegistration,
                       ),
                       const SizedBox(height: 10),
                       CustomButton(
                         text: 'Cancel',
                         backgroundColor: const Color(0xFFC1121F),
-                        onPressed: _cancelResetPassword,
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                       ),
                     ],
                   ),

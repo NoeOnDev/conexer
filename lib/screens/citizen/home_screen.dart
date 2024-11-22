@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../widgets/citizen_scaffold.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/selection_template.dart';
+import '../../widgets/citizen_scaffold.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/selection_template.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

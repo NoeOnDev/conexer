@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/verify_code_template.dart';
-import '../services/verify_service.dart';
+import '../../widgets/verify_code_template.dart';
+import '../../services/verify_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Verify2FAScreen extends StatelessWidget {

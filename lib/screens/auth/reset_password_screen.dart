@@ -1,43 +1,56 @@
 import 'package:flutter/material.dart';
-import '../widgets/labeled_text_field.dart';
-import '../widgets/custom_button.dart';
-import '../services/user_service.dart';
+import '../../widgets/labeled_text_field.dart';
+import '../../widgets/custom_button.dart';
+import '../../services/user_service.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
+class ResetPasswordScreen extends StatefulWidget {
+  final String jwtToken;
   final UserService userService;
 
-  const ForgotPasswordScreen({super.key, required this.userService});
+  const ResetPasswordScreen({
+    super.key,
+    required this.jwtToken,
+    required this.userService,
+  });
 
   @override
-  ForgotPasswordScreenState createState() => ForgotPasswordScreenState();
+  ResetPasswordScreenState createState() => ResetPasswordScreenState();
 }
 
-class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+class ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
+  final newPasswordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   void dispose() {
-    emailController.dispose();
+    newPasswordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 
-  void _requestPasswordReset() async {
+  void _resetPassword() async {
     if (formKey.currentState!.validate()) {
+      if (newPasswordController.text != confirmPasswordController.text) {
+        return;
+      }
+
       try {
-        final token = await widget.userService
-            .requestPasswordChange(emailController.text);
-        // Handle successful password change request
-        if (!mounted) return;
-        Navigator.pushNamed(
-          context,
-          '/verify-password',
-          arguments: {'token': token},
+        await widget.userService.updatePassword(
+          widget.jwtToken,
+          newPasswordController.text,
         );
+        // Handle successful password update
+        if (!mounted) return;
+        Navigator.pushNamed(context, '/');
       } catch (e) {
         // Handle error
       }
     }
+  }
+
+  void _cancelResetPassword() {
+    Navigator.pop(context);
   }
 
   @override
@@ -62,7 +75,7 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     children: [
                       const Center(
                         child: Text(
-                          'Forgot Password',
+                          'Reset Password',
                           style: TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
@@ -72,28 +85,42 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       const SizedBox(height: 16),
                       Center(
                         child: Image.asset(
-                          'assets/img/img_forgot_password.png',
+                          'assets/img/img_reset_password.png',
                           width: 250,
                           height: 200,
                         ),
                       ),
                       const SizedBox(height: 16),
                       const Text(
-                        'Please enter your email address to request a password reset.',
+                        'Please enter your new password and confirm it below. Make sure your password is strong and secure.',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 16),
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
-                        label: 'Email:',
-                        keyboardType: TextInputType.emailAddress,
-                        controller: emailController,
+                        label: 'New Password:',
+                        keyboardType: TextInputType.visiblePassword,
+                        controller: newPasswordController,
+                        obscureText: true,
+                      ),
+                      const SizedBox(height: 16),
+                      LabeledTextField(
+                        label: 'Confirm Password:',
+                        keyboardType: TextInputType.visiblePassword,
+                        controller: confirmPasswordController,
+                        obscureText: true,
                       ),
                       const SizedBox(height: 20),
                       CustomButton(
-                        text: 'Request Password Reset',
+                        text: 'Reset Password',
                         backgroundColor: const Color(0xFF324A5F),
-                        onPressed: _requestPasswordReset,
+                        onPressed: _resetPassword,
+                      ),
+                      const SizedBox(height: 10),
+                      CustomButton(
+                        text: 'Cancel',
+                        backgroundColor: const Color(0xFFC1121F),
+                        onPressed: _cancelResetPassword,
                       ),
                     ],
                   ),

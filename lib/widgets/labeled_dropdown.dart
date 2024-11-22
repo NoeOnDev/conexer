@@ -5,6 +5,7 @@ class LabeledDropdown extends StatelessWidget {
   final String? value;
   final List<String> items;
   final ValueChanged<String?> onChanged;
+  final Color labelColor;
 
   const LabeledDropdown({
     super.key,
@@ -12,6 +13,7 @@ class LabeledDropdown extends StatelessWidget {
     required this.value,
     required this.items,
     required this.onChanged,
+    this.labelColor = Colors.black,
   });
 
   @override
@@ -21,7 +23,8 @@ class LabeledDropdown extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 16, color: labelColor),
         ),
         const SizedBox(height: 2),
         DropdownButtonFormField<String>(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/link_text.dart';
+import '../../widgets/link_text.dart';
 
 class SelectRegisterScreen extends StatelessWidget {
   const SelectRegisterScreen({super.key});

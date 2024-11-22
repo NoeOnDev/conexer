@@ -12,7 +12,7 @@ class CitizenScaffold extends StatelessWidget {
         Navigator.pushNamed(context, '/home');
         break;
       case 'Reports':
-        Navigator.pushNamed(context, '/reports');
+        Navigator.pushNamed(context, '/report-history');
         break;
       case 'Appointments':
         Navigator.pushNamed(context, '/appointments');

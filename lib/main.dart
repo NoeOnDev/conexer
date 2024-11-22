@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'screens/register_screen.dart';
-import 'screens/complete_registration_screen.dart';
+import 'screens/auth/register_screen.dart';
+import 'screens/auth/complete_registration_screen.dart';
 import 'screens/splash_screen.dart';
-import 'screens/verify_account_screen.dart';
-import 'screens/verify_password_screen.dart';
-import 'screens/verify_2fa_screen.dart';
-import 'screens/login_screen.dart';
-import 'screens/select_register_screen.dart';
-import 'screens/forgot_password_screen.dart';
-import 'screens/reset_password_screen.dart';
-import 'screens/home_screen.dart';
-import 'screens/create_report_screen.dart';
-import 'screens/schedule_appointment_screen.dart';
+import 'screens/auth/verify_account_screen.dart';
+import 'screens/auth/verify_password_screen.dart';
+import 'screens/auth/verify_2fa_screen.dart';
+import 'screens/auth/login_screen.dart';
+import 'screens/auth/select_register_screen.dart';
+import 'screens/auth/forgot_password_screen.dart';
+import 'screens/auth/reset_password_screen.dart';
+import 'screens/citizen/home_screen.dart';
+import 'screens/citizen/create_report_screen.dart';
+import 'screens/citizen/schedule_appointment_screen.dart';
+import 'screens/citizen/profile_screen.dart';
+import 'screens/citizen/report_history_screen.dart';
+import 'screens/citizen/appointments_screen.dart';
+import 'screens/citizen/news_screen.dart';
 import 'services/contact_service.dart';
 import 'services/user_service.dart';
 import 'services/verify_service.dart';
@@ -110,6 +114,10 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomeScreen(),
         '/create-report': (context) => const CreateReportScreen(),
         '/schedule-appointment': (context) => const ScheduleAppointmentScreen(),
+        '/profile': (context) => const ProfileScreen(),
+        '/report-history': (context) => const ReportHistoryScreen(),
+        '/appointments': (context) => const AppointmentsScreen(),
+        '/news': (context) => const NewsScreen(),
       },
     );
   }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../widgets/labeled_text_field.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/labeled_dropdown.dart';
-import '../models/contact.dart';
-import '../services/contact_service.dart';
+import '../../widgets/labeled_text_field.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/labeled_dropdown.dart';
+import '../../models/contact.dart';
+import '../../services/contact_service.dart';
 
 class RegisterScreen extends StatefulWidget {
   final ContactService contactService;

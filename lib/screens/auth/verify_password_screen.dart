@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/verify_code_template.dart';
-import '../services/verify_service.dart';
+import '../../widgets/verify_code_template.dart';
+import '../../services/verify_service.dart';
 
 class VerifyPasswordScreen extends StatelessWidget {
   final String token;
