@@ -6,9 +6,8 @@ import '../widgets/selection_template.dart';
 class ActionsScreen extends StatelessWidget {
   const ActionsScreen({super.key});
 
-  void _reportIssue() {
-    // Navegar a la pantalla de reportes
-    // Navigator.pushNamed(context, '/report-issue');
+  void _reportIssue(BuildContext context) {
+    Navigator.pushNamed(context, '/create-report');
   }
 
   void _proposeEvent() {
@@ -31,7 +30,7 @@ class ActionsScreen extends StatelessWidget {
           CustomButton(
             text: 'Report an Issue',
             backgroundColor: const Color(0xFF324A5F),
-            onPressed: _reportIssue,
+            onPressed: () => _reportIssue(context),
             textSize: 18.0,
           ),
           const SizedBox(height: 16),

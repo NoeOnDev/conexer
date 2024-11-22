@@ -7,6 +7,8 @@ class LabeledTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool obscureText;
   final String? prefixText;
+  final int maxLines;
+  final Color labelColor;
 
   const LabeledTextField({
     super.key,
@@ -16,6 +18,8 @@ class LabeledTextField extends StatelessWidget {
     this.validator,
     this.obscureText = false,
     this.prefixText,
+    this.maxLines = 1,
+    this.labelColor = Colors.black,
   });
 
   @override
@@ -25,13 +29,16 @@ class LabeledTextField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 16, color: labelColor),
         ),
+        const SizedBox(height: 2),
         TextFormField(
           keyboardType: keyboardType,
           controller: controller,
           validator: validator,
           obscureText: obscureText,
+          maxLines: maxLines,
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.white,

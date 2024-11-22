@@ -5,6 +5,7 @@ class CustomButton extends StatelessWidget {
   final Color backgroundColor;
   final VoidCallback onPressed;
   final double textSize;
+  final Color textColor;
 
   const CustomButton({
     super.key,
@@ -12,6 +13,7 @@ class CustomButton extends StatelessWidget {
     required this.backgroundColor,
     required this.onPressed,
     this.textSize = 16.0,
+    this.textColor = Colors.white,
   });
 
   @override
@@ -33,7 +35,7 @@ class CustomButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            color: Colors.white,
+            color: textColor,
             fontWeight: FontWeight.w700,
             fontSize: textSize,
           ),

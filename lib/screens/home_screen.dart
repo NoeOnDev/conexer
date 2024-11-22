@@ -7,7 +7,7 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   void _reportIssue(BuildContext context) {
-    Navigator.pushNamed(context, '/actions');
+    Navigator.pushNamed(context, '/create-report');
   }
 
   void _viewEvents(BuildContext context) {
