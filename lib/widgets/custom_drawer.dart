@@ -73,6 +73,8 @@ class CustomDrawer extends StatelessWidget {
     switch (option) {
       case 'Home':
         return Icons.home;
+      case 'Statistics':
+        return Icons.bar_chart;
       case 'Reports':
         return Icons.assignment;
       case 'Appointments':
@@ -81,8 +83,6 @@ class CustomDrawer extends StatelessWidget {
         return Icons.article;
       case 'Profile':
         return Icons.person;
-      case 'Statistics':
-        return Icons.bar_chart;
       case 'Logout':
         return Icons.logout;
       default:

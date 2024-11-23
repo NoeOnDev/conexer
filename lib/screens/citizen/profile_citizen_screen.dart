@@ -4,14 +4,14 @@ import '../../widgets/labeled_text_field.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/labeled_dropdown.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class ProfileCitizenScreen extends StatefulWidget {
+  const ProfileCitizenScreen({super.key});
 
   @override
-  ProfileScreenState createState() => ProfileScreenState();
+  ProfileCitizenScreenState createState() => ProfileCitizenScreenState();
 }
 
-class ProfileScreenState extends State<ProfileScreen> {
+class ProfileCitizenScreenState extends State<ProfileCitizenScreen> {
   final formKey = GlobalKey<FormState>();
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
@@ -44,6 +44,7 @@ class ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return FormTemplate(
       title: 'Profile',
+      scaffoldType: ScaffoldType.citizen,
       fields: [
         LabeledTextField(
           label: 'First Name:',

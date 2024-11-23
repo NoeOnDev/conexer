@@ -52,7 +52,7 @@ class CitizenScaffold extends StatelessWidget {
           'Reports': '/report-history',
           'Appointments': '/appointments',
           'News': '/news',
-          'Profile': '/profile',
+          'Profile': '/profile-citizen',
         },
       ),
       body: body,

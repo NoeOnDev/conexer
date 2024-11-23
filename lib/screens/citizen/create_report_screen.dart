@@ -42,6 +42,7 @@ class CreateReportScreenState extends State<CreateReportScreen> {
   Widget build(BuildContext context) {
     return FormTemplate(
       title: 'Create Report',
+      scaffoldType: ScaffoldType.citizen,
       fields: [
         LabeledTextField(
           label: 'Title:',

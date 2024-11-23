@@ -13,11 +13,12 @@ import 'screens/auth/reset_password_screen.dart';
 import 'screens/citizen/home_citizen_screen.dart';
 import 'screens/citizen/create_report_screen.dart';
 import 'screens/citizen/schedule_appointment_screen.dart';
-import 'screens/citizen/profile_screen.dart';
+import 'screens/citizen/profile_citizen_screen.dart';
 import 'screens/citizen/report_history_screen.dart';
 import 'screens/citizen/appointments_screen.dart';
 import 'screens/citizen/news_screen.dart';
 import 'screens/representative/home_representative_screen.dart';
+import 'screens/representative/profile_representative_screen.dart';
 import 'services/contact_service.dart';
 import 'services/user_service.dart';
 import 'services/verify_service.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const String baseUrl =
-        'https://53a9-2806-262-3487-34f-7d3-515f-714-c0b5.ngrok-free.app';
+        'https://a768-2806-262-3487-34f-309d-d2c-deba-a614.ngrok-free.app';
 
     return MaterialApp(
       title: 'Conexer',
@@ -130,7 +131,10 @@ class MyApp extends StatelessWidget {
         '/home-representative': (context) => const HomeRepresentativeScreen(),
         '/create-report': (context) => const CreateReportScreen(),
         '/schedule-appointment': (context) => const ScheduleAppointmentScreen(),
-        '/profile': (context) => const ProfileScreen(),
+        '/profile-citizen': (context) =>
+            const ProfileCitizenScreen(),
+        '/profile-representative': (context) =>
+            const ProfileRepresentativeScreen(),
         '/report-history': (context) => const ReportHistoryScreen(),
         '/appointments': (context) => const AppointmentsScreen(),
         '/news': (context) => const NewsScreen(),

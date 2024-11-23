@@ -41,20 +41,20 @@ class RepresentativeScaffold extends StatelessWidget {
       drawer: const CustomDrawer(
         options: [
           'Home',
+          'Statistics',
           'Reports',
           'Appointments',
           'News',
           'Profile',
-          'Statistics',
           'Logout'
         ],
         routes: {
           'Home': '/home-representative',
+          'Statistics': '/statistics',
           'Reports': '/report-history-representative',
           'Appointments': '/appointments-representative',
           'News': '/news-representative',
           'Profile': '/profile-representative',
-          'Statistics': '/statistics',
         },
       ),
       body: body,

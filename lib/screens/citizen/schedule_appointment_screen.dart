@@ -37,6 +37,7 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
   Widget build(BuildContext context) {
     return FormTemplate(
       title: 'Schedule Appointment',
+      scaffoldType: ScaffoldType.citizen,
       fields: [
         LabeledTextField(
           label: 'Title:',
