@@ -8,6 +8,7 @@ class ReportHistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ViewTemplate(
       title: 'Report History',
+      scaffoldType: ScaffoldType.citizen,
       content: Center(
         child: Text(
           'Content for Report History',

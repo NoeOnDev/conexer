@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../widgets/citizen_scaffold.dart';
 import '../../widgets/custom_button.dart';
-import '../../widgets/selection_template.dart';
+import '../../widgets/view_template.dart';
 
 class HomeRepresentativeScreen extends StatelessWidget {
   const HomeRepresentativeScreen({super.key});
@@ -15,18 +14,27 @@ class HomeRepresentativeScreen extends StatelessWidget {
   }
 
   void _viewNews(BuildContext context) {
-    Navigator.pushNamed(context, '/news');
+    Navigator.pushNamed(context, '/news-representative');
   }
 
   @override
   Widget build(BuildContext context) {
-    return CitizenScaffold(
-      body: SelectionTemplate(
-        title: 'Welcome Representative',
-        imagePath: 'assets/img/img_home.png',
-        buttons: [
+    return ViewTemplate(
+      title: 'Welcome',
+      scaffoldType: ScaffoldType.representative,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(
+            child: Image.asset(
+              'assets/img/img_home.png',
+              width: 370,
+              height: 260,
+            ),
+          ),
           const Text(
-            'Any issues in your community?',
+            'Any issues in your community? Want to report them?',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,

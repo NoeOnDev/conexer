@@ -8,6 +8,7 @@ class NewsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ViewTemplate(
       title: 'Community News',
+      scaffoldType: ScaffoldType.citizen,
       content: Center(
         child: Text(
           'Content for Community News',

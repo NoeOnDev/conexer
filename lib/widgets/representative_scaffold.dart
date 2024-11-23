@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'custom_drawer.dart';
 
-class CitizenScaffold extends StatelessWidget {
+class RepresentativeScaffold extends StatelessWidget {
   final Widget body;
 
-  const CitizenScaffold({super.key, required this.body});
+  const RepresentativeScaffold({super.key, required this.body});
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +45,16 @@ class CitizenScaffold extends StatelessWidget {
           'Appointments',
           'News',
           'Profile',
+          'Statistics',
           'Logout'
         ],
         routes: {
-          'Home': '/home',
-          'Reports': '/report-history',
-          'Appointments': '/appointments',
-          'News': '/news',
-          'Profile': '/profile',
+          'Home': '/home-representative',
+          'Reports': '/report-history-representative',
+          'Appointments': '/appointments-representative',
+          'News': '/news-representative',
+          'Profile': '/profile-representative',
+          'Statistics': '/statistics',
         },
       ),
       body: body,

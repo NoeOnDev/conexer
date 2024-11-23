@@ -8,6 +8,7 @@ class AppointmentsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ViewTemplate(
       title: 'Appointments',
+      scaffoldType: ScaffoldType.citizen,
       content: Center(
         child: Text(
           'Content for Appointments',

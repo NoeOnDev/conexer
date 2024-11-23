@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../widgets/citizen_scaffold.dart';
 import '../../widgets/custom_button.dart';
-import '../../widgets/selection_template.dart';
+import '../../widgets/view_template.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeCitizenScreen extends StatelessWidget {
+  const HomeCitizenScreen({super.key});
 
   void _reportIssue(BuildContext context) {
     Navigator.pushNamed(context, '/create-report');
@@ -20,11 +19,20 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CitizenScaffold(
-      body: SelectionTemplate(
-        title: 'Welcome',
-        imagePath: 'assets/img/img_home.png',
-        buttons: [
+    return ViewTemplate(
+      title: 'Welcome',
+      scaffoldType: ScaffoldType.citizen,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(
+            child: Image.asset(
+              'assets/img/img_home.png',
+              width: 370,
+              height: 260,
+            ),
+          ),
           const Text(
             'Any issues in your community? Want to report them?',
             textAlign: TextAlign.center,
