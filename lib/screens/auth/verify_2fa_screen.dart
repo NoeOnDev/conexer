@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../widgets/verify_code_template.dart';
 import '../../services/verify_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Verify2FAScreen extends StatelessWidget {
   final String token;
@@ -28,11 +28,19 @@ class Verify2FAScreen extends StatelessWidget {
           await prefs.setString('token_user_verification', jwtToken);
           await prefs.setString('user_role', role);
           if (context.mounted) {
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              '/home',
-              (Route<dynamic> route) => false,
-            );
+            if (role == 'Citizen') {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                '/home',
+                (Route<dynamic> route) => false,
+              );
+            } else if (role == 'Representative') {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                '/home-representative',
+                (Route<dynamic> route) => false,
+              );
+            }
           }
         }
       },

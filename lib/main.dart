@@ -17,6 +17,7 @@ import 'screens/citizen/profile_screen.dart';
 import 'screens/citizen/report_history_screen.dart';
 import 'screens/citizen/appointments_screen.dart';
 import 'screens/citizen/news_screen.dart';
+import 'screens/representative/home_representative_screen.dart';
 import 'services/contact_service.dart';
 import 'services/user_service.dart';
 import 'services/verify_service.dart';
@@ -54,7 +55,21 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const SplashScreen();
           } else if (snapshot.hasData && snapshot.data == true) {
-            return const HomeScreen();
+            return FutureBuilder<String?>(
+              future: SharedPreferences.getInstance().then(
+                (prefs) => prefs.getString('user_role'),
+              ),
+              builder: (context, roleSnapshot) {
+                if (roleSnapshot.hasData) {
+                  if (roleSnapshot.data == 'Citizen') {
+                    return const HomeScreen();
+                  } else if (roleSnapshot.data == 'Representative') {
+                    return const HomeRepresentativeScreen();
+                  }
+                }
+                return LoginScreen(userService: UserService(baseUrl: baseUrl));
+              },
+            );
           } else {
             return LoginScreen(userService: UserService(baseUrl: baseUrl));
           }
@@ -112,6 +127,7 @@ class MyApp extends StatelessWidget {
               verifyService: VerifyService(baseUrl: baseUrl));
         },
         '/home': (context) => const HomeScreen(),
+        '/home-representative': (context) => const HomeRepresentativeScreen(),
         '/create-report': (context) => const CreateReportScreen(),
         '/schedule-appointment': (context) => const ScheduleAppointmentScreen(),
         '/profile': (context) => const ProfileScreen(),
