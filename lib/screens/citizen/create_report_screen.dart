@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../widgets/form_template.dart';
 import '../../widgets/labeled_text_field.dart';
+import '../../widgets/labeled_dropdown.dart';
 import '../../widgets/custom_button.dart';
 
 class CreateReportScreen extends StatefulWidget {
@@ -13,15 +14,14 @@ class CreateReportScreen extends StatefulWidget {
 class CreateReportScreenState extends State<CreateReportScreen> {
   final formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
-  final categoryController = TextEditingController();
   final descriptionController = TextEditingController();
   final municipalityController = TextEditingController();
   final streetController = TextEditingController();
+  String? selectedCategory;
 
   @override
   void dispose() {
     titleController.dispose();
-    categoryController.dispose();
     descriptionController.dispose();
     municipalityController.dispose();
     streetController.dispose();
@@ -32,6 +32,10 @@ class CreateReportScreenState extends State<CreateReportScreen> {
     if (formKey.currentState!.validate()) {
       // Handle report creation logic
     }
+  }
+
+  void _cancel() {
+    Navigator.pop(context);
   }
 
   void _captureLocation() {
@@ -50,9 +54,15 @@ class CreateReportScreenState extends State<CreateReportScreen> {
           labelColor: Colors.white,
         ),
         const SizedBox(height: 16),
-        LabeledTextField(
+        LabeledDropdown(
           label: 'Category:',
-          controller: categoryController,
+          value: selectedCategory,
+          items: const ['Light', 'Water', 'Infrastructure', 'Trash'],
+          onChanged: (value) {
+            setState(() {
+              selectedCategory = value;
+            });
+          },
           labelColor: Colors.white,
         ),
         const SizedBox(height: 16),
@@ -88,6 +98,12 @@ class CreateReportScreenState extends State<CreateReportScreen> {
           text: 'Create Report',
           backgroundColor: const Color(0x8077A1DD),
           onPressed: _createReport,
+        ),
+        const SizedBox(height: 10),
+        CustomButton(
+          text: 'Cancel',
+          backgroundColor: const Color(0xFFC1121F),
+          onPressed: _cancel,
         ),
       ],
     );

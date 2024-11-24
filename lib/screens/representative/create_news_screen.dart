@@ -3,33 +3,28 @@ import '../../widgets/form_template.dart';
 import '../../widgets/labeled_text_field.dart';
 import '../../widgets/custom_button.dart';
 
-class ScheduleAppointmentScreen extends StatefulWidget {
-  const ScheduleAppointmentScreen({super.key});
+class CreateNewsScreen extends StatefulWidget {
+  const CreateNewsScreen({super.key});
 
   @override
-  ScheduleAppointmentScreenState createState() =>
-      ScheduleAppointmentScreenState();
+  CreateNewsScreenState createState() => CreateNewsScreenState();
 }
 
-class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
+class CreateNewsScreenState extends State<CreateNewsScreen> {
   final formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
-  final dateController = TextEditingController();
-  final timeController = TextEditingController();
 
   @override
   void dispose() {
     titleController.dispose();
     descriptionController.dispose();
-    dateController.dispose();
-    timeController.dispose();
     super.dispose();
   }
 
-  void _scheduleAppointment() {
+  void _createNews() {
     if (formKey.currentState!.validate()) {
-      // Handle appointment scheduling logic
+      // Handle news creation logic
     }
   }
 
@@ -40,7 +35,7 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
   @override
   Widget build(BuildContext context) {
     return FormTemplate(
-      title: 'Schedule Appointment',
+      title: 'Create News',
       scaffoldType: ScaffoldType.citizen,
       fields: [
         LabeledTextField(
@@ -55,26 +50,12 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
           maxLines: 8,
           labelColor: Colors.white,
         ),
-        const SizedBox(height: 16),
-        LabeledTextField(
-          label: 'Date:',
-          controller: dateController,
-          labelColor: Colors.white,
-          keyboardType: TextInputType.datetime,
-        ),
-        const SizedBox(height: 16),
-        LabeledTextField(
-          label: 'Time:',
-          controller: timeController,
-          labelColor: Colors.white,
-          keyboardType: TextInputType.datetime,
-        ),
       ],
       buttons: [
         CustomButton(
-          text: 'Schedule Appointment',
+          text: 'Create News',
           backgroundColor: const Color(0x8077A1DD),
-          onPressed: _scheduleAppointment,
+          onPressed: _createNews,
         ),
         const SizedBox(height: 10),
         CustomButton(

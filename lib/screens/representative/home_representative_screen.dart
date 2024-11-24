@@ -5,16 +5,16 @@ import '../../widgets/view_template.dart';
 class HomeRepresentativeScreen extends StatelessWidget {
   const HomeRepresentativeScreen({super.key});
 
-  void _reportIssue(BuildContext context) {
-    Navigator.pushNamed(context, '/create-report');
+  void _viewStatistics(BuildContext context) {
+    Navigator.pushNamed(context, '/community-statistics');
   }
 
-  void _scheduleAppointment(BuildContext context) {
-    Navigator.pushNamed(context, '/schedule-appointment');
+  void _createNews(BuildContext context) {
+    Navigator.pushNamed(context, '/create-news');
   }
 
-  void _viewNews(BuildContext context) {
-    Navigator.pushNamed(context, '/news-representative');
+  void _viewReports(BuildContext context) {
+    Navigator.pushNamed(context, '/citizen-reports');
   }
 
   @override
@@ -34,7 +34,7 @@ class HomeRepresentativeScreen extends StatelessWidget {
             ),
           ),
           const Text(
-            'Any issues in your community? Want to report them?',
+            'Interested in the statistics of your community? Want to see the community statistics?',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -43,14 +43,14 @@ class HomeRepresentativeScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           CustomButton(
-            text: 'Report an Issue',
+            text: 'View Community Statistics',
             backgroundColor: const Color(0xFF324A5F),
-            onPressed: () => _reportIssue(context),
+            onPressed: () => _viewStatistics(context),
             textSize: 16.0,
           ),
           const SizedBox(height: 32),
           const Text(
-            'Would you like to schedule an appointment?',
+            'Would you like to create a news update for your community?',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -59,14 +59,14 @@ class HomeRepresentativeScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           CustomButton(
-            text: 'Schedule Appointment',
+            text: 'Create News',
             backgroundColor: const Color(0xFF324A5F),
-            onPressed: () => _scheduleAppointment(context),
+            onPressed: () => _createNews(context),
             textSize: 16.0,
           ),
           const SizedBox(height: 32),
           const Text(
-            'Want to see community news?',
+            'Want to see all the reports submitted by the citizens of your community?',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -75,9 +75,9 @@ class HomeRepresentativeScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           CustomButton(
-            text: 'View News',
+            text: 'View Citizen Reports',
             backgroundColor: const Color(0xFF324A5F),
-            onPressed: () => _viewNews(context),
+            onPressed: () => _viewReports(context),
             textSize: 16.0,
           ),
         ],

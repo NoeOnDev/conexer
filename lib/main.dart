@@ -17,8 +17,13 @@ import 'screens/citizen/profile_citizen_screen.dart';
 import 'screens/citizen/report_history_screen.dart';
 import 'screens/citizen/appointments_screen.dart';
 import 'screens/citizen/news_screen.dart';
+import 'screens/representative/create_news_screen.dart';
 import 'screens/representative/home_representative_screen.dart';
 import 'screens/representative/profile_representative_screen.dart';
+import 'screens/representative/news_history_screen.dart';
+import 'screens/representative/citizen_appointments_screen.dart';
+import 'screens/representative/citizen_reports_screen.dart';
+import 'screens/representative/community_statistics_screen.dart';
 import 'services/contact_service.dart';
 import 'services/user_service.dart';
 import 'services/verify_service.dart';
@@ -131,13 +136,17 @@ class MyApp extends StatelessWidget {
         '/home-representative': (context) => const HomeRepresentativeScreen(),
         '/create-report': (context) => const CreateReportScreen(),
         '/schedule-appointment': (context) => const ScheduleAppointmentScreen(),
-        '/profile-citizen': (context) =>
-            const ProfileCitizenScreen(),
+        '/profile-citizen': (context) => const ProfileCitizenScreen(),
         '/profile-representative': (context) =>
             const ProfileRepresentativeScreen(),
         '/report-history': (context) => const ReportHistoryScreen(),
         '/appointments': (context) => const AppointmentsScreen(),
         '/news': (context) => const NewsScreen(),
+        '/create-news': (context) => const CreateNewsScreen(),
+        '/news-history': (context) => const NewsHistoryScreen(),
+        '/citizen-appointments': (context) => const CitizenAppointmentsScreen(),
+        '/citizen-reports': (context) => const CitizenReportsScreen(),
+        '/community-statistics': (context) => const CommunityStatisticsScreen(),
       },
     );
   }
