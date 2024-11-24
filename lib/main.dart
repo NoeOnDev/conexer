@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: FutureBuilder<bool>(
-        future: AuthService.isTokenValid(baseUrl),
+        future: AuthService.isTokenValid(baseUrl, userToken!),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const SplashScreen();
@@ -67,7 +67,9 @@ class MyApp extends StatelessWidget {
                 (prefs) => prefs.getString('user_role'),
               ),
               builder: (context, roleSnapshot) {
-                if (roleSnapshot.hasData) {
+                if (roleSnapshot.connectionState == ConnectionState.waiting) {
+                  return const SplashScreen();
+                } else if (roleSnapshot.hasData) {
                   if (roleSnapshot.data == 'Citizen') {
                     return const HomeCitizenScreen();
                   } else if (roleSnapshot.data == 'Representative') {
