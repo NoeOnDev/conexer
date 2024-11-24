@@ -47,6 +47,7 @@ class CreateReportScreenState extends State<CreateReportScreen> {
     return FormTemplate(
       title: 'Create Report',
       scaffoldType: ScaffoldType.citizen,
+      formKey: formKey,
       fields: [
         LabeledTextField(
           label: 'Title:',

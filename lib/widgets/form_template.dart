@@ -9,6 +9,7 @@ class FormTemplate extends StatelessWidget {
   final List<Widget> fields;
   final List<Widget> buttons;
   final ScaffoldType scaffoldType;
+  final GlobalKey<FormState> formKey;
 
   const FormTemplate({
     super.key,
@@ -16,6 +17,7 @@ class FormTemplate extends StatelessWidget {
     required this.fields,
     required this.buttons,
     required this.scaffoldType,
+    required this.formKey,
   });
 
   @override
@@ -60,6 +62,7 @@ class FormTemplate extends StatelessWidget {
                           color: Color(0xFF324A5F),
                         ),
                         child: Form(
+                          key: formKey,
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,

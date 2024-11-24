@@ -3,9 +3,21 @@ import '../../widgets/form_template.dart';
 import '../../widgets/labeled_text_field.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/labeled_dropdown.dart';
+import '../../services/user_service.dart';
+import '../../services/contact_service.dart';
+import '../../models/update_contact.dart';
 
 class ProfileRepresentativeScreen extends StatefulWidget {
-  const ProfileRepresentativeScreen({super.key});
+  final String token;
+  final UserService userService;
+  final ContactService contactService;
+
+  const ProfileRepresentativeScreen({
+    super.key,
+    required this.token,
+    required this.userService,
+    required this.contactService,
+  });
 
   @override
   ProfileRepresentativeScreenState createState() =>
@@ -23,6 +35,28 @@ class ProfileRepresentativeScreenState
   String? selectedHobby;
 
   @override
+  void initState() {
+    super.initState();
+    _loadUserInfo();
+  }
+
+  Future<void> _loadUserInfo() async {
+    try {
+      final userInfo = await widget.userService.getUserInfo(widget.token);
+      setState(() {
+        firstNameController.text = userInfo['contact']['firstName'];
+        lastNameController.text = userInfo['contact']['lastName'];
+        phoneController.text = userInfo['contact']['phone'];
+        usernameController.text = userInfo['username'];
+        emailController.text = userInfo['contact']['email'];
+        selectedHobby = userInfo['contact']['hobby']['value'];
+      });
+    } catch (e) {
+      // Handle error
+    }
+  }
+
+  @override
   void dispose() {
     firstNameController.dispose();
     lastNameController.dispose();
@@ -32,9 +66,20 @@ class ProfileRepresentativeScreenState
     super.dispose();
   }
 
-  void _saveChanges() {
+  void _saveChanges() async {
     if (formKey.currentState!.validate()) {
-      // Handle save changes logic
+      final contact = UpdateContact(
+        firstName: firstNameController.text,
+        lastName: lastNameController.text,
+        hobby: selectedHobby ?? 'None',
+      );
+
+      try {
+        await widget.contactService.updateContact(widget.token, contact);
+        // Handle successful update
+      } catch (e) {
+        // Handle update error
+      }
     }
   }
 
@@ -47,6 +92,7 @@ class ProfileRepresentativeScreenState
     return FormTemplate(
       title: 'Profile',
       scaffoldType: ScaffoldType.representative,
+      formKey: formKey,
       fields: [
         LabeledTextField(
           label: 'First Name:',
@@ -65,6 +111,7 @@ class ProfileRepresentativeScreenState
           keyboardType: TextInputType.phone,
           controller: phoneController,
           labelColor: Colors.white,
+          enabled: false,
         ),
         const SizedBox(height: 16),
         LabeledDropdown(
@@ -92,6 +139,7 @@ class ProfileRepresentativeScreenState
           label: 'Username:',
           controller: usernameController,
           labelColor: Colors.white,
+          enabled: false,
         ),
         const SizedBox(height: 16),
         LabeledTextField(
@@ -99,6 +147,7 @@ class ProfileRepresentativeScreenState
           keyboardType: TextInputType.emailAddress,
           controller: emailController,
           labelColor: Colors.white,
+          enabled: false,
         ),
       ],
       buttons: [

@@ -42,6 +42,7 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
     return FormTemplate(
       title: 'Schedule Appointment',
       scaffoldType: ScaffoldType.citizen,
+      formKey: formKey,
       fields: [
         LabeledTextField(
           label: 'Title:',

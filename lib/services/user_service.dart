@@ -71,4 +71,21 @@ class UserService extends BaseService {
       throw Exception('Failed to update password');
     }
   }
+
+  Future<Map<String, dynamic>> getUserInfo(String token) async {
+    final url = Uri.parse('$baseUrl/api/v1/users/id');
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to load user info');
+    }
+  }
 }

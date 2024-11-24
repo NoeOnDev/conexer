@@ -35,13 +35,14 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   final userToken = prefs.getString('token_user_verification');
 
-  runApp(MyApp(isLoggedIn: userToken != null));
+  runApp(MyApp(isLoggedIn: userToken != null, userToken: userToken));
 }
 
 class MyApp extends StatelessWidget {
   final bool isLoggedIn;
+  final String? userToken;
 
-  const MyApp({super.key, required this.isLoggedIn});
+  const MyApp({super.key, required this.isLoggedIn, this.userToken});
 
   @override
   Widget build(BuildContext context) {
@@ -136,9 +137,16 @@ class MyApp extends StatelessWidget {
         '/home-representative': (context) => const HomeRepresentativeScreen(),
         '/create-report': (context) => const CreateReportScreen(),
         '/schedule-appointment': (context) => const ScheduleAppointmentScreen(),
-        '/profile-citizen': (context) => const ProfileCitizenScreen(),
-        '/profile-representative': (context) =>
-            const ProfileRepresentativeScreen(),
+        '/profile-citizen': (context) => ProfileCitizenScreen(
+              token: userToken!,
+              userService: UserService(baseUrl: baseUrl),
+              contactService: ContactService(baseUrl: baseUrl),
+            ),
+        '/profile-representative': (context) => ProfileRepresentativeScreen(
+              token: userToken!,
+              userService: UserService(baseUrl: baseUrl),
+              contactService: ContactService(baseUrl: baseUrl),
+            ),
         '/report-history': (context) => const ReportHistoryScreen(),
         '/appointments': (context) => const AppointmentsScreen(),
         '/news': (context) => const NewsScreen(),

@@ -37,6 +37,7 @@ class CreateNewsScreenState extends State<CreateNewsScreen> {
     return FormTemplate(
       title: 'Create News',
       scaffoldType: ScaffoldType.citizen,
+      formKey: formKey,
       fields: [
         LabeledTextField(
           label: 'Title:',

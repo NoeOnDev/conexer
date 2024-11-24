@@ -12,7 +12,7 @@ class ReportHistoryScreen extends StatelessWidget {
       content: Center(
         child: Text(
           'Content for Report History',
-          style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 18),
+          style: TextStyle(color: Colors.black, fontSize: 18),
         ),
       ),
     );
