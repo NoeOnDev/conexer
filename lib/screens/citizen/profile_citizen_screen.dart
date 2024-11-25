@@ -30,6 +30,10 @@ class ProfileCitizenScreenState extends State<ProfileCitizenScreen> {
   final phoneController = TextEditingController();
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
+  final roleController = TextEditingController();
+  final localityController = TextEditingController();
+  final streetController = TextEditingController();
+  final verifiedController = TextEditingController();
   String? selectedHobby;
 
   @override
@@ -47,6 +51,10 @@ class ProfileCitizenScreenState extends State<ProfileCitizenScreen> {
         phoneController.text = userInfo['contact']['phone'];
         usernameController.text = userInfo['username'];
         emailController.text = userInfo['contact']['email'];
+        roleController.text = userInfo['role']['value'];
+        localityController.text = userInfo['address']['locality'];
+        streetController.text = userInfo['address']['street'];
+        verifiedController.text = userInfo['verified'];
         selectedHobby = userInfo['contact']['hobby']['value'];
       });
     } catch (e) {
@@ -61,6 +69,10 @@ class ProfileCitizenScreenState extends State<ProfileCitizenScreen> {
     phoneController.dispose();
     usernameController.dispose();
     emailController.dispose();
+    roleController.dispose();
+    localityController.dispose();
+    streetController.dispose();
+    verifiedController.dispose();
     super.dispose();
   }
 
@@ -144,6 +156,34 @@ class ProfileCitizenScreenState extends State<ProfileCitizenScreen> {
           label: 'Email:',
           keyboardType: TextInputType.emailAddress,
           controller: emailController,
+          labelColor: Colors.white,
+          enabled: false,
+        ),
+        const SizedBox(height: 16),
+        LabeledTextField(
+          label: 'Role:',
+          controller: roleController,
+          labelColor: Colors.white,
+          enabled: false,
+        ),
+        const SizedBox(height: 16),
+        LabeledTextField(
+          label: 'Locality:',
+          controller: localityController,
+          labelColor: Colors.white,
+          enabled: false,
+        ),
+        const SizedBox(height: 16),
+        LabeledTextField(
+          label: 'Street:',
+          controller: streetController,
+          labelColor: Colors.white,
+          enabled: false,
+        ),
+        const SizedBox(height: 16),
+        LabeledTextField(
+          label: 'Verified:',
+          controller: verifiedController,
           labelColor: Colors.white,
           enabled: false,
         ),

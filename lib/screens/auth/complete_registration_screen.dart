@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../widgets/labeled_text_field.dart';
 import '../../widgets/custom_button.dart';
+import '../../widgets/location_input.dart';
 import '../../models/user.dart';
 import '../../services/user_service.dart';
 
@@ -45,6 +46,8 @@ class CompleteRegistrationScreenState
         username: usernameController.text,
         password: passwordController.text,
         role: widget.role,
+        locality: localityController.text,
+        street: streetController.text,
       );
 
       try {
@@ -60,8 +63,6 @@ class CompleteRegistrationScreenState
       }
     }
   }
-
-  void _getLocation() {}
 
   @override
   Widget build(BuildContext context) {
@@ -113,23 +114,9 @@ class CompleteRegistrationScreenState
                         obscureText: true,
                       ),
                       const SizedBox(height: 20),
-                      CustomButton(
-                        text: 'Get Location',
-                        backgroundColor: Colors.grey.shade300,
-                        textColor: Colors.black,
-                        onPressed: _getLocation,
-                      ),
-                      const SizedBox(height: 16),
-                      LabeledTextField(
-                        label: 'Locality:',
-                        controller: localityController,
-                        enabled: false,
-                      ),
-                      const SizedBox(height: 16),
-                      LabeledTextField(
-                        label: 'Street:',
-                        controller: streetController,
-                        enabled: false,
+                      LocationInput(
+                        localityController: localityController,
+                        streetController: streetController,
                       ),
                       const SizedBox(height: 20),
                       CustomButton(

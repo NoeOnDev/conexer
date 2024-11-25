@@ -158,15 +158,39 @@ class MyApp extends StatelessWidget {
       '/home-representative': (context) => const HomeRepresentativeScreen(),
       '/create-report': (context) => const CreateReportScreen(),
       '/schedule-appointment': (context) => const ScheduleAppointmentScreen(),
-      '/profile-citizen': (context) => ProfileCitizenScreen(
-            token: token!,
-            userService: UserService(baseUrl: baseUrl),
-            contactService: ContactService(baseUrl: baseUrl),
+      '/profile-citizen': (context) => FutureBuilder<String?>(
+            future: SharedPreferences.getInstance()
+                .then((prefs) => prefs.getString('token_user_verification')),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const SplashScreen();
+              } else if (snapshot.hasData) {
+                return ProfileCitizenScreen(
+                  token: snapshot.data!,
+                  userService: UserService(baseUrl: baseUrl),
+                  contactService: ContactService(baseUrl: baseUrl),
+                );
+              } else {
+                return const SplashScreen();
+              }
+            },
           ),
-      '/profile-representative': (context) => ProfileRepresentativeScreen(
-            token: token!,
-            userService: UserService(baseUrl: baseUrl),
-            contactService: ContactService(baseUrl: baseUrl),
+      '/profile-representative': (context) => FutureBuilder<String?>(
+            future: SharedPreferences.getInstance()
+                .then((prefs) => prefs.getString('token_user_verification')),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const SplashScreen();
+              } else if (snapshot.hasData) {
+                return ProfileRepresentativeScreen(
+                  token: snapshot.data!,
+                  userService: UserService(baseUrl: baseUrl),
+                  contactService: ContactService(baseUrl: baseUrl),
+                );
+              } else {
+                return const SplashScreen();
+              }
+            },
           ),
       '/report-history': (context) => const ReportHistoryScreen(),
       '/appointments': (context) => const AppointmentsScreen(),
