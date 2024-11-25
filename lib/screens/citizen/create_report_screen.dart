@@ -50,9 +50,10 @@ class CreateReportScreenState extends State<CreateReportScreen> {
 
       try {
         await widget.reportService.createReport(widget.token, report);
-        // Handle successful report creation
+        if (!mounted) return;
+        Navigator.pushReplacementNamed(context, '/report-history');
       } catch (e) {
-        // Handle report creation error
+        // handle error
       }
     }
   }

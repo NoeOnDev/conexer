@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'custom_button.dart';
 
 class ReportCard extends StatelessWidget {
   final String title;
@@ -44,9 +45,10 @@ class ReportCard extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Center(
-                child: ElevatedButton(
+                child: CustomButton(
+                  text: 'Close',
+                  backgroundColor: const Color(0xFF324A5F),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Close'),
                 ),
               ),
             ],
