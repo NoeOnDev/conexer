@@ -10,9 +10,8 @@ class ReportHistoryScreen extends StatelessWidget {
     return ViewTemplate(
       title: 'Report History',
       scaffoldType: ScaffoldType.citizen,
-      content: ListView.builder(
-        itemCount: 5,
-        itemBuilder: (context, index) {
+      content: Column(
+        children: List.generate(5, (index) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: ReportCard(
@@ -28,7 +27,7 @@ class ReportHistoryScreen extends StatelessWidget {
               ),
             ),
           );
-        },
+        }),
       ),
     );
   }

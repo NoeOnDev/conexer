@@ -28,31 +28,27 @@ class ViewTemplate extends StatelessWidget {
   Widget _buildContent() {
     return Container(
       color: Colors.white,
-      child: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Container(
-              color: Colors.white,
-              width: double.infinity,
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
+      child: ListView(
+        children: [
+          Container(
+            color: Colors.white,
+            width: double.infinity,
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.center,
             ),
           ),
-          SliverFillRemaining(
-            child: Container(
-              padding: const EdgeInsets.all(16.0),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-              ),
-              child: content,
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            decoration: const BoxDecoration(
+              color: Colors.white,
             ),
+            child: content,
           ),
         ],
       ),

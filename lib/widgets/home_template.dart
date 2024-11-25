@@ -32,6 +32,7 @@ class HomeTemplate extends StatelessWidget {
   Widget _buildContent() {
     return Container(
       color: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
@@ -62,11 +63,11 @@ class HomeTemplate extends StatelessWidget {
                         height: 260,
                       ),
                     ),
-                    for (var text in texts)
+                    for (int i = 0; i < texts.length; i++) ...[
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: Text(
-                          text,
+                          texts[i],
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 16,
@@ -74,11 +75,11 @@ class HomeTemplate extends StatelessWidget {
                           ),
                         ),
                       ),
-                    for (var button in buttons)
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
-                        child: button,
+                        child: buttons[i],
                       ),
+                    ],
                   ],
                 ),
               ),
