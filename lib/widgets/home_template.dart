@@ -65,7 +65,7 @@ class HomeTemplate extends StatelessWidget {
                     ),
                     for (int i = 0; i < texts.length; i++) ...[
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Text(
                           texts[i],
                           textAlign: TextAlign.center,
@@ -76,7 +76,7 @@ class HomeTemplate extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: buttons[i],
                       ),
                     ],

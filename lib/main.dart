@@ -208,7 +208,22 @@ class MyApp extends StatelessWidget {
               }
             },
           ),
-      '/report-history': (context) => const ReportHistoryScreen(),
+      '/report-history': (context) => FutureBuilder<String?>(
+            future: SharedPreferences.getInstance()
+                .then((prefs) => prefs.getString('token_user_verification')),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const SplashScreen();
+              } else if (snapshot.hasData) {
+                return ReportHistoryScreen(
+                  token: snapshot.data!,
+                  reportService: ReportService(baseUrl: baseUrl),
+                );
+              } else {
+                return const SplashScreen();
+              }
+            },
+          ),
       '/appointments': (context) => const AppointmentsScreen(),
       '/news': (context) => const NewsScreen(),
       '/create-news': (context) => const CreateNewsScreen(),
