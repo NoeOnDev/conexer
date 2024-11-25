@@ -26,11 +26,15 @@ class CompleteRegistrationScreenState
   final formKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final localityController = TextEditingController();
+  final streetController = TextEditingController();
 
   @override
   void dispose() {
     usernameController.dispose();
     passwordController.dispose();
+    localityController.dispose();
+    streetController.dispose();
     super.dispose();
   }
 
@@ -56,6 +60,8 @@ class CompleteRegistrationScreenState
       }
     }
   }
+
+  void _getLocation() {}
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +111,25 @@ class CompleteRegistrationScreenState
                         keyboardType: TextInputType.visiblePassword,
                         controller: passwordController,
                         obscureText: true,
+                      ),
+                      const SizedBox(height: 20),
+                      CustomButton(
+                        text: 'Get Location',
+                        backgroundColor: Colors.grey.shade300,
+                        textColor: Colors.black,
+                        onPressed: _getLocation,
+                      ),
+                      const SizedBox(height: 16),
+                      LabeledTextField(
+                        label: 'Locality:',
+                        controller: localityController,
+                        enabled: false,
+                      ),
+                      const SizedBox(height: 16),
+                      LabeledTextField(
+                        label: 'Street:',
+                        controller: streetController,
+                        enabled: false,
                       ),
                       const SizedBox(height: 20),
                       CustomButton(
