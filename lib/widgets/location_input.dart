@@ -8,11 +8,13 @@ import 'labeled_text_field.dart';
 class LocationInput extends StatefulWidget {
   final TextEditingController localityController;
   final TextEditingController streetController;
+  final Color labelColor;
 
   const LocationInput({
     super.key,
     required this.localityController,
     required this.streetController,
+    this.labelColor = Colors.black,
   });
 
   @override
@@ -78,12 +80,14 @@ class LocationInputState extends State<LocationInput> {
         LabeledTextField(
           label: 'Locality:',
           controller: widget.localityController,
+          labelColor: widget.labelColor,
           enabled: false,
         ),
         const SizedBox(height: 16),
         LabeledTextField(
           label: 'Street:',
           controller: widget.streetController,
+          labelColor: widget.labelColor,
           enabled: false,
         ),
       ],

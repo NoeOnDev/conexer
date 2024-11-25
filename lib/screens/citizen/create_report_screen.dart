@@ -3,9 +3,19 @@ import '../../widgets/form_template.dart';
 import '../../widgets/labeled_text_field.dart';
 import '../../widgets/labeled_dropdown.dart';
 import '../../widgets/custom_button.dart';
+import '../../widgets/location_input.dart';
+import '../../models/report.dart';
+import '../../services/report_service.dart';
 
 class CreateReportScreen extends StatefulWidget {
-  const CreateReportScreen({super.key});
+  final String token;
+  final ReportService reportService;
+
+  const CreateReportScreen({
+    super.key,
+    required this.token,
+    required this.reportService,
+  });
 
   @override
   CreateReportScreenState createState() => CreateReportScreenState();
@@ -15,7 +25,7 @@ class CreateReportScreenState extends State<CreateReportScreen> {
   final formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
-  final municipalityController = TextEditingController();
+  final localityController = TextEditingController();
   final streetController = TextEditingController();
   String? selectedCategory;
 
@@ -23,23 +33,32 @@ class CreateReportScreenState extends State<CreateReportScreen> {
   void dispose() {
     titleController.dispose();
     descriptionController.dispose();
-    municipalityController.dispose();
+    localityController.dispose();
     streetController.dispose();
     super.dispose();
   }
 
-  void _createReport() {
+  void _createReport() async {
     if (formKey.currentState!.validate()) {
-      // Handle report creation logic
+      final report = Report(
+        title: titleController.text,
+        category: selectedCategory!,
+        description: descriptionController.text,
+        locality: localityController.text,
+        street: streetController.text,
+      );
+
+      try {
+        await widget.reportService.createReport(widget.token, report);
+        // Handle successful report creation
+      } catch (e) {
+        // Handle report creation error
+      }
     }
   }
 
   void _cancel() {
     Navigator.pop(context);
-  }
-
-  void _captureLocation() {
-    // Handle location capture logic
   }
 
   @override
@@ -74,23 +93,9 @@ class CreateReportScreenState extends State<CreateReportScreen> {
           labelColor: Colors.white,
         ),
         const SizedBox(height: 20),
-        CustomButton(
-          text: 'Capture Location',
-          backgroundColor: Colors.grey.shade300,
-          onPressed: _captureLocation,
-          textSize: 16.0,
-          textColor: Colors.black,
-        ),
-        const SizedBox(height: 16),
-        LabeledTextField(
-          label: 'Municipality or Colony:',
-          controller: municipalityController,
-          labelColor: Colors.white,
-        ),
-        const SizedBox(height: 16),
-        LabeledTextField(
-          label: 'Street:',
-          controller: streetController,
+        LocationInput(
+          localityController: localityController,
+          streetController: streetController,
           labelColor: Colors.white,
         ),
       ],

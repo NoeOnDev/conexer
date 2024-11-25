@@ -117,6 +117,7 @@ class CompleteRegistrationScreenState
                       LocationInput(
                         localityController: localityController,
                         streetController: streetController,
+                        labelColor: Colors.black,
                       ),
                       const SizedBox(height: 20),
                       CustomButton(
