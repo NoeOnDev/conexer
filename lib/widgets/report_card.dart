@@ -28,26 +28,30 @@ class ReportCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          color: const Color(0xFFCFD8DC),
+          color: const Color(0xFF324A5F),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+            Center(
+              child: Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ),
-            Text(
-              'Category: $category',
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Colors.blueGrey,
+            Center(
+              child: Text(
+                'Category: $category',
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
               ),
             ),
             const SizedBox(height: 8),
@@ -65,7 +69,7 @@ class ReportCard extends StatelessWidget {
                     description,
                     style: const TextStyle(
                       fontSize: 14,
-                      color: Colors.black87,
+                      color: Colors.white,
                     ),
                     maxLines: 4,
                     overflow: TextOverflow.ellipsis,
@@ -74,20 +78,24 @@ class ReportCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            Text(
-              'Date: $date',
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: Colors.black87,
+            Center(
+              child: Text(
+                'Date: $date',
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
               ),
             ),
-            Text(
-              'Status: $status',
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: Colors.black87,
+            Center(
+              child: Text(
+                'Status: $status',
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
               ),
             ),
           ],

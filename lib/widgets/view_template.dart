@@ -27,45 +27,34 @@ class ViewTemplate extends StatelessWidget {
 
   Widget _buildContent() {
     return Container(
-      color: const Color.fromARGB(255, 255, 255, 255),
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          return SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: constraints.maxHeight,
+      color: Colors.white,
+      child: Column(
+        children: [
+          Container(
+            color: Colors.white,
+            width: double.infinity,
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
               ),
-              child: IntrinsicHeight(
-                child: Column(
-                  children: [
-                    Container(
-                      color: Colors.white,
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        title,
-                        style: const TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(16.0),
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                        ),
-                        child: content,
-                      ),
-                    ),
-                  ],
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
                 ),
+                child: content,
               ),
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }

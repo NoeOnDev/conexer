@@ -11,7 +11,6 @@ class ReportHistoryScreen extends StatelessWidget {
       title: 'Report History',
       scaffoldType: ScaffoldType.citizen,
       content: ListView.builder(
-        padding: const EdgeInsets.all(16.0),
         itemCount: 5,
         itemBuilder: (context, index) {
           return Padding(
