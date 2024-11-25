@@ -14,7 +14,7 @@ class ReportHistoryScreen extends StatelessWidget {
         itemCount: 5,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
+            padding: const EdgeInsets.only(bottom: 8.0),
             child: ReportCard(
               title: 'Report #$index',
               category: 'Water',

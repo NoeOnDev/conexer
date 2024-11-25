@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../widgets/custom_button.dart';
-import '../../widgets/view_template.dart';
+import '../../widgets/home_template.dart';
 
 class HomeCitizenScreen extends StatelessWidget {
   const HomeCitizenScreen({super.key});
@@ -19,69 +19,35 @@ class HomeCitizenScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewTemplate(
+    return HomeTemplate(
       title: 'Welcome',
+      imagePath: 'assets/img/img_home.png',
+      texts: const [
+        'Any issues in your community? Want to report them?',
+        'Would you like to schedule an appointment?',
+        'Want to see community news?',
+      ],
+      buttons: [
+        CustomButton(
+          text: 'Report an Issue',
+          backgroundColor: const Color(0xFF324A5F),
+          onPressed: () => _reportIssue(context),
+          textSize: 16.0,
+        ),
+        CustomButton(
+          text: 'Schedule Appointment',
+          backgroundColor: const Color(0xFF324A5F),
+          onPressed: () => _scheduleAppointment(context),
+          textSize: 16.0,
+        ),
+        CustomButton(
+          text: 'View News',
+          backgroundColor: const Color(0xFF324A5F),
+          onPressed: () => _viewNews(context),
+          textSize: 16.0,
+        ),
+      ],
       scaffoldType: ScaffoldType.citizen,
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: Image.asset(
-              'assets/img/img_home.png',
-              width: 370,
-              height: 260,
-            ),
-          ),
-          const Text(
-            'Any issues in your community? Want to report them?',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 16),
-          CustomButton(
-            text: 'Report an Issue',
-            backgroundColor: const Color(0xFF324A5F),
-            onPressed: () => _reportIssue(context),
-            textSize: 16.0,
-          ),
-          const SizedBox(height: 32),
-          const Text(
-            'Would you like to schedule an appointment?',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 16),
-          CustomButton(
-            text: 'Schedule Appointment',
-            backgroundColor: const Color(0xFF324A5F),
-            onPressed: () => _scheduleAppointment(context),
-            textSize: 16.0,
-          ),
-          const SizedBox(height: 32),
-          const Text(
-            'Want to see community news?',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 16),
-          CustomButton(
-            text: 'View News',
-            backgroundColor: const Color(0xFF324A5F),
-            onPressed: () => _viewNews(context),
-            textSize: 16.0,
-          ),
-        ],
-      ),
     );
   }
 }
