@@ -15,10 +15,10 @@ class ReportHistoryScreen extends StatefulWidget {
   });
 
   @override
-  _ReportHistoryScreenState createState() => _ReportHistoryScreenState();
+  ReportHistoryScreenState createState() => ReportHistoryScreenState();
 }
 
-class _ReportHistoryScreenState extends State<ReportHistoryScreen> {
+class ReportHistoryScreenState extends State<ReportHistoryScreen> {
   late Future<List<ReportResponse>> _reportsFuture;
 
   @override
@@ -55,7 +55,7 @@ class _ReportHistoryScreenState extends State<ReportHistoryScreen> {
             return Column(
               children: reports.map((report) {
                 return Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: 16.0),
                   child: ReportCard(
                     title: report.title,
                     category: report.category,

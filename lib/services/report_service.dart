@@ -47,4 +47,42 @@ class ReportService extends BaseService {
       throw Exception('Failed to load user reports');
     }
   }
+
+  Future<List<ReportResponse>> getAllReports(String token) async {
+    final url = Uri.parse('$baseUrl/api/v1/cases');
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic> responseData = jsonDecode(response.body);
+      return responseData.map((json) => ReportResponse.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load all reports');
+    }
+  }
+
+  Future<void> updateReportStatus(
+      String token, String reportId, String status) async {
+    final url = Uri.parse('$baseUrl/api/v1/cases/status');
+    final response = await http.patch(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode({
+        'reportId': reportId,
+        'status': status,
+      }),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to update report status');
+    }
+  }
 }

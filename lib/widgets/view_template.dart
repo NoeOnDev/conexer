@@ -48,6 +48,7 @@ class ViewTemplate extends StatelessWidget {
                 ),
               ),
               Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
