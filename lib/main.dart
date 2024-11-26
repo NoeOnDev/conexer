@@ -29,6 +29,7 @@ import 'services/user_service.dart';
 import 'services/verify_service.dart';
 import 'services/auth_service.dart';
 import 'services/report_service.dart';
+import 'services/appointment_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -173,7 +174,22 @@ class MyApp extends StatelessWidget {
               }
             },
           ),
-      '/schedule-appointment': (context) => const ScheduleAppointmentScreen(),
+      '/schedule-appointment': (context) => FutureBuilder<String?>(
+            future: SharedPreferences.getInstance()
+                .then((prefs) => prefs.getString('token_user_verification')),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const SplashScreen();
+              } else if (snapshot.hasData) {
+                return ScheduleAppointmentScreen(
+                  token: snapshot.data!,
+                  appointmentService: AppointmentService(baseUrl: baseUrl),
+                );
+              } else {
+                return const SplashScreen();
+              }
+            },
+          ),
       '/profile-citizen': (context) => FutureBuilder<String?>(
             future: SharedPreferences.getInstance()
                 .then((prefs) => prefs.getString('token_user_verification')),

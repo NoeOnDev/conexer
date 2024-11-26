@@ -10,6 +10,7 @@ class LabeledTextField extends StatelessWidget {
   final int maxLines;
   final Color labelColor;
   final bool enabled;
+  final Widget? prefixIcon;
 
   const LabeledTextField({
     super.key,
@@ -22,6 +23,7 @@ class LabeledTextField extends StatelessWidget {
     this.maxLines = 1,
     this.labelColor = Colors.black,
     this.enabled = true,
+    this.prefixIcon,
   });
 
   @override
@@ -46,6 +48,7 @@ class LabeledTextField extends StatelessWidget {
             filled: true,
             fillColor: Colors.white,
             prefixText: prefixText,
+            prefixIcon: prefixIcon,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(10),
