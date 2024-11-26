@@ -240,7 +240,22 @@ class MyApp extends StatelessWidget {
               }
             },
           ),
-      '/appointments': (context) => const AppointmentsScreen(),
+      '/appointments': (context) => FutureBuilder<String?>(
+            future: SharedPreferences.getInstance()
+                .then((prefs) => prefs.getString('token_user_verification')),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const SplashScreen();
+              } else if (snapshot.hasData) {
+                return AppointmentsScreen(
+                  token: snapshot.data!,
+                  appointmentService: AppointmentService(baseUrl: baseUrl),
+                );
+              } else {
+                return const SplashScreen();
+              }
+            },
+          ),
       '/news': (context) => const NewsScreen(),
       '/create-news': (context) => const CreateNewsScreen(),
       '/news-history': (context) => const NewsHistoryScreen(),
