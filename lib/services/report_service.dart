@@ -61,6 +61,13 @@ class ReportService extends BaseService {
     if (response.statusCode == 200) {
       final List<dynamic> responseData = jsonDecode(response.body);
       return responseData.map((json) => ReportResponse.fromJson(json)).toList();
+    } else if (response.statusCode == 404) {
+      final Map<String, dynamic> responseData = jsonDecode(response.body);
+      if (responseData.containsKey('error')) {
+        throw Exception(responseData['error']);
+      } else {
+        throw Exception('Failed to load all reports');
+      }
     } else {
       throw Exception('Failed to load all reports');
     }

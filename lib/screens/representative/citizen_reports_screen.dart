@@ -82,7 +82,14 @@ class CitizenReportsScreenState extends State<CitizenReportsScreen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            final errorMessage = snapshot.error.toString();
+            if (errorMessage.contains('No reports found for locality')) {
+              return const Center(
+                child: Text('No reports found for your locality.'),
+              );
+            } else {
+              return Center(child: Text('Error: $errorMessage'));
+            }
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(child: Text('No reports found.'));
           } else {
@@ -98,7 +105,7 @@ class CitizenReportsScreenState extends State<CitizenReportsScreen> {
                     date: report.createdAt,
                     status: report.status,
                     image: Image.asset(
-                      'assets/img/img_report_image.png',
+                      'assets/img/img_cases.png',
                       fit: BoxFit.cover,
                     ),
                     onResolved: () => _markAsResolved(report.id),
