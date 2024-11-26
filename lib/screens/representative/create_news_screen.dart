@@ -2,9 +2,18 @@ import 'package:flutter/material.dart';
 import '../../widgets/form_template.dart';
 import '../../widgets/labeled_text_field.dart';
 import '../../widgets/custom_button.dart';
+import '../../models/news.dart';
+import '../../services/news_service.dart';
 
 class CreateNewsScreen extends StatefulWidget {
-  const CreateNewsScreen({super.key});
+  final String token;
+  final NewsService newsService;
+
+  const CreateNewsScreen({
+    super.key,
+    required this.token,
+    required this.newsService,
+  });
 
   @override
   CreateNewsScreenState createState() => CreateNewsScreenState();
@@ -22,9 +31,22 @@ class CreateNewsScreenState extends State<CreateNewsScreen> {
     super.dispose();
   }
 
-  void _createNews() {
+  void _createNews() async {
     if (formKey.currentState!.validate()) {
-      // Handle news creation logic
+      final now = DateTime.now().toIso8601String();
+      final news = News(
+        title: titleController.text,
+        description: descriptionController.text,
+        createdAt: now,
+      );
+
+      try {
+        await widget.newsService.createNews(widget.token, news);
+        if (!mounted) return;
+        Navigator.pop(context);
+      } catch (e) {
+        // Handle error
+      }
     }
   }
 
@@ -36,7 +58,7 @@ class CreateNewsScreenState extends State<CreateNewsScreen> {
   Widget build(BuildContext context) {
     return FormTemplate(
       title: 'Create News',
-      scaffoldType: ScaffoldType.citizen,
+      scaffoldType: ScaffoldType.representative,
       formKey: formKey,
       fields: [
         LabeledTextField(

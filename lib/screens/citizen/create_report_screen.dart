@@ -40,12 +40,14 @@ class CreateReportScreenState extends State<CreateReportScreen> {
 
   void _createReport() async {
     if (formKey.currentState!.validate()) {
+      final now = DateTime.now().toIso8601String();
       final report = Report(
         title: titleController.text,
         category: selectedCategory!,
         description: descriptionController.text,
         locality: localityController.text,
         street: streetController.text,
+        createdAt: now,
       );
 
       try {
@@ -53,7 +55,7 @@ class CreateReportScreenState extends State<CreateReportScreen> {
         if (!mounted) return;
         Navigator.pushReplacementNamed(context, '/report-history');
       } catch (e) {
-        // handle error
+        // Handle error
       }
     }
   }

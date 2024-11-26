@@ -30,6 +30,7 @@ import 'services/verify_service.dart';
 import 'services/auth_service.dart';
 import 'services/report_service.dart';
 import 'services/appointment_service.dart';
+import 'services/news_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -257,7 +258,22 @@ class MyApp extends StatelessWidget {
             },
           ),
       '/news': (context) => const NewsScreen(),
-      '/create-news': (context) => const CreateNewsScreen(),
+      '/create-news': (context) => FutureBuilder<String?>(
+            future: SharedPreferences.getInstance()
+                .then((prefs) => prefs.getString('token_user_verification')),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const SplashScreen();
+              } else if (snapshot.hasData) {
+                return CreateNewsScreen(
+                  token: snapshot.data!,
+                  newsService: NewsService(baseUrl: baseUrl),
+                );
+              } else {
+                return const SplashScreen();
+              }
+            },
+          ),
       '/news-history': (context) => const NewsHistoryScreen(),
       '/citizen-appointments': (context) => FutureBuilder<String?>(
             future: SharedPreferences.getInstance()
