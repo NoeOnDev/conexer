@@ -112,7 +112,7 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
           appointment,
         );
         if (!mounted) return;
-        Navigator.pop(context);
+        Navigator.pushReplacementNamed(context, '/appointments');
       } catch (e) {
         // Handle error
       }

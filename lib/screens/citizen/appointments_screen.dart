@@ -43,7 +43,14 @@ class AppointmentsScreenState extends State<AppointmentsScreen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            final errorMessage = snapshot.error.toString();
+            if (errorMessage.contains('No appointments found for user ID')) {
+              return const Center(
+                child: Text('You have not created any appointments yet.'),
+              );
+            } else {
+              return Center(child: Text('Error: $errorMessage'));
+            }
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(child: Text('No appointments found.'));
           } else {

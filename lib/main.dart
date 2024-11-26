@@ -259,7 +259,23 @@ class MyApp extends StatelessWidget {
       '/news': (context) => const NewsScreen(),
       '/create-news': (context) => const CreateNewsScreen(),
       '/news-history': (context) => const NewsHistoryScreen(),
-      '/citizen-appointments': (context) => const CitizenAppointmentsScreen(),
+      '/citizen-appointments': (context) => FutureBuilder<String?>(
+            future: SharedPreferences.getInstance()
+                .then((prefs) => prefs.getString('token_user_verification')),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const SplashScreen();
+              } else if (snapshot.hasData) {
+                return CitizenAppointmentsScreen(
+                  token: snapshot.data!,
+                  appointmentService: AppointmentService(baseUrl: baseUrl),
+                  isLocalityAppointments: true,
+                );
+              } else {
+                return const SplashScreen();
+              }
+            },
+          ),
       '/citizen-reports': (context) => FutureBuilder<String?>(
             future: SharedPreferences.getInstance()
                 .then((prefs) => prefs.getString('token_user_verification')),
