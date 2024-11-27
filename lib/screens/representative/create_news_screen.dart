@@ -23,6 +23,7 @@ class CreateNewsScreenState extends State<CreateNewsScreen> {
   final formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -33,6 +34,10 @@ class CreateNewsScreenState extends State<CreateNewsScreen> {
 
   void _createNews() async {
     if (formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+
       final now = DateTime.now().toIso8601String();
       final news = News(
         title: titleController.text,
@@ -46,6 +51,12 @@ class CreateNewsScreenState extends State<CreateNewsScreen> {
         Navigator.pushReplacementNamed(context, '/news-history');
       } catch (e) {
         // Handle error
+      } finally {
+        if (mounted) {
+          setState(() {
+            isLoading = false;
+          });
+        }
       }
     }
   }
@@ -100,12 +111,14 @@ class CreateNewsScreenState extends State<CreateNewsScreen> {
           text: 'Create News',
           backgroundColor: const Color(0x8077A1DD),
           onPressed: _createNews,
+          enabled: !isLoading,
         ),
         const SizedBox(height: 10),
         CustomButton(
           text: 'Cancel',
           backgroundColor: const Color(0xFFC1121F),
           onPressed: _cancel,
+          enabled: !isLoading,
         ),
       ],
     );

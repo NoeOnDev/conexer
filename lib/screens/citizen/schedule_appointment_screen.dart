@@ -27,6 +27,7 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
   final descriptionController = TextEditingController();
   final dateController = TextEditingController();
   final timeController = TextEditingController();
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -129,6 +130,10 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
         return;
       }
 
+      setState(() {
+        isLoading = true;
+      });
+
       final dateTime = '${dateController.text}T${timeController.text}:00Z';
 
       final appointment = Appointment(
@@ -146,6 +151,12 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
         Navigator.pushReplacementNamed(context, '/appointments');
       } catch (e) {
         // Handle error
+      } finally {
+        if (mounted) {
+          setState(() {
+            isLoading = false;
+          });
+        }
       }
     }
   }
@@ -260,12 +271,14 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
           text: 'Schedule Appointment',
           backgroundColor: const Color(0x8077A1DD),
           onPressed: _scheduleAppointment,
+          enabled: !isLoading,
         ),
         const SizedBox(height: 10),
         CustomButton(
           text: 'Cancel',
           backgroundColor: const Color(0xFFC1121F),
           onPressed: _cancel,
+          enabled: !isLoading,
         ),
       ],
     );

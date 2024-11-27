@@ -15,6 +15,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -24,6 +25,10 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   void _requestPasswordReset() async {
     if (formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+
       try {
         final token = await widget.userService
             .requestPasswordChange(emailController.text);
@@ -36,6 +41,12 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         );
       } catch (e) {
         // Handle error
+      } finally {
+        if (mounted) {
+          setState(() {
+            isLoading = false;
+          });
+        }
       }
     }
   }
@@ -88,12 +99,19 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         label: 'Email:',
                         keyboardType: TextInputType.emailAddress,
                         controller: emailController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Email is required';
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 20),
                       CustomButton(
                         text: 'Request Password Reset',
                         backgroundColor: const Color(0xFF324A5F),
                         onPressed: _requestPasswordReset,
+                        enabled: !isLoading,
                       ),
                     ],
                   ),

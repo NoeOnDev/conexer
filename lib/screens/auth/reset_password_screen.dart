@@ -21,6 +21,7 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final formKey = GlobalKey<FormState>();
   final newPasswordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -32,8 +33,18 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
   void _resetPassword() async {
     if (formKey.currentState!.validate()) {
       if (newPasswordController.text != confirmPasswordController.text) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Passwords do not match.'),
+            backgroundColor: Colors.red,
+          ),
+        );
         return;
       }
+
+      setState(() {
+        isLoading = true;
+      });
 
       try {
         await widget.userService.updatePassword(
@@ -45,6 +56,12 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
         Navigator.pushNamed(context, '/');
       } catch (e) {
         // Handle error
+      } finally {
+        if (mounted) {
+          setState(() {
+            isLoading = false;
+          });
+        }
       }
     }
   }
@@ -102,6 +119,19 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         keyboardType: TextInputType.visiblePassword,
                         controller: newPasswordController,
                         obscureText: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'New Password is required';
+                          }
+                          if (value.length < 8) {
+                            return 'Password must be at least 8 characters';
+                          }
+                          if (!RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$')
+                              .hasMatch(value)) {
+                            return 'Password must contain at least one uppercase letter, one lowercase letter, and one number';
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
@@ -109,18 +139,26 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         keyboardType: TextInputType.visiblePassword,
                         controller: confirmPasswordController,
                         obscureText: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Confirm Password is required';
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 20),
                       CustomButton(
                         text: 'Reset Password',
                         backgroundColor: const Color(0xFF324A5F),
                         onPressed: _resetPassword,
+                        enabled: !isLoading,
                       ),
                       const SizedBox(height: 10),
                       CustomButton(
                         text: 'Cancel',
                         backgroundColor: const Color(0xFFC1121F),
                         onPressed: _cancelResetPassword,
+                        enabled: !isLoading,
                       ),
                     ],
                   ),

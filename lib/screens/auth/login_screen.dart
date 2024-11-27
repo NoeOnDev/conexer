@@ -17,6 +17,7 @@ class LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
   final usernameOrEmailController = TextEditingController();
   final passwordController = TextEditingController();
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -27,6 +28,10 @@ class LoginScreenState extends State<LoginScreen> {
 
   void _login() async {
     if (formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+
       try {
         final token = await widget.userService.login(
           usernameOrEmailController.text,
@@ -41,6 +46,12 @@ class LoginScreenState extends State<LoginScreen> {
         );
       } catch (e) {
         // Handle login error
+      } finally {
+        if (mounted) {
+          setState(() {
+            isLoading = false;
+          });
+        }
       }
     }
   }
@@ -124,12 +135,14 @@ class LoginScreenState extends State<LoginScreen> {
                         text: 'Login',
                         backgroundColor: const Color(0xFF324A5F),
                         onPressed: _login,
+                        enabled: !isLoading,
                       ),
                       const SizedBox(height: 10),
                       CustomButton(
                         text: 'Register',
                         backgroundColor: const Color(0xFF6A6A6A),
                         onPressed: _navigateToRegister,
+                        enabled: !isLoading,
                       ),
                     ],
                   ),

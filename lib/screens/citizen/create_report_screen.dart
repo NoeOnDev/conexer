@@ -28,6 +28,7 @@ class CreateReportScreenState extends State<CreateReportScreen> {
   final localityController = TextEditingController();
   final streetController = TextEditingController();
   String? selectedCategory;
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -51,6 +52,10 @@ class CreateReportScreenState extends State<CreateReportScreen> {
         return;
       }
 
+      setState(() {
+        isLoading = true;
+      });
+
       final now = DateTime.now().toIso8601String();
       final report = Report(
         title: titleController.text,
@@ -67,6 +72,12 @@ class CreateReportScreenState extends State<CreateReportScreen> {
         Navigator.pushReplacementNamed(context, '/report-history');
       } catch (e) {
         // Handle error
+      } finally {
+        if (mounted) {
+          setState(() {
+            isLoading = false;
+          });
+        }
       }
     }
   }
@@ -145,12 +156,14 @@ class CreateReportScreenState extends State<CreateReportScreen> {
           text: 'Create Report',
           backgroundColor: const Color(0x8077A1DD),
           onPressed: _createReport,
+          enabled: !isLoading,
         ),
         const SizedBox(height: 10),
         CustomButton(
           text: 'Cancel',
           backgroundColor: const Color(0xFFC1121F),
           onPressed: _cancel,
+          enabled: !isLoading,
         ),
       ],
     );
