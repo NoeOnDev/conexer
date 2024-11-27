@@ -29,6 +29,7 @@ class CompleteRegistrationScreenState
   final passwordController = TextEditingController();
   final localityController = TextEditingController();
   final streetController = TextEditingController();
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -41,6 +42,21 @@ class CompleteRegistrationScreenState
 
   void _completeRegistration() async {
     if (formKey.currentState!.validate()) {
+      if (localityController.text.isEmpty || streetController.text.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+                'Locality and Street are required. Please use the "Get Location" button to fill them.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return;
+      }
+
+      setState(() {
+        isLoading = true;
+      });
+
       final user = User(
         contactId: widget.contactId,
         username: usernameController.text,
@@ -60,6 +76,12 @@ class CompleteRegistrationScreenState
         );
       } catch (e) {
         // Handle registration error
+      } finally {
+        if (mounted) {
+          setState(() {
+            isLoading = false;
+          });
+        }
       }
     }
   }
@@ -149,6 +171,7 @@ class CompleteRegistrationScreenState
                         text: 'Complete Registration',
                         backgroundColor: const Color(0xFF324A5F),
                         onPressed: _completeRegistration,
+                        enabled: !isLoading,
                       ),
                       const SizedBox(height: 10),
                       CustomButton(
@@ -157,6 +180,7 @@ class CompleteRegistrationScreenState
                         onPressed: () {
                           Navigator.pop(context);
                         },
+                        enabled: !isLoading,
                       ),
                     ],
                   ),

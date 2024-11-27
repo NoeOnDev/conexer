@@ -29,6 +29,7 @@ class RegisterScreenState extends State<RegisterScreen> {
   final phoneController = TextEditingController();
   String? selectedHobby;
   String countryCode = '+52';
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -41,6 +42,10 @@ class RegisterScreenState extends State<RegisterScreen> {
 
   void _register() async {
     if (formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+
       final contact = Contact(
         firstName: firstNameController.text,
         lastName: lastNameController.text,
@@ -62,6 +67,12 @@ class RegisterScreenState extends State<RegisterScreen> {
         );
       } catch (e) {
         // Handle registration error
+      } finally {
+        if (mounted) {
+          setState(() {
+            isLoading = false;
+          });
+        }
       }
     }
   }
@@ -198,6 +209,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                         text: 'Register',
                         backgroundColor: const Color(0xFF324A5F),
                         onPressed: _register,
+                        enabled: !isLoading,
                       ),
                       const SizedBox(height: 10),
                       CustomButton(
@@ -206,6 +218,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                         onPressed: () {
                           Navigator.pop(context);
                         },
+                        enabled: !isLoading,
                       ),
                     ],
                   ),

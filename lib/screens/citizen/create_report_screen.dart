@@ -40,6 +40,17 @@ class CreateReportScreenState extends State<CreateReportScreen> {
 
   void _createReport() async {
     if (formKey.currentState!.validate()) {
+      if (localityController.text.isEmpty || streetController.text.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+                'Locality and Street are required. Please use the "Get Location" button to fill them.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return;
+      }
+
       final now = DateTime.now().toIso8601String();
       final report = Report(
         title: titleController.text,

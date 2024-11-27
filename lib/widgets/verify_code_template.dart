@@ -23,6 +23,7 @@ class VerifyCodeTemplateState extends State<VerifyCodeTemplate> {
   final formKey = GlobalKey<FormState>();
   final codeControllers = List.generate(5, (_) => TextEditingController());
   final focusNodes = List.generate(5, (_) => FocusNode());
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -48,23 +49,59 @@ class VerifyCodeTemplateState extends State<VerifyCodeTemplate> {
   }
 
   void _confirmCode() async {
-    if (formKey.currentState!.validate()) {
-      final code = codeControllers.map((controller) => controller.text).join();
-      try {
-        await widget.onConfirmCode(code);
-        // Handle successful confirmation
-      } catch (e) {
-        // Handle error
+    bool allFieldsFilled = true;
+    for (var controller in codeControllers) {
+      if (controller.text.isEmpty) {
+        allFieldsFilled = false;
+        break;
+      }
+    }
+
+    if (!allFieldsFilled) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill in all the fields.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    setState(() {
+      isLoading = true;
+    });
+
+    final code = codeControllers.map((controller) => controller.text).join();
+    try {
+      await widget.onConfirmCode(code);
+      // Handle successful confirmation
+    } catch (e) {
+      // Handle error
+    } finally {
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
       }
     }
   }
 
   void _resendCode() async {
+    setState(() {
+      isLoading = true;
+    });
+
     try {
       await widget.onResendCode();
       // Handle successful resend
     } catch (e) {
       // Handle error
+    } finally {
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -153,12 +190,14 @@ class VerifyCodeTemplateState extends State<VerifyCodeTemplate> {
                         text: 'Resend Code',
                         backgroundColor: const Color(0xFF6A6A6A),
                         onPressed: _resendCode,
+                        enabled: !isLoading,
                       ),
                       const SizedBox(height: 10),
                       CustomButton(
                         text: 'Confirm Code',
                         backgroundColor: const Color(0xFF324A5F),
                         onPressed: _confirmCode,
+                        enabled: !isLoading,
                       ),
                     ],
                   ),

@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
   final String text;
   final Color backgroundColor;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final double textSize;
   final Color textColor;
   final EdgeInsetsGeometry padding;
+  final bool enabled;
 
   const CustomButton({
     super.key,
@@ -15,8 +16,8 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     this.textSize = 16.0,
     this.textColor = Colors.white,
-    this.padding =
-        const EdgeInsets.symmetric(vertical: 16.0),
+    this.padding = const EdgeInsets.symmetric(vertical: 16.0),
+    this.enabled = true,
   });
 
   @override
@@ -34,7 +35,7 @@ class CustomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
-        onPressed: onPressed,
+        onPressed: enabled ? onPressed : null,
         child: Text(
           text,
           style: TextStyle(
