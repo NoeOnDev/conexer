@@ -6,6 +6,7 @@ class LabeledDropdown extends StatelessWidget {
   final List<String> items;
   final ValueChanged<String?> onChanged;
   final Color labelColor;
+  final String? Function(String?)? validator;
 
   const LabeledDropdown({
     super.key,
@@ -14,6 +15,7 @@ class LabeledDropdown extends StatelessWidget {
     required this.items,
     required this.onChanged,
     this.labelColor = Colors.black,
+    this.validator,
   });
 
   @override
@@ -36,6 +38,7 @@ class LabeledDropdown extends StatelessWidget {
             );
           }).toList(),
           onChanged: onChanged,
+          validator: validator,
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.white,
@@ -46,6 +49,18 @@ class LabeledDropdown extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.deepPurple),
               borderRadius: BorderRadius.circular(10),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.red),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.red),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            errorStyle: const TextStyle(
+              color: Colors.red,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),

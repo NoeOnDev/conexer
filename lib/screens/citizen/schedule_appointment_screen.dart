@@ -47,31 +47,64 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
     if (picked != null) {
       setState(() {
         dateController.text = picked.toLocal().toString().split(' ')[0];
+        timeController.clear(); // Clear the time field when date changes
       });
     }
   }
 
   Future<void> _selectTime(BuildContext context) async {
+    if (dateController.text.isEmpty) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please select a date first.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    final DateTime selectedDate = DateTime.parse(dateController.text);
+    final DateTime now = DateTime.now();
+    final TimeOfDay initialTime = TimeOfDay.now();
+
     final TimeOfDay? picked = await showTimePicker(
       context: context,
-      initialTime: TimeOfDay.now(),
+      initialTime: initialTime,
     );
+
     if (picked != null) {
-      final now = TimeOfDay.now();
-      if (picked.hour < now.hour ||
-          (picked.hour == now.hour && picked.minute < now.minute)) {
-      } else {
-        final dateTime = _convertTimeOfDayToDateTime(picked);
-        setState(() {
-          timeController.text = DateFormat('HH:mm').format(dateTime);
-        });
+      final DateTime pickedDateTime = DateTime(
+        selectedDate.year,
+        selectedDate.month,
+        selectedDate.day,
+        picked.hour,
+        picked.minute,
+      );
+
+      if (selectedDate
+          .isAtSameMomentAs(DateTime(now.year, now.month, now.day))) {
+        final DateTime minAllowedTime = now.add(const Duration(hours: 2));
+        if (pickedDateTime.isBefore(minAllowedTime)) {
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Please select a time at least 2 hours from now.'),
+              backgroundColor: Colors.red,
+            ),
+          );
+          return;
+        }
       }
+
+      setState(() {
+        timeController.text = DateFormat('HH:mm').format(pickedDateTime);
+      });
     }
   }
 
-  DateTime _convertTimeOfDayToDateTime(TimeOfDay time) {
-    final now = DateTime.now();
-    return DateTime(now.year, now.month, now.day, time.hour, time.minute);
+  DateTime _combineDateAndTime(DateTime date, TimeOfDay time) {
+    return DateTime(date.year, date.month, date.day, time.hour, time.minute);
   }
 
   void _scheduleAppointment() async {
@@ -82,16 +115,14 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
         minute: int.parse(timeController.text.split(':')[1]),
       );
       final now = DateTime.now();
+      final selectedDateTime = _combineDateAndTime(selectedDate, selectedTime);
 
-      if (selectedDate.isBefore(now) ||
-          (selectedDate.isAtSameMomentAs(now) &&
-              (selectedTime.hour < now.hour ||
-                  (selectedTime.hour == now.hour &&
-                      selectedTime.minute < now.minute)))) {
+      if (selectedDateTime.isBefore(now.add(const Duration(hours: 2)))) {
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text(
-                'Please select a date and time later than the current date and time.'),
+                'Please select a date and time at least 2 hours from now.'),
             backgroundColor: Colors.red,
           ),
         );
@@ -134,6 +165,18 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
           label: 'Title:',
           controller: titleController,
           labelColor: Colors.white,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Title is required';
+            }
+            if (value.length < 5 || value.length > 30) {
+              return 'Title must be between 5 and 30 characters';
+            }
+            if (!RegExp(r'^[a-zA-Z0-9\s]+$').hasMatch(value)) {
+              return 'Title can only contain letters and numbers';
+            }
+            return null;
+          },
         ),
         const SizedBox(height: 16),
         LabeledTextField(
@@ -141,6 +184,15 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
           controller: descriptionController,
           maxLines: 8,
           labelColor: Colors.white,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Description is required';
+            }
+            if (value.length < 10 || value.length > 200) {
+              return 'Description must be between 10 and 200 characters';
+            }
+            return null;
+          },
         ),
         const SizedBox(height: 16),
         GestureDetector(
@@ -152,6 +204,12 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
               labelColor: Colors.white,
               keyboardType: TextInputType.datetime,
               prefixIcon: const Icon(Icons.calendar_today),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Date is required';
+                }
+                return null;
+              },
             ),
           ),
         ),
@@ -165,6 +223,34 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
               labelColor: Colors.white,
               keyboardType: TextInputType.datetime,
               prefixIcon: const Icon(Icons.access_time),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Time is required';
+                }
+                if (dateController.text.isNotEmpty) {
+                  final selectedDate = DateTime.parse(dateController.text);
+                  final now = DateTime.now();
+                  final selectedTime = TimeOfDay(
+                    hour: int.parse(value.split(':')[0]),
+                    minute: int.parse(value.split(':')[1]),
+                  );
+                  final selectedDateTime = DateTime(
+                    selectedDate.year,
+                    selectedDate.month,
+                    selectedDate.day,
+                    selectedTime.hour,
+                    selectedTime.minute,
+                  );
+                  if (selectedDate.isAtSameMomentAs(
+                      DateTime(now.year, now.month, now.day))) {
+                    final minAllowedTime = now.add(const Duration(hours: 2));
+                    if (selectedDateTime.isBefore(minAllowedTime)) {
+                      return 'Please select a time at least 2 hours from now.';
+                    }
+                  }
+                }
+                return null;
+              },
             ),
           ),
         ),

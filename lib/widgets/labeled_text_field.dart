@@ -61,6 +61,21 @@ class LabeledTextField extends StatelessWidget {
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(10),
             ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.red),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.red),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            errorStyle: const TextStyle(
+              color: Colors.red,
+              fontWeight: FontWeight.bold,
+              fontSize: 12.0,
+              height: 1.5,
+            ),
+            errorMaxLines: 3,
           ),
         ),
       ],

@@ -94,6 +94,12 @@ class LoginScreenState extends State<LoginScreen> {
                       LabeledTextField(
                         label: 'Username or Email:',
                         controller: usernameOrEmailController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Username or Email is required';
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
@@ -101,6 +107,12 @@ class LoginScreenState extends State<LoginScreen> {
                         keyboardType: TextInputType.visiblePassword,
                         controller: passwordController,
                         obscureText: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Password is required';
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 8),
                       LinkText(

@@ -25,8 +25,8 @@ class NewsCard extends StatelessWidget {
       description: description,
       date: date,
       image: image,
-      backgroundColor: const Color(0xFF324A5F),
-      textColor: Colors.white,
+      backgroundColor: const Color(0x8077A1DD),
+      textColor: Colors.black,
     );
   }
 }

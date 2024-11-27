@@ -107,24 +107,65 @@ class RegisterScreenState extends State<RegisterScreen> {
                       LabeledTextField(
                         label: 'First Name:',
                         controller: firstNameController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'First name is required';
+                          }
+                          if (!RegExp(
+                                  r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(?: [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$')
+                              .hasMatch(value)) {
+                            return 'Enter a valid first name';
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
                         label: 'Last Name:',
                         controller: lastNameController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Last name is required';
+                          }
+                          if (!RegExp(
+                                  r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(?: [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$')
+                              .hasMatch(value)) {
+                            return 'Enter a valid last name';
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
                         label: 'Email:',
-                        keyboardType: TextInputType.emailAddress,
                         controller: emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Email is required';
+                          }
+                          if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                              .hasMatch(value)) {
+                            return 'Enter a valid email';
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
                         label: 'Phone:',
-                        keyboardType: TextInputType.phone,
                         controller: phoneController,
+                        keyboardType: TextInputType.phone,
                         prefixText: '$countryCode ',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Phone number is required';
+                          }
+                          if (!RegExp(r'^\d{10}$').hasMatch(value)) {
+                            return 'Enter a valid 10-digit phone number';
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 16),
                       LabeledDropdown(
@@ -144,6 +185,12 @@ class RegisterScreenState extends State<RegisterScreen> {
                           setState(() {
                             selectedHobby = value;
                           });
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Hobby is required';
+                          }
+                          return null;
                         },
                       ),
                       const SizedBox(height: 20),
