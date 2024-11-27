@@ -45,14 +45,7 @@ class CitizenAppointmentsScreenState extends State<CitizenAppointmentsScreen> {
             : widget.appointmentService.getUserAppointments(widget.token);
       });
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Error accepting appointment'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
+      if (mounted) {}
     }
   }
 
@@ -69,14 +62,7 @@ class CitizenAppointmentsScreenState extends State<CitizenAppointmentsScreen> {
             : widget.appointmentService.getUserAppointments(widget.token);
       });
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Error rejecting appointment'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
+      if (mounted) {}
     }
   }
 

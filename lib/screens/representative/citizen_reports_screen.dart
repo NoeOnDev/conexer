@@ -32,20 +32,13 @@ class CitizenReportsScreenState extends State<CitizenReportsScreen> {
       await widget.reportService.updateReportStatus(
         widget.token,
         reportId,
-        'resolved',
+        'RESOLVED',
       );
       setState(() {
         _reportsFuture = widget.reportService.getAllReports(widget.token);
       });
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Error marking report as resolved'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
+      if (mounted) {}
     }
   }
 
@@ -54,20 +47,13 @@ class CitizenReportsScreenState extends State<CitizenReportsScreen> {
       await widget.reportService.updateReportStatus(
         widget.token,
         reportId,
-        'unresolved',
+        'UNRESOLVED',
       );
       setState(() {
         _reportsFuture = widget.reportService.getAllReports(widget.token);
       });
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Error marking report as unresolved'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
+      if (mounted) {}
     }
   }
 

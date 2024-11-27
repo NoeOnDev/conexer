@@ -6,6 +6,7 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final double textSize;
   final Color textColor;
+  final EdgeInsetsGeometry padding;
 
   const CustomButton({
     super.key,
@@ -14,6 +15,8 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     this.textSize = 16.0,
     this.textColor = Colors.white,
+    this.padding =
+        const EdgeInsets.symmetric(vertical: 16.0),
   });
 
   @override
@@ -23,7 +26,7 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: backgroundColor,
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          padding: padding,
           elevation: 5.0,
           shadowColor: Colors.black.withOpacity(0.5),
           animationDuration: const Duration(milliseconds: 200),

@@ -43,7 +43,7 @@ class CreateNewsScreenState extends State<CreateNewsScreen> {
       try {
         await widget.newsService.createNews(widget.token, news);
         if (!mounted) return;
-        Navigator.pop(context);
+        Navigator.pushReplacementNamed(context, '/news-history');
       } catch (e) {
         // Handle error
       }

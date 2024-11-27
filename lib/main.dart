@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const String baseUrl =
-        'https://af4c-2806-262-3487-34f-11dc-6aad-f096-6701.ngrok-free.app';
+        'https://3816-2806-262-3487-34f-a13a-fd68-2180-54f.ngrok-free.app';
 
     if (userToken == null) {
       return MaterialApp(
@@ -257,7 +257,22 @@ class MyApp extends StatelessWidget {
               }
             },
           ),
-      '/news': (context) => const NewsScreen(),
+      '/news': (context) => FutureBuilder<String?>(
+            future: SharedPreferences.getInstance()
+                .then((prefs) => prefs.getString('token_user_verification')),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const SplashScreen();
+              } else if (snapshot.hasData) {
+                return NewsScreen(
+                  token: snapshot.data!,
+                  newsService: NewsService(baseUrl: baseUrl),
+                );
+              } else {
+                return const SplashScreen();
+              }
+            },
+          ),
       '/create-news': (context) => FutureBuilder<String?>(
             future: SharedPreferences.getInstance()
                 .then((prefs) => prefs.getString('token_user_verification')),
@@ -274,7 +289,22 @@ class MyApp extends StatelessWidget {
               }
             },
           ),
-      '/news-history': (context) => const NewsHistoryScreen(),
+      '/news-history': (context) => FutureBuilder<String?>(
+            future: SharedPreferences.getInstance()
+                .then((prefs) => prefs.getString('token_user_verification')),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const SplashScreen();
+              } else if (snapshot.hasData) {
+                return NewsHistoryScreen(
+                  token: snapshot.data!,
+                  newsService: NewsService(baseUrl: baseUrl),
+                );
+              } else {
+                return const SplashScreen();
+              }
+            },
+          ),
       '/citizen-appointments': (context) => FutureBuilder<String?>(
             future: SharedPreferences.getInstance()
                 .then((prefs) => prefs.getString('token_user_verification')),
