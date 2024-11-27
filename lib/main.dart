@@ -159,186 +159,118 @@ class MyApp extends StatelessWidget {
       },
       '/home': (context) => const HomeCitizenScreen(),
       '/home-representative': (context) => const HomeRepresentativeScreen(),
-      '/create-report': (context) => FutureBuilder<String?>(
-            future: SharedPreferences.getInstance()
-                .then((prefs) => prefs.getString('token_user_verification')),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SplashScreen();
-              } else if (snapshot.hasData) {
-                return CreateReportScreen(
-                  token: snapshot.data!,
-                  reportService: ReportService(baseUrl: baseUrl),
-                );
-              } else {
-                return const SplashScreen();
-              }
-            },
+      '/create-report': (context) => buildFutureBuilderRoute(
+            context: context,
+            routeName: '/create-report',
+            builder: (context, token) => CreateReportScreen(
+              token: token,
+              reportService: ReportService(baseUrl: baseUrl),
+            ),
           ),
-      '/schedule-appointment': (context) => FutureBuilder<String?>(
-            future: SharedPreferences.getInstance()
-                .then((prefs) => prefs.getString('token_user_verification')),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SplashScreen();
-              } else if (snapshot.hasData) {
-                return ScheduleAppointmentScreen(
-                  token: snapshot.data!,
-                  appointmentService: AppointmentService(baseUrl: baseUrl),
-                );
-              } else {
-                return const SplashScreen();
-              }
-            },
+      '/schedule-appointment': (context) => buildFutureBuilderRoute(
+            context: context,
+            routeName: '/schedule-appointment',
+            builder: (context, token) => ScheduleAppointmentScreen(
+              token: token,
+              appointmentService: AppointmentService(baseUrl: baseUrl),
+            ),
           ),
-      '/profile-citizen': (context) => FutureBuilder<String?>(
-            future: SharedPreferences.getInstance()
-                .then((prefs) => prefs.getString('token_user_verification')),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SplashScreen();
-              } else if (snapshot.hasData) {
-                return ProfileCitizenScreen(
-                  token: snapshot.data!,
-                  userService: UserService(baseUrl: baseUrl),
-                  contactService: ContactService(baseUrl: baseUrl),
-                );
-              } else {
-                return const SplashScreen();
-              }
-            },
+      '/profile-citizen': (context) => buildFutureBuilderRoute(
+            context: context,
+            routeName: '/profile-citizen',
+            builder: (context, token) => ProfileCitizenScreen(
+              token: token,
+              userService: UserService(baseUrl: baseUrl),
+              contactService: ContactService(baseUrl: baseUrl),
+            ),
           ),
-      '/profile-representative': (context) => FutureBuilder<String?>(
-            future: SharedPreferences.getInstance()
-                .then((prefs) => prefs.getString('token_user_verification')),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SplashScreen();
-              } else if (snapshot.hasData) {
-                return ProfileRepresentativeScreen(
-                  token: snapshot.data!,
-                  userService: UserService(baseUrl: baseUrl),
-                  contactService: ContactService(baseUrl: baseUrl),
-                );
-              } else {
-                return const SplashScreen();
-              }
-            },
+      '/profile-representative': (context) => buildFutureBuilderRoute(
+            context: context,
+            routeName: '/profile-representative',
+            builder: (context, token) => ProfileRepresentativeScreen(
+              token: token,
+              userService: UserService(baseUrl: baseUrl),
+              contactService: ContactService(baseUrl: baseUrl),
+            ),
           ),
-      '/report-history': (context) => FutureBuilder<String?>(
-            future: SharedPreferences.getInstance()
-                .then((prefs) => prefs.getString('token_user_verification')),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SplashScreen();
-              } else if (snapshot.hasData) {
-                return ReportHistoryScreen(
-                  token: snapshot.data!,
-                  reportService: ReportService(baseUrl: baseUrl),
-                );
-              } else {
-                return const SplashScreen();
-              }
-            },
+      '/report-history': (context) => buildFutureBuilderRoute(
+            context: context,
+            routeName: '/report-history',
+            builder: (context, token) => ReportHistoryScreen(
+              token: token,
+              reportService: ReportService(baseUrl: baseUrl),
+            ),
           ),
-      '/appointments': (context) => FutureBuilder<String?>(
-            future: SharedPreferences.getInstance()
-                .then((prefs) => prefs.getString('token_user_verification')),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SplashScreen();
-              } else if (snapshot.hasData) {
-                return AppointmentsScreen(
-                  token: snapshot.data!,
-                  appointmentService: AppointmentService(baseUrl: baseUrl),
-                );
-              } else {
-                return const SplashScreen();
-              }
-            },
+      '/appointments': (context) => buildFutureBuilderRoute(
+            context: context,
+            routeName: '/appointments',
+            builder: (context, token) => AppointmentsScreen(
+              token: token,
+              appointmentService: AppointmentService(baseUrl: baseUrl),
+            ),
           ),
-      '/news': (context) => FutureBuilder<String?>(
-            future: SharedPreferences.getInstance()
-                .then((prefs) => prefs.getString('token_user_verification')),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SplashScreen();
-              } else if (snapshot.hasData) {
-                return NewsScreen(
-                  token: snapshot.data!,
-                  newsService: NewsService(baseUrl: baseUrl),
-                );
-              } else {
-                return const SplashScreen();
-              }
-            },
+      '/news': (context) => buildFutureBuilderRoute(
+            context: context,
+            routeName: '/news',
+            builder: (context, token) => NewsScreen(
+              token: token,
+              newsService: NewsService(baseUrl: baseUrl),
+            ),
           ),
-      '/create-news': (context) => FutureBuilder<String?>(
-            future: SharedPreferences.getInstance()
-                .then((prefs) => prefs.getString('token_user_verification')),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SplashScreen();
-              } else if (snapshot.hasData) {
-                return CreateNewsScreen(
-                  token: snapshot.data!,
-                  newsService: NewsService(baseUrl: baseUrl),
-                );
-              } else {
-                return const SplashScreen();
-              }
-            },
+      '/create-news': (context) => buildFutureBuilderRoute(
+            context: context,
+            routeName: '/create-news',
+            builder: (context, token) => CreateNewsScreen(
+              token: token,
+              newsService: NewsService(baseUrl: baseUrl),
+            ),
           ),
-      '/news-history': (context) => FutureBuilder<String?>(
-            future: SharedPreferences.getInstance()
-                .then((prefs) => prefs.getString('token_user_verification')),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SplashScreen();
-              } else if (snapshot.hasData) {
-                return NewsHistoryScreen(
-                  token: snapshot.data!,
-                  newsService: NewsService(baseUrl: baseUrl),
-                );
-              } else {
-                return const SplashScreen();
-              }
-            },
+      '/news-history': (context) => buildFutureBuilderRoute(
+            context: context,
+            routeName: '/news-history',
+            builder: (context, token) => NewsHistoryScreen(
+              token: token,
+              newsService: NewsService(baseUrl: baseUrl),
+            ),
           ),
-      '/citizen-appointments': (context) => FutureBuilder<String?>(
-            future: SharedPreferences.getInstance()
-                .then((prefs) => prefs.getString('token_user_verification')),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SplashScreen();
-              } else if (snapshot.hasData) {
-                return CitizenAppointmentsScreen(
-                  token: snapshot.data!,
-                  appointmentService: AppointmentService(baseUrl: baseUrl),
-                  isLocalityAppointments: true,
-                );
-              } else {
-                return const SplashScreen();
-              }
-            },
+      '/citizen-appointments': (context) => buildFutureBuilderRoute(
+            context: context,
+            routeName: '/citizen-appointments',
+            builder: (context, token) => CitizenAppointmentsScreen(
+              token: token,
+              appointmentService: AppointmentService(baseUrl: baseUrl),
+              isLocalityAppointments: true,
+            ),
           ),
-      '/citizen-reports': (context) => FutureBuilder<String?>(
-            future: SharedPreferences.getInstance()
-                .then((prefs) => prefs.getString('token_user_verification')),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SplashScreen();
-              } else if (snapshot.hasData) {
-                return CitizenReportsScreen(
-                  token: snapshot.data!,
-                  reportService: ReportService(baseUrl: baseUrl),
-                );
-              } else {
-                return const SplashScreen();
-              }
-            },
+      '/citizen-reports': (context) => buildFutureBuilderRoute(
+            context: context,
+            routeName: '/citizen-reports',
+            builder: (context, token) => CitizenReportsScreen(
+              token: token,
+              reportService: ReportService(baseUrl: baseUrl),
+            ),
           ),
       '/community-statistics': (context) => const CommunityStatisticsScreen(),
     };
   }
+}
+
+Widget buildFutureBuilderRoute<T>({
+  required BuildContext context,
+  required String routeName,
+  required Widget Function(BuildContext, String) builder,
+}) {
+  return FutureBuilder<String?>(
+    future: SharedPreferences.getInstance()
+        .then((prefs) => prefs.getString('token_user_verification')),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const SplashScreen();
+      } else if (snapshot.hasData) {
+        return builder(context, snapshot.data!);
+      } else {
+        return const SplashScreen();
+      }
+    },
+  );
 }
