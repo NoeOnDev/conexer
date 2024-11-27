@@ -47,7 +47,7 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
     if (picked != null) {
       setState(() {
         dateController.text = picked.toLocal().toString().split(' ')[0];
-        timeController.clear(); // Clear the time field when date changes
+        timeController.clear();
       });
     }
   }
