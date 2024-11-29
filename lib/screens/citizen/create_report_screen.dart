@@ -101,8 +101,8 @@ class CreateReportScreenState extends State<CreateReportScreen> {
             if (value == null || value.isEmpty) {
               return 'Title is required';
             }
-            if (value.length < 5 || value.length > 30) {
-              return 'Title must be between 5 and 30 characters';
+            if (value.length < 5 || value.length > 40) {
+              return 'Title must be between 5 and 40 characters';
             }
             if (!RegExp(r'^[a-zA-Z0-9\s]+$').hasMatch(value)) {
               return 'Title can only contain letters and numbers';
@@ -138,8 +138,8 @@ class CreateReportScreenState extends State<CreateReportScreen> {
             if (value == null || value.isEmpty) {
               return 'Description is required';
             }
-            if (value.length < 10 || value.length > 200) {
-              return 'Description must be between 10 and 200 characters';
+            if (value.length < 10 || value.length > 300) {
+              return 'Description must be between 10 and 300 characters';
             }
             return null;
           },
