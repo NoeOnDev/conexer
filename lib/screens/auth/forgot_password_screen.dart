@@ -51,6 +51,10 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     }
   }
 
+  void _cancel() {
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,6 +107,10 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           if (value == null || value.isEmpty) {
                             return 'Email is required';
                           }
+                          if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                              .hasMatch(value)) {
+                            return 'Enter a valid email';
+                          }
                           return null;
                         },
                       ),
@@ -111,6 +119,13 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         text: 'Request Password Reset',
                         backgroundColor: const Color(0xFF324A5F),
                         onPressed: _requestPasswordReset,
+                        enabled: !isLoading,
+                      ),
+                      const SizedBox(height: 10),
+                      CustomButton(
+                        text: 'Cancel',
+                        backgroundColor: const Color(0xFFC1121F),
+                        onPressed: _cancel,
                         enabled: !isLoading,
                       ),
                     ],

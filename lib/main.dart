@@ -49,7 +49,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String baseUrl = 'https://c8c5-189-150-63-203.ngrok-free.app';
+    const String baseUrl =
+        'https://77a3-2806-262-3487-34f-ed53-1836-15da-8e71.ngrok-free.app';
 
     if (userToken == null) {
       return MaterialApp(
