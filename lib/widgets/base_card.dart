@@ -63,6 +63,7 @@ class BaseCard extends StatelessWidget {
               Center(
                 child: Text(
                   title,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -70,6 +71,7 @@ class BaseCard extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(height: 8),
               Center(
                 child: Text(
                   subtitle,
@@ -137,7 +139,9 @@ class BaseCard extends StatelessWidget {
                     ),
                   ),
                 ),
-              if (status == 'PENDING' && onPrimaryAction != null && onSecondaryAction != null) ...[
+              if (status == 'PENDING' &&
+                  onPrimaryAction != null &&
+                  onSecondaryAction != null) ...[
                 const SizedBox(height: 12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -104,8 +104,8 @@ class CreateReportScreenState extends State<CreateReportScreen> {
             if (value.length < 5 || value.length > 40) {
               return 'Title must be between 5 and 40 characters';
             }
-            if (!RegExp(r'^[a-zA-Z0-9\s]+$').hasMatch(value)) {
-              return 'Title can only contain letters and numbers';
+            if (!RegExp(r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]+$').hasMatch(value)) {
+              return 'Title can only contain letters, numbers, and spaces';
             }
             return null;
           },
