@@ -4,6 +4,7 @@ import '../../widgets/custom_button.dart';
 import '../../widgets/location_input.dart';
 import '../../models/user.dart';
 import '../../services/user_service.dart';
+import '../../utils/validators.dart';
 
 class CompleteRegistrationScreen extends StatefulWidget {
   final String contactId;
@@ -127,18 +128,9 @@ class CompleteRegistrationScreenState
                       LabeledTextField(
                         label: 'Username:',
                         controller: usernameController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Username is required';
-                          }
-                          if (value.length < 3 || value.length > 30) {
-                            return 'Username must be between 3 and 30 characters';
-                          }
-                          if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
-                            return 'Username can only contain letters';
-                          }
-                          return null;
-                        },
+                        validator: (value) =>
+                            Validators.validateTextWithAccents(
+                                value, 'Username', 3, 30),
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
@@ -146,19 +138,7 @@ class CompleteRegistrationScreenState
                         keyboardType: TextInputType.visiblePassword,
                         controller: passwordController,
                         obscureText: true,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Password is required';
-                          }
-                          if (value.length < 8) {
-                            return 'Password must be at least 8 characters';
-                          }
-                          if (!RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$')
-                              .hasMatch(value)) {
-                            return 'Password must contain at least one uppercase letter, one lowercase letter, and one number';
-                          }
-                          return null;
-                        },
+                        validator: Validators.validatePassword,
                       ),
                       const SizedBox(height: 20),
                       LocationInput(

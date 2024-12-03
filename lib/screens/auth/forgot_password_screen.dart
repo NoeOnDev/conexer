@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../widgets/labeled_text_field.dart';
 import '../../widgets/custom_button.dart';
 import '../../services/user_service.dart';
+import '../../utils/validators.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   final UserService userService;
@@ -103,16 +104,7 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         label: 'Email:',
                         keyboardType: TextInputType.emailAddress,
                         controller: emailController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Email is required';
-                          }
-                          if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                              .hasMatch(value)) {
-                            return 'Enter a valid email';
-                          }
-                          return null;
-                        },
+                        validator: Validators.validateEmail,
                       ),
                       const SizedBox(height: 20),
                       CustomButton(

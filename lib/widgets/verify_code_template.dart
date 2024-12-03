@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_button.dart';
+import '../utils/validators.dart';
 
 class VerifyCodeTemplate extends StatefulWidget {
   final String title;
@@ -49,39 +50,23 @@ class VerifyCodeTemplateState extends State<VerifyCodeTemplate> {
   }
 
   void _confirmCode() async {
-    bool allFieldsFilled = true;
-    for (var controller in codeControllers) {
-      if (controller.text.isEmpty) {
-        allFieldsFilled = false;
-        break;
-      }
-    }
+    if (formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
 
-    if (!allFieldsFilled) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please fill in all the fields.'),
-          backgroundColor: Colors.red,
-        ),
-      );
-      return;
-    }
-
-    setState(() {
-      isLoading = true;
-    });
-
-    final code = codeControllers.map((controller) => controller.text).join();
-    try {
-      await widget.onConfirmCode(code);
-      // Handle successful confirmation
-    } catch (e) {
-      // Handle error
-    } finally {
-      if (mounted) {
-        setState(() {
-          isLoading = false;
-        });
+      final code = codeControllers.map((controller) => controller.text).join();
+      try {
+        await widget.onConfirmCode(code);
+        // Handle successful confirmation
+      } catch (e) {
+        // Handle error
+      } finally {
+        if (mounted) {
+          setState(() {
+            isLoading = false;
+          });
+        }
       }
     }
   }
@@ -167,6 +152,8 @@ class VerifyCodeTemplateState extends State<VerifyCodeTemplate> {
                               textAlign: TextAlign.center,
                               maxLength: 1,
                               onChanged: (value) => _onChanged(value, index),
+                              validator: (value) =>
+                                  Validators.validateRequired(value, 'Code'),
                               decoration: InputDecoration(
                                 counterText: '',
                                 filled: true,

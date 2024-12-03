@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../widgets/labeled_text_field.dart';
 import '../../widgets/custom_button.dart';
 import '../../services/user_service.dart';
+import '../../utils/validators.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   final String jwtToken;
@@ -119,19 +120,7 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         keyboardType: TextInputType.visiblePassword,
                         controller: newPasswordController,
                         obscureText: true,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'New Password is required';
-                          }
-                          if (value.length < 8) {
-                            return 'Password must be at least 8 characters';
-                          }
-                          if (!RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$')
-                              .hasMatch(value)) {
-                            return 'Password must contain at least one uppercase letter, one lowercase letter, and one number';
-                          }
-                          return null;
-                        },
+                        validator: Validators.validatePassword,
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
@@ -139,12 +128,8 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         keyboardType: TextInputType.visiblePassword,
                         controller: confirmPasswordController,
                         obscureText: true,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Confirm Password is required';
-                          }
-                          return null;
-                        },
+                        validator: (value) => Validators.validateRequired(
+                            value, 'Confirm Password'),
                       ),
                       const SizedBox(height: 20),
                       CustomButton(

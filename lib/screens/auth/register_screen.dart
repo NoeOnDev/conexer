@@ -4,6 +4,7 @@ import '../../widgets/custom_button.dart';
 import '../../widgets/labeled_dropdown.dart';
 import '../../models/contact.dart';
 import '../../services/contact_service.dart';
+import '../../utils/validators.dart';
 
 class RegisterScreen extends StatefulWidget {
   final ContactService contactService;
@@ -118,49 +119,24 @@ class RegisterScreenState extends State<RegisterScreen> {
                       LabeledTextField(
                         label: 'First Name:',
                         controller: firstNameController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'First name is required';
-                          }
-                          if (!RegExp(
-                                  r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(?: [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$')
-                              .hasMatch(value)) {
-                            return 'Enter a valid first name';
-                          }
-                          return null;
-                        },
+                        validator: (value) =>
+                            Validators.validateTextWithAccents(
+                                value, 'First Name', 3, 30),
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
                         label: 'Last Name:',
                         controller: lastNameController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Last name is required';
-                          }
-                          if (!RegExp(
-                                  r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(?: [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$')
-                              .hasMatch(value)) {
-                            return 'Enter a valid last name';
-                          }
-                          return null;
-                        },
+                        validator: (value) =>
+                            Validators.validateTextWithAccents(
+                                value, 'Last Name', 3, 30),
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
                         label: 'Email:',
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Email is required';
-                          }
-                          if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                              .hasMatch(value)) {
-                            return 'Enter a valid email';
-                          }
-                          return null;
-                        },
+                        validator: Validators.validateEmail,
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
@@ -168,15 +144,8 @@ class RegisterScreenState extends State<RegisterScreen> {
                         controller: phoneController,
                         keyboardType: TextInputType.phone,
                         prefixText: '$countryCode ',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Phone number is required';
-                          }
-                          if (!RegExp(r'^\d{10}$').hasMatch(value)) {
-                            return 'Enter a valid 10-digit phone number';
-                          }
-                          return null;
-                        },
+                        validator: (value) => Validators.validatePhoneNumber(
+                            value, 'Phone Number'),
                       ),
                       const SizedBox(height: 16),
                       LabeledDropdown(
@@ -197,12 +166,8 @@ class RegisterScreenState extends State<RegisterScreen> {
                             selectedHobby = value;
                           });
                         },
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Hobby is required';
-                          }
-                          return null;
-                        },
+                        validator: (value) =>
+                            Validators.validateRequired(value, 'Hobby'),
                       ),
                       const SizedBox(height: 20),
                       CustomButton(

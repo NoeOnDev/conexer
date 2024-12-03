@@ -3,6 +3,7 @@ import '../../widgets/labeled_text_field.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/link_text.dart';
 import '../../services/user_service.dart';
+import '../../utils/validators.dart';
 
 class LoginScreen extends StatefulWidget {
   final UserService userService;
@@ -105,12 +106,8 @@ class LoginScreenState extends State<LoginScreen> {
                       LabeledTextField(
                         label: 'Username or Email:',
                         controller: usernameOrEmailController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Username or Email is required';
-                          }
-                          return null;
-                        },
+                        validator: (value) => Validators.validateRequired(
+                            value, 'Username or Email'),
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
@@ -118,12 +115,8 @@ class LoginScreenState extends State<LoginScreen> {
                         keyboardType: TextInputType.visiblePassword,
                         controller: passwordController,
                         obscureText: true,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Password is required';
-                          }
-                          return null;
-                        },
+                        validator: (value) =>
+                            Validators.validateRequired(value, 'Password'),
                       ),
                       const SizedBox(height: 8),
                       LinkText(

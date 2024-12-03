@@ -6,6 +6,7 @@ import '../../widgets/custom_button.dart';
 import '../../widgets/location_input.dart';
 import '../../models/report.dart';
 import '../../services/report_service.dart';
+import '../../utils/validators.dart';
 
 class CreateReportScreen extends StatefulWidget {
   final String token;
@@ -97,18 +98,8 @@ class CreateReportScreenState extends State<CreateReportScreen> {
           label: 'Title:',
           controller: titleController,
           labelColor: Colors.white,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Title is required';
-            }
-            if (value.length < 5 || value.length > 40) {
-              return 'Title must be between 5 and 40 characters';
-            }
-            if (!RegExp(r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]+$').hasMatch(value)) {
-              return 'Title can only contain letters, numbers, and spaces';
-            }
-            return null;
-          },
+          validator: (value) =>
+              Validators.validateTextWithAccents(value, 'Title', 5, 40),
         ),
         const SizedBox(height: 16),
         LabeledDropdown(
@@ -121,12 +112,7 @@ class CreateReportScreenState extends State<CreateReportScreen> {
             });
           },
           labelColor: Colors.white,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Category is required';
-            }
-            return null;
-          },
+          validator: (value) => Validators.validateRequired(value, 'Category'),
         ),
         const SizedBox(height: 16),
         LabeledTextField(
@@ -134,15 +120,8 @@ class CreateReportScreenState extends State<CreateReportScreen> {
           controller: descriptionController,
           maxLines: 8,
           labelColor: Colors.white,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Description is required';
-            }
-            if (value.length < 10 || value.length > 300) {
-              return 'Description must be between 10 and 300 characters';
-            }
-            return null;
-          },
+          validator: (value) =>
+              Validators.validateTextWithAccents(value, 'Description', 10, 300),
         ),
         const SizedBox(height: 20),
         LocationInput(

@@ -4,6 +4,7 @@ import '../../widgets/labeled_text_field.dart';
 import '../../widgets/custom_button.dart';
 import '../../models/news.dart';
 import '../../services/news_service.dart';
+import '../../utils/validators.dart';
 
 class CreateNewsScreen extends StatefulWidget {
   final String token;
@@ -76,18 +77,8 @@ class CreateNewsScreenState extends State<CreateNewsScreen> {
           label: 'Title:',
           controller: titleController,
           labelColor: Colors.white,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Title is required';
-            }
-            if (value.length < 5 || value.length > 40) {
-              return 'Title must be between 5 and 40 characters';
-            }
-            if (!RegExp(r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]+$').hasMatch(value)) {
-              return 'Title can only contain letters, numbers, and spaces';
-            }
-            return null;
-          },
+          validator: (value) =>
+              Validators.validateTextWithAccents(value, 'Title', 5, 40),
         ),
         const SizedBox(height: 16),
         LabeledTextField(
@@ -95,15 +86,8 @@ class CreateNewsScreenState extends State<CreateNewsScreen> {
           controller: descriptionController,
           maxLines: 8,
           labelColor: Colors.white,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Description is required';
-            }
-            if (value.length < 10 || value.length > 300) {
-              return 'Description must be between 10 and 300 characters';
-            }
-            return null;
-          },
+          validator: (value) =>
+              Validators.validateTextWithAccents(value, 'Description', 10, 300),
         ),
       ],
       buttons: [

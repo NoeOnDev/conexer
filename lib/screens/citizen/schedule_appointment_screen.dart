@@ -5,6 +5,7 @@ import '../../widgets/labeled_text_field.dart';
 import '../../widgets/custom_button.dart';
 import '../../models/appointment.dart';
 import '../../services/appointment_service.dart';
+import '../../utils/validators.dart';
 
 class ScheduleAppointmentScreen extends StatefulWidget {
   final String token;
@@ -176,18 +177,8 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
           label: 'Title:',
           controller: titleController,
           labelColor: Colors.white,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Title is required';
-            }
-            if (value.length < 5 || value.length > 40) {
-              return 'Title must be between 5 and 40 characters';
-            }
-            if (!RegExp(r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]+$').hasMatch(value)) {
-              return 'Title can only contain letters, numbers, and spaces';
-            }
-            return null;
-          },
+          validator: (value) =>
+              Validators.validateTextWithAccents(value, 'Title', 5, 40),
         ),
         const SizedBox(height: 16),
         LabeledTextField(
@@ -195,15 +186,8 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
           controller: descriptionController,
           maxLines: 8,
           labelColor: Colors.white,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Description is required';
-            }
-            if (value.length < 10 || value.length > 300) {
-              return 'Description must be between 10 and 300 characters';
-            }
-            return null;
-          },
+          validator: (value) =>
+              Validators.validateTextWithAccents(value, 'Description', 10, 300),
         ),
         const SizedBox(height: 16),
         GestureDetector(
@@ -215,12 +199,7 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
               labelColor: Colors.white,
               keyboardType: TextInputType.datetime,
               prefixIcon: const Icon(Icons.calendar_today),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Date is required';
-                }
-                return null;
-              },
+              validator: (value) => Validators.validateRequired(value, 'Date'),
             ),
           ),
         ),
@@ -234,34 +213,7 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
               labelColor: Colors.white,
               keyboardType: TextInputType.datetime,
               prefixIcon: const Icon(Icons.access_time),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Time is required';
-                }
-                if (dateController.text.isNotEmpty) {
-                  final selectedDate = DateTime.parse(dateController.text);
-                  final now = DateTime.now();
-                  final selectedTime = TimeOfDay(
-                    hour: int.parse(value.split(':')[0]),
-                    minute: int.parse(value.split(':')[1]),
-                  );
-                  final selectedDateTime = DateTime(
-                    selectedDate.year,
-                    selectedDate.month,
-                    selectedDate.day,
-                    selectedTime.hour,
-                    selectedTime.minute,
-                  );
-                  if (selectedDate.isAtSameMomentAs(
-                      DateTime(now.year, now.month, now.day))) {
-                    final minAllowedTime = now.add(const Duration(hours: 2));
-                    if (selectedDateTime.isBefore(minAllowedTime)) {
-                      return 'Please select a time at least 2 hours from now.';
-                    }
-                  }
-                }
-                return null;
-              },
+              validator: (value) => Validators.validateRequired(value, 'Time'),
             ),
           ),
         ),
