@@ -21,7 +21,7 @@ class AuthService {
   }
 
   static Future<bool> isTokenValid(String baseUrl, String token) async {
-    final url = Uri.parse('$baseUrl/api/v1/verify-token');
+    final url = Uri.parse('$baseUrl/api/v1/users/id');
     try {
       final response = await http.get(
         url,
@@ -36,11 +36,15 @@ class AuthService {
 
         final prefs = await SharedPreferences.getInstance();
         final currentRole = prefs.getString('user_role');
-        if (currentRole != responseData['role']) {
-          await prefs.setString('user_role', responseData['role']);
+        final newRole = responseData['role']['value'];
+        if (currentRole != newRole) {
+          await prefs.setString('user_role', newRole);
         }
 
-        return responseData['message'] == 'Token is valid';
+        return true;
+      } else if (response.statusCode == 404) {
+        await _clearCredentials();
+        return false;
       } else {
         await _clearCredentials();
         return false;

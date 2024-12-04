@@ -40,19 +40,19 @@ class CitizenScaffold extends StatelessWidget {
       ),
       drawer: const CustomDrawer(
         options: [
-          'Home',
-          'Reports',
-          'Appointments',
-          'News',
-          'Profile',
-          'Logout'
+          'Inicio',
+          'Reportes',
+          'Citas',
+          'Noticias',
+          'Perfil',
+          'Cerrar Sesión'
         ],
         routes: {
-          'Home': '/home',
-          'Reports': '/report-history',
-          'Appointments': '/appointments',
-          'News': '/news',
-          'Profile': '/profile-citizen',
+          'Inicio': '/home',
+          'Reportes': '/report-history',
+          'Citas': '/appointments',
+          'Noticias': '/news',
+          'Perfil': '/profile-citizen',
         },
       ),
       body: body,

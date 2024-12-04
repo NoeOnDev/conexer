@@ -11,7 +11,7 @@ class CustomDrawer extends StatelessWidget {
     final route = routes[value];
     if (route != null) {
       Navigator.pushNamed(context, route);
-    } else if (value == 'Logout') {
+    } else if (value == 'Cerrar Sesión') {
       AuthService.logout(context);
     }
   }
@@ -40,7 +40,7 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 SizedBox(width: 20),
                 Text(
-                  'Menu',
+                  'Menú',
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w600,
@@ -54,12 +54,12 @@ class CustomDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(
                 _getIconForOption(option),
-                color: option == 'Logout' ? Colors.red : null,
+                color: option == 'Cerrar Sesión' ? Colors.red : null,
               ),
               title: Text(
                 option,
                 style: TextStyle(
-                  color: option == 'Logout' ? Colors.red : null,
+                  color: option == 'Cerrar Sesión' ? Colors.red : null,
                 ),
               ),
               onTap: () => _onMenuItemSelected(context, option),
@@ -71,19 +71,19 @@ class CustomDrawer extends StatelessWidget {
 
   IconData _getIconForOption(String option) {
     switch (option) {
-      case 'Home':
+      case 'Inicio':
         return Icons.home;
-      case 'Statistics':
+      case 'Estadísticas':
         return Icons.bar_chart;
-      case 'Reports':
+      case 'Reportes':
         return Icons.assignment;
-      case 'Appointments':
+      case 'Citas':
         return Icons.calendar_today;
-      case 'News':
+      case 'Noticias':
         return Icons.article;
-      case 'Profile':
+      case 'Perfil':
         return Icons.person;
-      case 'Logout':
+      case 'Cerrar Sesión':
         return Icons.logout;
       default:
         return Icons.help;
