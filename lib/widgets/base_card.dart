@@ -15,6 +15,7 @@ class BaseCard extends StatelessWidget {
   final VoidCallback? onSecondaryAction;
   final String primaryActionText;
   final String secondaryActionText;
+  final Widget? additionalInfo;
 
   const BaseCard({
     super.key,
@@ -30,6 +31,7 @@ class BaseCard extends StatelessWidget {
     this.onSecondaryAction,
     this.primaryActionText = '',
     this.secondaryActionText = '',
+    this.additionalInfo,
   });
 
   String _formatDate(String dateTime) {
@@ -106,11 +108,16 @@ class BaseCard extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 16),
+              if (additionalInfo != null)
+                Center(
+                  child: additionalInfo!,
+                ),
+              const SizedBox(height: 12),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    'Date: ${_formatDate(date)}',
+                    'Fecha: ${_formatDate(date)}',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
@@ -118,7 +125,7 @@ class BaseCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Time: ${_formatTime(date)}',
+                    'Hora: ${_formatTime(date)}',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
@@ -131,7 +138,7 @@ class BaseCard extends StatelessWidget {
               if (status != null)
                 Center(
                   child: Text(
-                    'Status: $status',
+                    'Estado: $status',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
@@ -139,7 +146,7 @@ class BaseCard extends StatelessWidget {
                     ),
                   ),
                 ),
-              if (status == 'PENDING' &&
+              if (status == 'Pendiente' &&
                   onPrimaryAction != null &&
                   onSecondaryAction != null) ...[
                 const SizedBox(height: 12),
@@ -191,7 +198,7 @@ class BaseCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Description',
+                'Descripción',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -207,7 +214,7 @@ class BaseCard extends StatelessWidget {
               const SizedBox(height: 16),
               Center(
                 child: CustomButton(
-                  text: 'Close',
+                  text: 'Cerrar',
                   backgroundColor: const Color(0xFF324A5F),
                   onPressed: () => Navigator.pop(context),
                 ),

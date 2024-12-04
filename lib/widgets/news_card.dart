@@ -21,7 +21,7 @@ class NewsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseCard(
       title: title,
-      subtitle: 'Locality: $locality',
+      subtitle: 'Localidad: $locality',
       description: description,
       date: date,
       image: image,

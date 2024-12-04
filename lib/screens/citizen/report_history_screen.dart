@@ -62,6 +62,8 @@ class ReportHistoryScreenState extends State<ReportHistoryScreen> {
                     description: report.description,
                     date: report.createdAt,
                     status: report.status,
+                    locality: report.locality,
+                    street: report.street,
                     image: Image.asset(
                       'assets/img/img_report_image.png',
                       fit: BoxFit.cover,

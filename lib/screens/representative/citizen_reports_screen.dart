@@ -90,6 +90,8 @@ class CitizenReportsScreenState extends State<CitizenReportsScreen> {
                     description: report.description,
                     date: report.createdAt,
                     status: report.status,
+                    locality: report.locality,
+                    street: report.street,
                     image: Image.asset(
                       'assets/img/img_cases.png',
                       fit: BoxFit.cover,

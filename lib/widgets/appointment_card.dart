@@ -44,21 +44,34 @@ class AppointmentCard extends StatelessWidget {
     }
   }
 
+  String _translateStatus(String status) {
+    switch (status) {
+      case 'ACCEPTED':
+        return 'Aceptado';
+      case 'REJECTED':
+        return 'Rechazado';
+      case 'PENDING':
+        return 'Pendiente';
+      default:
+        return status;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseCard(
       title: title,
-      subtitle: 'Citizen: $userName',
+      subtitle: 'Ciudadano: $userName',
       description: description,
       date: dateTime,
       image: image,
-      status: status,
+      status: _translateStatus(status),
       backgroundColor: _getBackgroundColor(),
       textColor: _getTextColor(),
       onPrimaryAction: status == 'PENDING' ? onAccepted : null,
       onSecondaryAction: status == 'PENDING' ? onRejected : null,
-      primaryActionText: 'Accept',
-      secondaryActionText: 'Reject',
+      primaryActionText: 'Aceptar',
+      secondaryActionText: 'Rechazar',
     );
   }
 }
