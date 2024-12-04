@@ -60,7 +60,7 @@ class CitizenReportsScreenState extends State<CitizenReportsScreen> {
   @override
   Widget build(BuildContext context) {
     return ViewTemplate(
-      title: 'Citizen Reports',
+      title: 'Reportes de Ciudadanos',
       scaffoldType: ScaffoldType.representative,
       content: FutureBuilder<List<ReportResponse>>(
         future: _reportsFuture,
@@ -71,13 +71,13 @@ class CitizenReportsScreenState extends State<CitizenReportsScreen> {
             final errorMessage = snapshot.error.toString();
             if (errorMessage.contains('No reports found for locality')) {
               return const Center(
-                child: Text('No reports found for your locality.'),
+                child: Text('No se encontraron reportes para su localidad.'),
               );
             } else {
               return Center(child: Text('Error: $errorMessage'));
             }
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No reports found.'));
+            return const Center(child: Text('No se encontraron reportes.'));
           } else {
             final reports = snapshot.data!;
             return Column(

@@ -15,18 +15,16 @@ class VerifyAccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VerifyCodeTemplate(
-      title: 'Verify Your Account',
-      message: 'A 5-digit code has been sent to your WhatsApp number.',
+      title: 'Verifique su Cuenta',
+      message: 'Se ha enviado un código de 5 dígitos a su número de WhatsApp.',
       onConfirmCode: (code) async {
         await verifyService.validateToken(token, code);
-        // Handle successful verification
         if (context.mounted) {
           Navigator.pushNamed(context, '/');
         }
       },
       onResendCode: () async {
         await verifyService.resendNotification(token);
-        // Handle successful resend
       },
     );
   }

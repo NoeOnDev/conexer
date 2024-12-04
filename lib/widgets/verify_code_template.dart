@@ -134,7 +134,7 @@ class VerifyCodeTemplateState extends State<VerifyCodeTemplate> {
                       ),
                       const SizedBox(height: 16),
                       const Text(
-                        'Enter the 5-digit code:',
+                        'Ingrese el código de 5 dígitos:',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
@@ -153,7 +153,7 @@ class VerifyCodeTemplateState extends State<VerifyCodeTemplate> {
                               maxLength: 1,
                               onChanged: (value) => _onChanged(value, index),
                               validator: (value) =>
-                                  Validators.validateRequired(value, 'Code'),
+                                  Validators.validateRequired(value, 'Código'),
                               decoration: InputDecoration(
                                 counterText: '',
                                 filled: true,
@@ -174,14 +174,14 @@ class VerifyCodeTemplateState extends State<VerifyCodeTemplate> {
                       ),
                       const SizedBox(height: 20),
                       CustomButton(
-                        text: 'Resend Code',
+                        text: 'Reenviar Código',
                         backgroundColor: const Color(0xFF6A6A6A),
                         onPressed: _resendCode,
                         enabled: !isLoading,
                       ),
                       const SizedBox(height: 10),
                       CustomButton(
-                        text: 'Confirm Code',
+                        text: 'Confirmar Código',
                         backgroundColor: const Color(0xFF324A5F),
                         onPressed: _confirmCode,
                         enabled: !isLoading,

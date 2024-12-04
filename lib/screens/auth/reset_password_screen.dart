@@ -36,7 +36,7 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
       if (newPasswordController.text != confirmPasswordController.text) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Passwords do not match.'),
+            content: Text('Las contraseñas no coinciden.'),
             backgroundColor: Colors.red,
           ),
         );
@@ -93,10 +93,12 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     children: [
                       const Center(
                         child: Text(
-                          'Reset Password',
+                          'Restablecer Contraseña',
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
+
                           ),
                         ),
                       ),
@@ -110,13 +112,13 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       ),
                       const SizedBox(height: 16),
                       const Text(
-                        'Please enter your new password and confirm it below. Make sure your password is strong and secure.',
+                        'Por favor ingrese su nueva contraseña y confírmela a continuación. Asegúrese de que su contraseña sea fuerte y segura.',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 16),
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
-                        label: 'New Password:',
+                        label: 'Nueva Contraseña:',
                         keyboardType: TextInputType.visiblePassword,
                         controller: newPasswordController,
                         obscureText: true,
@@ -124,23 +126,23 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
-                        label: 'Confirm Password:',
+                        label: 'Confirmar Contraseña:',
                         keyboardType: TextInputType.visiblePassword,
                         controller: confirmPasswordController,
                         obscureText: true,
                         validator: (value) => Validators.validateRequired(
-                            value, 'Confirm Password'),
+                            value, 'Confirmar Contraseña'),
                       ),
                       const SizedBox(height: 20),
                       CustomButton(
-                        text: 'Reset Password',
+                        text: 'Restablecer Contraseña',
                         backgroundColor: const Color(0xFF324A5F),
                         onPressed: _resetPassword,
                         enabled: !isLoading,
                       ),
                       const SizedBox(height: 10),
                       CustomButton(
-                        text: 'Cancel',
+                        text: 'Cancelar',
                         backgroundColor: const Color(0xFFC1121F),
                         onPressed: _cancelResetPassword,
                         enabled: !isLoading,

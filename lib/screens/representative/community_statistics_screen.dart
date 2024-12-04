@@ -7,11 +7,11 @@ class CommunityStatisticsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const ViewTemplate(
-      title: 'Community Statistics',
+      title: 'Estadísticas de la Comunidad',
       scaffoldType: ScaffoldType.representative,
       content: Center(
         child: Text(
-          'Content for Community Statistics',
+          'Contenido para Estadísticas de la Comunidad',
           style: TextStyle(color: Colors.black, fontSize: 18),
         ),
       ),

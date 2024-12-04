@@ -71,21 +71,21 @@ class LocationInputState extends State<LocationInput> {
     return Column(
       children: [
         CustomButton(
-          text: 'Get Location',
+          text: 'Obtener Ubicación',
           backgroundColor: Colors.grey.shade300,
           textColor: Colors.black,
           onPressed: _checkLocationService,
         ),
         const SizedBox(height: 16),
         LabeledTextField(
-          label: 'Locality:',
+          label: 'Localidad:',
           controller: widget.localityController,
           labelColor: widget.labelColor,
           enabled: false,
         ),
         const SizedBox(height: 16),
         LabeledTextField(
-          label: 'Street:',
+          label: 'Calle:',
           controller: widget.streetController,
           labelColor: widget.labelColor,
           enabled: false,

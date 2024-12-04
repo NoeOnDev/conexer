@@ -59,7 +59,7 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Please select a date first.'),
+          content: Text('Por favor seleccione una fecha primero.'),
           backgroundColor: Colors.red,
         ),
       );
@@ -91,7 +91,8 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
           if (!mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Please select a time at least 2 hours from now.'),
+              content: Text(
+                  'Por favor seleccione una hora al menos 2 horas a partir de ahora.'),
               backgroundColor: Colors.red,
             ),
           );
@@ -124,7 +125,7 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text(
-                'Please select a date and time at least 2 hours from now.'),
+                'Por favor seleccione una fecha y hora al menos 2 horas a partir de ahora.'),
             backgroundColor: Colors.red,
           ),
         );
@@ -169,37 +170,37 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
   @override
   Widget build(BuildContext context) {
     return FormTemplate(
-      title: 'Schedule Appointment',
+      title: 'Agendar Cita',
       scaffoldType: ScaffoldType.citizen,
       formKey: formKey,
       fields: [
         LabeledTextField(
-          label: 'Title:',
+          label: 'Título:',
           controller: titleController,
           labelColor: Colors.white,
           validator: (value) =>
-              Validators.validateTextWithAccents(value, 'Title', 5, 40),
+              Validators.validateTextWithAccents(value, 'Título', 5, 40),
         ),
         const SizedBox(height: 16),
         LabeledTextField(
-          label: 'Description:',
+          label: 'Descripción:',
           controller: descriptionController,
           maxLines: 8,
           labelColor: Colors.white,
           validator: (value) =>
-              Validators.validateTextWithAccents(value, 'Description', 10, 300),
+              Validators.validateDescription(value, 'Descripción', 10, 300),
         ),
         const SizedBox(height: 16),
         GestureDetector(
           onTap: () => _selectDate(context),
           child: AbsorbPointer(
             child: LabeledTextField(
-              label: 'Date:',
+              label: 'Fecha:',
               controller: dateController,
               labelColor: Colors.white,
               keyboardType: TextInputType.datetime,
               prefixIcon: const Icon(Icons.calendar_today),
-              validator: (value) => Validators.validateRequired(value, 'Date'),
+              validator: (value) => Validators.validateRequired(value, 'Fecha'),
             ),
           ),
         ),
@@ -208,26 +209,26 @@ class ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
           onTap: () => _selectTime(context),
           child: AbsorbPointer(
             child: LabeledTextField(
-              label: 'Time:',
+              label: 'Hora:',
               controller: timeController,
               labelColor: Colors.white,
               keyboardType: TextInputType.datetime,
               prefixIcon: const Icon(Icons.access_time),
-              validator: (value) => Validators.validateRequired(value, 'Time'),
+              validator: (value) => Validators.validateRequired(value, 'Hora'),
             ),
           ),
         ),
       ],
       buttons: [
         CustomButton(
-          text: 'Schedule Appointment',
+          text: 'Agendar Cita',
           backgroundColor: const Color(0x8077A1DD),
           onPressed: _scheduleAppointment,
           enabled: !isLoading,
         ),
         const SizedBox(height: 10),
         CustomButton(
-          text: 'Cancel',
+          text: 'Cancelar',
           backgroundColor: const Color(0xFFC1121F),
           onPressed: _cancel,
           enabled: !isLoading,

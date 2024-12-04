@@ -35,8 +35,8 @@ class LoginScreenState extends State<LoginScreen> {
 
       try {
         final token = await widget.userService.login(
-          usernameOrEmailController.text,
-          passwordController.text,
+          usernameOrEmailController.text.trim(),
+          passwordController.text.trim(),
         );
         // Handle successful login
         if (!mounted) return;
@@ -87,7 +87,7 @@ class LoginScreenState extends State<LoginScreen> {
                     children: [
                       const Center(
                         child: Text(
-                          'Login',
+                          'Iniciar Sesión',
                           style: TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
@@ -104,35 +104,35 @@ class LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
-                        label: 'Username or Email:',
+                        label: 'Usuario o Correo Electrónico:',
                         controller: usernameOrEmailController,
                         validator: (value) => Validators.validateRequired(
-                            value, 'Username or Email'),
+                            value?.trim(), 'Usuario o Correo Electrónico'),
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
-                        label: 'Password:',
+                        label: 'Contraseña:',
                         keyboardType: TextInputType.visiblePassword,
                         controller: passwordController,
                         obscureText: true,
-                        validator: (value) =>
-                            Validators.validateRequired(value, 'Password'),
+                        validator: (value) => Validators.validateRequired(
+                            value?.trim(), 'Contraseña'),
                       ),
                       const SizedBox(height: 8),
                       LinkText(
-                        text: 'Forgot your password?',
+                        text: '¿Olvidó su contraseña?',
                         onTap: _navigateToForgotPassword,
                       ),
                       const SizedBox(height: 28),
                       CustomButton(
-                        text: 'Login',
+                        text: 'Iniciar Sesión',
                         backgroundColor: const Color(0xFF324A5F),
                         onPressed: _login,
                         enabled: !isLoading,
                       ),
                       const SizedBox(height: 10),
                       CustomButton(
-                        text: 'Register',
+                        text: 'Registrarse',
                         backgroundColor: const Color(0xFF6A6A6A),
                         onPressed: _navigateToRegister,
                         enabled: !isLoading,

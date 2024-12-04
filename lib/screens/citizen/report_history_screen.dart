@@ -34,7 +34,7 @@ class ReportHistoryScreenState extends State<ReportHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return ViewTemplate(
-      title: 'Report History',
+      title: 'Historial de Reportes',
       scaffoldType: ScaffoldType.citizen,
       content: FutureBuilder<List<ReportResponse>>(
         future: _reportsFuture,
@@ -44,12 +44,12 @@ class ReportHistoryScreenState extends State<ReportHistoryScreen> {
           } else if (snapshot.hasError) {
             if (snapshot.error.toString().contains('No reports found')) {
               return const Center(
-                  child: Text('You have not created any reports yet.'));
+                  child: Text('Aún no ha creado ningún reporte.'));
             } else {
               return Center(child: Text('Error: ${snapshot.error}'));
             }
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No reports found.'));
+            return const Center(child: Text('No se encontraron reportes.'));
           } else {
             final reports = snapshot.data!;
             return Column(

@@ -69,37 +69,37 @@ class CreateNewsScreenState extends State<CreateNewsScreen> {
   @override
   Widget build(BuildContext context) {
     return FormTemplate(
-      title: 'Create News',
+      title: 'Crear Noticias',
       scaffoldType: ScaffoldType.representative,
       formKey: formKey,
       fields: [
         LabeledTextField(
-          label: 'Title:',
+          label: 'Título:',
           controller: titleController,
           labelColor: Colors.white,
           validator: (value) =>
-              Validators.validateTextWithAccents(value, 'Title', 5, 40),
+              Validators.validateTextWithAccents(value, 'Título', 5, 40),
         ),
         const SizedBox(height: 16),
         LabeledTextField(
-          label: 'Description:',
+          label: 'Descripción:',
           controller: descriptionController,
           maxLines: 8,
           labelColor: Colors.white,
           validator: (value) =>
-              Validators.validateTextWithAccents(value, 'Description', 10, 300),
+              Validators.validateDescription(value, 'Descripción', 10, 300),
         ),
       ],
       buttons: [
         CustomButton(
-          text: 'Create News',
+          text: 'Crear Noticias',
           backgroundColor: const Color(0x8077A1DD),
           onPressed: _createNews,
           enabled: !isLoading,
         ),
         const SizedBox(height: 10),
         CustomButton(
-          text: 'Cancel',
+          text: 'Cancelar',
           backgroundColor: const Color(0xFFC1121F),
           onPressed: _cancel,
           enabled: !isLoading,

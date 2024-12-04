@@ -70,8 +70,8 @@ class CitizenAppointmentsScreenState extends State<CitizenAppointmentsScreen> {
   Widget build(BuildContext context) {
     return ViewTemplate(
       title: widget.isLocalityAppointments
-          ? 'Locality Appointments'
-          : 'Citizen Appointments',
+          ? 'Citas de la Localidad'
+          : 'Citas de Ciudadanos',
       scaffoldType: widget.isLocalityAppointments
           ? ScaffoldType.representative
           : ScaffoldType.citizen,
@@ -84,13 +84,13 @@ class CitizenAppointmentsScreenState extends State<CitizenAppointmentsScreen> {
             final errorMessage = snapshot.error.toString();
             if (errorMessage.contains('No appointments found')) {
               return const Center(
-                child: Text('No appointments found.'),
+                child: Text('No se encontraron citas.'),
               );
             } else {
               return Center(child: Text('Error: $errorMessage'));
             }
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No appointments found.'));
+            return const Center(child: Text('No se encontraron citas.'));
           } else {
             final appointments = snapshot.data!;
             return Column(

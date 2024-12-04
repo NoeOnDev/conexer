@@ -20,28 +20,28 @@ class HomeCitizenScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HomeTemplate(
-      title: 'Welcome',
+      title: 'Bienvenido',
       imagePath: 'assets/img/img_home.png',
       texts: const [
-        'Any issues in your community? Want to report them?',
-        'Would you like to schedule an appointment?',
-        'Want to see community news?',
+        '¿Algún problema en su comunidad? ¿Quiere reportarlo?',
+        '¿Le gustaría agendar una cita?',
+        '¿Quiere ver noticias de la comunidad?',
       ],
       buttons: [
         CustomButton(
-          text: 'Report an Issue',
+          text: 'Reportar un Problema',
           backgroundColor: const Color(0xFF324A5F),
           onPressed: () => _reportIssue(context),
           textSize: 16.0,
         ),
         CustomButton(
-          text: 'Schedule Appointment',
+          text: 'Agendar Cita',
           backgroundColor: const Color(0xFF324A5F),
           onPressed: () => _scheduleAppointment(context),
           textSize: 16.0,
         ),
         CustomButton(
-          text: 'View News',
+          text: 'Ver Noticias',
           backgroundColor: const Color(0xFF324A5F),
           onPressed: () => _viewNews(context),
           textSize: 16.0,

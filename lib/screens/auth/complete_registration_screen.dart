@@ -47,7 +47,7 @@ class CompleteRegistrationScreenState
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text(
-                'Locality and Street are required. Please use the "Get Location" button to fill them.'),
+                'Localidad y Calle son requeridas. Por favor use el botón "Obtener Ubicación" para llenarlos.'),
             backgroundColor: Colors.red,
           ),
         );
@@ -60,11 +60,11 @@ class CompleteRegistrationScreenState
 
       final user = User(
         contactId: widget.contactId,
-        username: usernameController.text,
-        password: passwordController.text,
+        username: usernameController.text.trim(),
+        password: passwordController.text.trim(),
         role: widget.role,
-        locality: localityController.text,
-        street: streetController.text,
+        locality: localityController.text.trim(),
+        street: streetController.text.trim(),
       );
 
       try {
@@ -109,7 +109,7 @@ class CompleteRegistrationScreenState
                     children: [
                       const Center(
                         child: Text(
-                          'Complete Registration',
+                          'Completar Registro',
                           style: TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
@@ -126,15 +126,13 @@ class CompleteRegistrationScreenState
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
-                        label: 'Username:',
+                        label: 'Nombre de Usuario:',
                         controller: usernameController,
-                        validator: (value) =>
-                            Validators.validateTextWithAccents(
-                                value, 'Username', 3, 30),
+                        validator: Validators.validateUsername,
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
-                        label: 'Password:',
+                        label: 'Contraseña:',
                         keyboardType: TextInputType.visiblePassword,
                         controller: passwordController,
                         obscureText: true,
@@ -148,14 +146,14 @@ class CompleteRegistrationScreenState
                       ),
                       const SizedBox(height: 20),
                       CustomButton(
-                        text: 'Complete Registration',
+                        text: 'Completar Registro',
                         backgroundColor: const Color(0xFF324A5F),
                         onPressed: _completeRegistration,
                         enabled: !isLoading,
                       ),
                       const SizedBox(height: 10),
                       CustomButton(
-                        text: 'Cancel',
+                        text: 'Cancelar',
                         backgroundColor: const Color(0xFFC1121F),
                         onPressed: () {
                           Navigator.pop(context);

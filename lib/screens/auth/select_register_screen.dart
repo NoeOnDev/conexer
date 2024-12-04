@@ -35,7 +35,7 @@ class SelectRegisterScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Text(
-                    'Select Registration Type',
+                    'Seleccione el Tipo de Registro',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 26,
@@ -75,7 +75,7 @@ class SelectRegisterScreen extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 8),
                                   const Text(
-                                    'Citizen',
+                                    'Ciudadano',
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
@@ -126,7 +126,7 @@ class SelectRegisterScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 28),
                   LinkText(
-                    text: 'Already have an account?',
+                    text: '¿Ya tiene una cuenta?',
                     onTap: () => _navigateToLogin(context),
                   ),
                 ],

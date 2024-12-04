@@ -15,12 +15,11 @@ class VerifyPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VerifyCodeTemplate(
-      title: 'Verify Password Change',
-      message: 'A 5-digit code has been sent to your WhatsApp number.',
+      title: 'Verifique el Cambio de Contraseña',
+      message: 'Se ha enviado un código de 5 dígitos a su número de WhatsApp.',
       onConfirmCode: (code) async {
         final response = await verifyService.validateToken(token, code);
         final jwtToken = response['jwtToken'];
-        // Handle successful verification
         if (context.mounted) {
           Navigator.pushNamed(
             context,
@@ -31,7 +30,6 @@ class VerifyPasswordScreen extends StatelessWidget {
       },
       onResendCode: () async {
         await verifyService.resendNotification(token);
-        // Handle successful resend
       },
     );
   }

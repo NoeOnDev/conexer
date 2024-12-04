@@ -32,6 +32,17 @@ class RegisterScreenState extends State<RegisterScreen> {
   String countryCode = '+52';
   bool isLoading = false;
 
+  final Map<String, String> hobbyTranslations = {
+    'Chef': 'Chef',
+    'Comercio de Mercancías': 'Merchandise Trade',
+    'Artesano': 'Craftsman',
+    'Voluntariado Comunitario': 'Community Volunteering',
+    'Promoción de Arte y Cultura': 'Arts and Culture Promotion',
+    'Educador Comunitario': 'Community Educator',
+    'Salud y Bienestar': 'Health and Wellness',
+    'Ninguno': 'None',
+  };
+
   @override
   void dispose() {
     firstNameController.dispose();
@@ -48,11 +59,11 @@ class RegisterScreenState extends State<RegisterScreen> {
       });
 
       final contact = Contact(
-        firstName: firstNameController.text,
-        lastName: lastNameController.text,
-        email: emailController.text,
-        phone: '$countryCode${phoneController.text}',
-        hobby: selectedHobby ?? 'None',
+        firstName: firstNameController.text.trim(),
+        lastName: lastNameController.text.trim(),
+        email: emailController.text.trim(),
+        phone: '$countryCode${phoneController.text.trim()}',
+        hobby: hobbyTranslations[selectedHobby] ?? 'None',
       );
 
       try {
@@ -100,7 +111,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       const Center(
                         child: Text(
-                          'Register',
+                          'Registrarse',
                           style: TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
@@ -117,68 +128,59 @@ class RegisterScreenState extends State<RegisterScreen> {
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
-                        label: 'First Name:',
+                        label: 'Nombre:',
                         controller: firstNameController,
                         validator: (value) =>
                             Validators.validateTextWithAccents(
-                                value, 'First Name', 3, 30),
+                                value, 'Nombre', 3, 30),
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
-                        label: 'Last Name:',
+                        label: 'Apellido:',
                         controller: lastNameController,
                         validator: (value) =>
                             Validators.validateTextWithAccents(
-                                value, 'Last Name', 3, 30),
+                                value, 'Apellido', 3, 30),
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
-                        label: 'Email:',
+                        label: 'Correo Electrónico:',
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         validator: Validators.validateEmail,
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
-                        label: 'Phone:',
+                        label: 'Teléfono:',
                         controller: phoneController,
                         keyboardType: TextInputType.phone,
                         prefixText: '$countryCode ',
-                        validator: (value) => Validators.validatePhoneNumber(
-                            value, 'Phone Number'),
+                        validator: (value) =>
+                            Validators.validatePhoneNumber(value, 'Teléfono'),
                       ),
                       const SizedBox(height: 16),
                       LabeledDropdown(
-                        label: 'Hobby:',
+                        label: 'Pasatiempo:',
                         value: selectedHobby,
-                        items: const [
-                          'Chef',
-                          'Merchandise Trade',
-                          'Craftsman',
-                          'Community Volunteering',
-                          'Arts and Culture Promotion',
-                          'Community Educator',
-                          'Health and Wellness',
-                          'None',
-                        ],
+                        items: hobbyTranslations.keys.toList(),
                         onChanged: (value) {
                           setState(() {
                             selectedHobby = value;
                           });
                         },
                         validator: (value) =>
-                            Validators.validateRequired(value, 'Hobby'),
+                            Validators.validateRequired(value, 'Pasatiempo'),
                       ),
                       const SizedBox(height: 20),
                       CustomButton(
-                        text: 'Register',
+                        text: 'Registrarse',
                         backgroundColor: const Color(0xFF324A5F),
                         onPressed: _register,
                         enabled: !isLoading,
                       ),
                       const SizedBox(height: 10),
                       CustomButton(
-                        text: 'Cancel',
+                        text: 'Cancelar',
                         backgroundColor: const Color(0xFFC1121F),
                         onPressed: () {
                           Navigator.pop(context);

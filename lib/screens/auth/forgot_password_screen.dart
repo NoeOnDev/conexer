@@ -78,7 +78,7 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     children: [
                       const Center(
                         child: Text(
-                          'Forgot Password',
+                          'Olvidó su Contraseña',
                           style: TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
@@ -95,27 +95,27 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       ),
                       const SizedBox(height: 16),
                       const Text(
-                        'Please enter your email address to request a password reset.',
+                        'Por favor ingrese su dirección de correo electrónico para solicitar un restablecimiento de contraseña.',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 16),
                       ),
                       const SizedBox(height: 16),
                       LabeledTextField(
-                        label: 'Email:',
+                        label: 'Correo Electrónico:',
                         keyboardType: TextInputType.emailAddress,
                         controller: emailController,
                         validator: Validators.validateEmail,
                       ),
                       const SizedBox(height: 20),
                       CustomButton(
-                        text: 'Request Password Reset',
+                        text: 'Solicitar',
                         backgroundColor: const Color(0xFF324A5F),
                         onPressed: _requestPasswordReset,
                         enabled: !isLoading,
                       ),
                       const SizedBox(height: 10),
                       CustomButton(
-                        text: 'Cancel',
+                        text: 'Cancelar',
                         backgroundColor: const Color(0xFFC1121F),
                         onPressed: _cancel,
                         enabled: !isLoading,

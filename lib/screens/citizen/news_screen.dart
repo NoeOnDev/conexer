@@ -30,7 +30,7 @@ class NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return ViewTemplate(
-      title: 'Community News',
+      title: 'Noticias',
       scaffoldType: ScaffoldType.citizen,
       content: FutureBuilder<List<NewsResponse>>(
         future: _newsFuture,
@@ -41,13 +41,13 @@ class NewsScreenState extends State<NewsScreen> {
             final errorMessage = snapshot.error.toString();
             if (errorMessage.contains('No news found')) {
               return const Center(
-                child: Text('No news found for your locality.'),
+                child: Text('No se encontraron noticias para su localidad.'),
               );
             } else {
               return Center(child: Text('Error: $errorMessage'));
             }
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No news found.'));
+            return const Center(child: Text('No se encontraron noticias.'));
           } else {
             final newsList = snapshot.data!;
             return Column(

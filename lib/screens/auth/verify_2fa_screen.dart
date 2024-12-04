@@ -16,13 +16,12 @@ class Verify2FAScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VerifyCodeTemplate(
-      title: 'Verify Your Login',
-      message: 'A 5-digit code has been sent to your WhatsApp number.',
+      title: 'Verifique su Inicio de Sesión',
+      message: 'Se ha enviado un código de 5 dígitos a su número de WhatsApp.',
       onConfirmCode: (code) async {
         final response = await verifyService.validateToken(token, code);
         final jwtToken = response['jwtToken'];
         final role = response['role'];
-        // Handle successful verification
         if (context.mounted) {
           final prefs = await SharedPreferences.getInstance();
           await prefs.setString('token_user_verification', jwtToken);
@@ -46,7 +45,6 @@ class Verify2FAScreen extends StatelessWidget {
       },
       onResendCode: () async {
         await verifyService.resendNotification(token);
-        // Handle successful resend
       },
     );
   }

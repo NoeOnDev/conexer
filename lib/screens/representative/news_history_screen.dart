@@ -34,7 +34,7 @@ class NewsHistoryScreenState extends State<NewsHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return ViewTemplate(
-      title: 'News History',
+      title: 'Historial de Noticias',
       scaffoldType: ScaffoldType.representative,
       content: FutureBuilder<List<NewsResponse>>(
         future: _newsFuture,
@@ -45,13 +45,13 @@ class NewsHistoryScreenState extends State<NewsHistoryScreen> {
             final errorMessage = snapshot.error.toString();
             if (errorMessage.contains('No news found')) {
               return const Center(
-                child: Text('You have not created any news yet.'),
+                child: Text('Aún no ha creado ninguna noticia.'),
               );
             } else {
               return Center(child: Text('Error: $errorMessage'));
             }
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No news found.'));
+            return const Center(child: Text('No se encontraron noticias.'));
           } else {
             final newsList = snapshot.data!;
             return Column(

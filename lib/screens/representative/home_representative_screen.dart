@@ -20,28 +20,28 @@ class HomeRepresentativeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HomeTemplate(
-      title: 'Welcome',
+      title: 'Bienvenido',
       imagePath: 'assets/img/img_home.png',
       texts: const [
-        'Interested in the statistics of your community? Want to see the community statistics?',
-        'Would you like to create a news update for your community?',
-        'Want to see all the reports submitted by the citizens of your community?',
+        '¿Interesado en las estadísticas de su comunidad? ¿Quiere ver las estadísticas de la comunidad?',
+        '¿Le gustaría crear una actualización de noticias para su comunidad?',
+        '¿Quiere ver todos los reportes enviados por los ciudadanos de su comunidad?',
       ],
       buttons: [
         CustomButton(
-          text: 'View Community Statistics',
+          text: 'Ver Estadísticas de la Comunidad',
           backgroundColor: const Color(0xFF324A5F),
           onPressed: () => _viewStatistics(context),
           textSize: 16.0,
         ),
         CustomButton(
-          text: 'Create News',
+          text: 'Crear Noticias',
           backgroundColor: const Color(0xFF324A5F),
           onPressed: () => _createNews(context),
           textSize: 16.0,
         ),
         CustomButton(
-          text: 'View Citizen Reports',
+          text: 'Ver Reportes de Ciudadanos',
           backgroundColor: const Color(0xFF324A5F),
           onPressed: () => _viewReports(context),
           textSize: 16.0,

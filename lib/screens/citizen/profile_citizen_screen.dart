@@ -30,11 +30,20 @@ class ProfileCitizenScreenState extends State<ProfileCitizenScreen> {
   final phoneController = TextEditingController();
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
-  final roleController = TextEditingController();
   final localityController = TextEditingController();
   final streetController = TextEditingController();
-  final verifiedController = TextEditingController();
   String? selectedHobby;
+
+  final Map<String, String> hobbyTranslations = {
+    'Chef': 'Chef',
+    'Merchandise Trade': 'Comercio de Mercancías',
+    'Craftsman': 'Artesano',
+    'Community Volunteering': 'Voluntariado Comunitario',
+    'Arts and Culture Promotion': 'Promoción de Arte y Cultura',
+    'Community Educator': 'Educador Comunitario',
+    'Health and Wellness': 'Salud y Bienestar',
+    'None': 'Ninguno',
+  };
 
   @override
   void initState() {
@@ -51,10 +60,8 @@ class ProfileCitizenScreenState extends State<ProfileCitizenScreen> {
         phoneController.text = userInfo['contact']['phone'];
         usernameController.text = userInfo['username'];
         emailController.text = userInfo['contact']['email'];
-        roleController.text = userInfo['role']['value'];
         localityController.text = userInfo['address']['locality'];
         streetController.text = userInfo['address']['street'];
-        verifiedController.text = userInfo['verified'];
         selectedHobby = userInfo['contact']['hobby']['value'];
       });
     } catch (e) {
@@ -69,10 +76,8 @@ class ProfileCitizenScreenState extends State<ProfileCitizenScreen> {
     phoneController.dispose();
     usernameController.dispose();
     emailController.dispose();
-    roleController.dispose();
     localityController.dispose();
     streetController.dispose();
-    verifiedController.dispose();
     super.dispose();
   }
 
@@ -100,24 +105,24 @@ class ProfileCitizenScreenState extends State<ProfileCitizenScreen> {
   @override
   Widget build(BuildContext context) {
     return FormTemplate(
-      title: 'Profile',
+      title: 'Perfil',
       scaffoldType: ScaffoldType.citizen,
       formKey: formKey,
       fields: [
         LabeledTextField(
-          label: 'First Name:',
+          label: 'Nombre:',
           controller: firstNameController,
           labelColor: Colors.white,
         ),
         const SizedBox(height: 16),
         LabeledTextField(
-          label: 'Last Name:',
+          label: 'Apellido:',
           controller: lastNameController,
           labelColor: Colors.white,
         ),
         const SizedBox(height: 16),
         LabeledTextField(
-          label: 'Phone:',
+          label: 'Teléfono:',
           keyboardType: TextInputType.phone,
           controller: phoneController,
           labelColor: Colors.white,
@@ -125,35 +130,29 @@ class ProfileCitizenScreenState extends State<ProfileCitizenScreen> {
         ),
         const SizedBox(height: 16),
         LabeledDropdown(
-          label: 'Hobby:',
-          value: selectedHobby,
-          items: const [
-            'Chef',
-            'Merchandise Trade',
-            'Craftsman',
-            'Community Volunteering',
-            'Arts and Culture Promotion',
-            'Community Educator',
-            'Health and Wellness',
-            'None',
-          ],
+          label: 'Pasatiempo:',
+          value: hobbyTranslations[selectedHobby],
+          items: hobbyTranslations.values.toList(),
           onChanged: (value) {
             setState(() {
-              selectedHobby = value;
+              selectedHobby = hobbyTranslations.keys.firstWhere(
+                (key) => hobbyTranslations[key] == value,
+                orElse: () => 'None',
+              );
             });
           },
           labelColor: Colors.white,
         ),
         const SizedBox(height: 16),
         LabeledTextField(
-          label: 'Username:',
+          label: 'Nombre de Usuario:',
           controller: usernameController,
           labelColor: Colors.white,
           enabled: false,
         ),
         const SizedBox(height: 16),
         LabeledTextField(
-          label: 'Email:',
+          label: 'Correo Electrónico:',
           keyboardType: TextInputType.emailAddress,
           controller: emailController,
           labelColor: Colors.white,
@@ -161,42 +160,28 @@ class ProfileCitizenScreenState extends State<ProfileCitizenScreen> {
         ),
         const SizedBox(height: 16),
         LabeledTextField(
-          label: 'Role:',
-          controller: roleController,
-          labelColor: Colors.white,
-          enabled: false,
-        ),
-        const SizedBox(height: 16),
-        LabeledTextField(
-          label: 'Locality:',
+          label: 'Localidad:',
           controller: localityController,
           labelColor: Colors.white,
           enabled: false,
         ),
         const SizedBox(height: 16),
         LabeledTextField(
-          label: 'Street:',
+          label: 'Calle:',
           controller: streetController,
           labelColor: Colors.white,
           enabled: false,
-        ),
-        const SizedBox(height: 16),
-        LabeledTextField(
-          label: 'Verified:',
-          controller: verifiedController,
-          labelColor: Colors.white,
-          enabled: false,
-        ),
+        )
       ],
       buttons: [
         CustomButton(
-          text: 'Save Changes',
+          text: 'Guardar Cambios',
           backgroundColor: const Color(0x8077A1DD),
           onPressed: _saveChanges,
         ),
         const SizedBox(height: 10),
         CustomButton(
-          text: 'Cancel',
+          text: 'Cancelar',
           backgroundColor: const Color(0xFFC1121F),
           onPressed: _cancel,
         ),

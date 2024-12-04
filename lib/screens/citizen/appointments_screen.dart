@@ -35,7 +35,7 @@ class AppointmentsScreenState extends State<AppointmentsScreen> {
   @override
   Widget build(BuildContext context) {
     return ViewTemplate(
-      title: 'Appointments',
+      title: 'Historial de Citas',
       scaffoldType: ScaffoldType.citizen,
       content: FutureBuilder<List<AppointmentResponse>>(
         future: _appointmentsFuture,
@@ -46,13 +46,13 @@ class AppointmentsScreenState extends State<AppointmentsScreen> {
             final errorMessage = snapshot.error.toString();
             if (errorMessage.contains('No appointments found for user ID')) {
               return const Center(
-                child: Text('You have not created any appointments yet.'),
+                child: Text('Aún no ha creado ninguna cita.'),
               );
             } else {
               return Center(child: Text('Error: $errorMessage'));
             }
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No appointments found.'));
+            return const Center(child: Text('No se encontraron citas.'));
           } else {
             final appointments = snapshot.data!;
             return Column(

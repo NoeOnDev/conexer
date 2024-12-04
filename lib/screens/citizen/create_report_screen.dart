@@ -31,6 +31,13 @@ class CreateReportScreenState extends State<CreateReportScreen> {
   String? selectedCategory;
   bool isLoading = false;
 
+  final Map<String, String> categoryTranslations = {
+    'Luz': 'Light',
+    'Agua': 'Water',
+    'Infraestructura': 'Infrastructure',
+    'Basura': 'Trash',
+  };
+
   @override
   void dispose() {
     titleController.dispose();
@@ -46,7 +53,7 @@ class CreateReportScreenState extends State<CreateReportScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text(
-                'Locality and Street are required. Please use the "Get Location" button to fill them.'),
+                'Localidad y Calle son requeridas. Por favor use el botón "Obtener Ubicación" para llenarlos.'),
             backgroundColor: Colors.red,
           ),
         );
@@ -60,7 +67,7 @@ class CreateReportScreenState extends State<CreateReportScreen> {
       final now = DateTime.now().toIso8601String();
       final report = Report(
         title: titleController.text,
-        category: selectedCategory!,
+        category: categoryTranslations[selectedCategory] ?? 'None',
         description: descriptionController.text,
         locality: localityController.text,
         street: streetController.text,
@@ -90,38 +97,38 @@ class CreateReportScreenState extends State<CreateReportScreen> {
   @override
   Widget build(BuildContext context) {
     return FormTemplate(
-      title: 'Create Report',
+      title: 'Crear Reporte',
       scaffoldType: ScaffoldType.citizen,
       formKey: formKey,
       fields: [
         LabeledTextField(
-          label: 'Title:',
+          label: 'Título:',
           controller: titleController,
           labelColor: Colors.white,
           validator: (value) =>
-              Validators.validateTextWithAccents(value, 'Title', 5, 40),
+              Validators.validateTextWithAccents(value, 'Título', 5, 40),
         ),
         const SizedBox(height: 16),
         LabeledDropdown(
-          label: 'Category:',
+          label: 'Categoría:',
           value: selectedCategory,
-          items: const ['Light', 'Water', 'Infrastructure', 'Trash'],
+          items: categoryTranslations.keys.toList(),
           onChanged: (value) {
             setState(() {
               selectedCategory = value;
             });
           },
           labelColor: Colors.white,
-          validator: (value) => Validators.validateRequired(value, 'Category'),
+          validator: (value) => Validators.validateRequired(value, 'Categoría'),
         ),
         const SizedBox(height: 16),
         LabeledTextField(
-          label: 'Description:',
+          label: 'Descripción:',
           controller: descriptionController,
           maxLines: 8,
           labelColor: Colors.white,
           validator: (value) =>
-              Validators.validateTextWithAccents(value, 'Description', 10, 300),
+              Validators.validateDescription(value, 'Descripción', 10, 300),
         ),
         const SizedBox(height: 20),
         LocationInput(
@@ -132,14 +139,14 @@ class CreateReportScreenState extends State<CreateReportScreen> {
       ],
       buttons: [
         CustomButton(
-          text: 'Create Report',
+          text: 'Crear Reporte',
           backgroundColor: const Color(0x8077A1DD),
           onPressed: _createReport,
           enabled: !isLoading,
         ),
         const SizedBox(height: 10),
         CustomButton(
-          text: 'Cancel',
+          text: 'Cancelar',
           backgroundColor: const Color(0xFFC1121F),
           onPressed: _cancel,
           enabled: !isLoading,

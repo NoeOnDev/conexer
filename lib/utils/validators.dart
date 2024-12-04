@@ -1,5 +1,6 @@
 class Validators {
   static String? validateRequired(String? value, String fieldName) {
+    value = value?.trim();
     if (value == null || value.isEmpty) {
       return '$fieldName is required';
     }
@@ -8,6 +9,7 @@ class Validators {
 
   static String? validateLength(
       String? value, String fieldName, int min, int max) {
+    value = value?.trim();
     if (value == null || value.isEmpty) {
       return '$fieldName is required';
     }
@@ -18,6 +20,7 @@ class Validators {
   }
 
   static String? validateEmail(String? value) {
+    value = value?.trim();
     if (value == null || value.isEmpty) {
       return 'Email is required';
     }
@@ -28,6 +31,7 @@ class Validators {
   }
 
   static String? validatePassword(String? value) {
+    value = value?.trim();
     if (value == null || value.isEmpty) {
       return 'Password is required';
     }
@@ -42,6 +46,7 @@ class Validators {
 
   static String? validateTextWithAccents(
       String? value, String fieldName, int min, int max) {
+    value = value?.trim();
     if (value == null || value.isEmpty) {
       return '$fieldName is required';
     }
@@ -55,11 +60,38 @@ class Validators {
   }
 
   static String? validatePhoneNumber(String? value, String fieldName) {
+    value = value?.trim();
     if (value == null || value.isEmpty) {
       return '$fieldName is required';
     }
     if (!RegExp(r'^\d{10}$').hasMatch(value)) {
       return 'Enter a valid 10-digit phone number';
+    }
+    return null;
+  }
+
+  static String? validateUsername(String? value) {
+    value = value?.trim();
+    if (value == null || value.isEmpty) {
+      return 'Username is required';
+    }
+    if (value.length < 3 || value.length > 30) {
+      return 'Username must be between 3 and 30 characters';
+    }
+    if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+      return 'Username can only contain letters';
+    }
+    return null;
+  }
+
+  static String? validateDescription(
+      String? value, String fieldName, int min, int max) {
+    value = value?.trim();
+    if (value == null || value.isEmpty) {
+      return '$fieldName is required';
+    }
+    if (value.length < min || value.length > max) {
+      return '$fieldName must be between $min and $max characters';
     }
     return null;
   }
