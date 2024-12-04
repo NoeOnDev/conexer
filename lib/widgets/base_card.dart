@@ -118,6 +118,7 @@ class BaseCard extends StatelessWidget {
                 children: [
                   Text(
                     'Fecha: ${_formatDate(date)}',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,

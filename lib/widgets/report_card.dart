@@ -91,13 +91,18 @@ class ReportCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(Icons.location_on, color: _getTextColor()),
-          const SizedBox(width: 4),
-          Text(
-            '$locality, $street',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: _getTextColor(),
+          const SizedBox(width: 5),
+          Flexible(
+            child: Text(
+              '$locality, $street',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: _getTextColor(),
+              ),
+              overflow: TextOverflow.visible,
+              softWrap: true,
             ),
           ),
         ],
