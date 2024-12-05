@@ -2,7 +2,7 @@ class Validators {
   static String? validateRequired(String? value, String fieldName) {
     value = value?.trim();
     if (value == null || value.isEmpty) {
-      return '$fieldName is required';
+      return '$fieldName es requerido';
     }
     return null;
   }
@@ -11,10 +11,10 @@ class Validators {
       String? value, String fieldName, int min, int max) {
     value = value?.trim();
     if (value == null || value.isEmpty) {
-      return '$fieldName is required';
+      return '$fieldName es requerido';
     }
     if (value.length < min || value.length > max) {
-      return '$fieldName must be between $min and $max characters';
+      return '$fieldName debe tener entre $min y $max caracteres';
     }
     return null;
   }
@@ -22,10 +22,10 @@ class Validators {
   static String? validateEmail(String? value) {
     value = value?.trim();
     if (value == null || value.isEmpty) {
-      return 'Email is required';
+      return 'Correo electrónico es requerido';
     }
     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-      return 'Enter a valid email';
+      return 'Ingrese un correo electrónico válido';
     }
     return null;
   }
@@ -33,13 +33,13 @@ class Validators {
   static String? validatePassword(String? value) {
     value = value?.trim();
     if (value == null || value.isEmpty) {
-      return 'Password is required';
+      return 'Contraseña es requerida';
     }
     if (value.length < 8) {
-      return 'Password must be at least 8 characters';
+      return 'La contraseña debe tener al menos 8 caracteres';
     }
     if (!RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$').hasMatch(value)) {
-      return 'Password must contain at least one uppercase letter, one lowercase letter, and one number';
+      return 'La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número';
     }
     return null;
   }
@@ -48,13 +48,13 @@ class Validators {
       String? value, String fieldName, int min, int max) {
     value = value?.trim();
     if (value == null || value.isEmpty) {
-      return '$fieldName is required';
+      return '$fieldName es requerido';
     }
     if (value.length < min || value.length > max) {
-      return '$fieldName must be between $min and $max characters';
+      return '$fieldName debe tener entre $min y $max caracteres';
     }
     if (!RegExp(r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]+$').hasMatch(value)) {
-      return '$fieldName can only contain letters, numbers, and spaces';
+      return '$fieldName solo puede contener letras, números y espacios';
     }
     return null;
   }
@@ -62,10 +62,10 @@ class Validators {
   static String? validatePhoneNumber(String? value, String fieldName) {
     value = value?.trim();
     if (value == null || value.isEmpty) {
-      return '$fieldName is required';
+      return '$fieldName es requerido';
     }
     if (!RegExp(r'^\d{10}$').hasMatch(value)) {
-      return 'Enter a valid 10-digit phone number';
+      return 'Ingrese un número de teléfono de 10 dígitos válido';
     }
     return null;
   }
@@ -73,13 +73,13 @@ class Validators {
   static String? validateUsername(String? value) {
     value = value?.trim();
     if (value == null || value.isEmpty) {
-      return 'Username is required';
+      return 'Nombre de usuario es requerido';
     }
     if (value.length < 3 || value.length > 30) {
-      return 'Username must be between 3 and 30 characters';
+      return 'El nombre de usuario debe tener entre 3 y 30 caracteres';
     }
     if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
-      return 'Username can only contain letters';
+      return 'El nombre de usuario solo puede contener letras';
     }
     return null;
   }
@@ -88,10 +88,10 @@ class Validators {
       String? value, String fieldName, int min, int max) {
     value = value?.trim();
     if (value == null || value.isEmpty) {
-      return '$fieldName is required';
+      return '$fieldName es requerido';
     }
     if (value.length < min || value.length > max) {
-      return '$fieldName must be between $min and $max characters';
+      return '$fieldName debe tener entre $min y $max caracteres';
     }
     return null;
   }

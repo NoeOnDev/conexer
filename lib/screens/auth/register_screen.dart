@@ -98,6 +98,8 @@ class RegisterScreenState extends State<RegisterScreen> {
           child: Center(
             child: SingleChildScrollView(
               child: Container(
+                margin: const EdgeInsets.symmetric(
+                    vertical: 16.0),
                 padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
                   color: const Color(0x8077A1DD),
